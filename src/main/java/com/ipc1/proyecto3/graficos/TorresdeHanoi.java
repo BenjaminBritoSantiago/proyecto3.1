@@ -9,6 +9,7 @@ import com.ipc1.proyecto3.controladores.ControladorHanoi;
 import com.ipc1.proyecto3.controladores.Torre;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,47 +20,69 @@ public class TorresdeHanoi extends javax.swing.JFrame {
     Barra[] barras = new Barra[8];
     Torre[] torres = new Torre[3];
     private int idClico = -1;
-    int cantidaBarras = 8;
+    int cantidaBarras = 4;
 
     /**
      * Creates new form TorresdeHanoi
      */
     public TorresdeHanoi() {
-        
+
         initComponents();
         //constructorH();
-        
+
         this.setLocationRelativeTo(null);
         ControladorHanoi.instanciarBarras(barras, cantidaBarras);
         ControladorHanoi.instanciarTorres(torres);
         ControladorHanoi.iniciador(barras, torres, cantidaBarras);
+        deshabilitarBarras();
+
         //inciador ();
         datos();
     }
-  
-    public void datos(){
+
+    public void datos() {
         for (int i = 0; i < 3; i++) {
-             System.out.println("peso tor "+i+":"+torres[i].getPeso());
-             System.out.println("ocupado tor "+i+":"+torres[i].getPosOcupadas());
+            System.out.println("peso tor " + i + ":" + torres[i].getPeso());
+            System.out.println("ocupado tor " + i + ":" + torres[i].getPosOcupadas());
         }
-      
-    
-    }
-    
-    
-    public void inciador (){
-        torres[0].setPeso(0);
-        torres[0].setPosOcupadas(8); 
     }
 
-    public void constructorH() {
+    public void deshabilitarBarras() {
         for (int i = 0; i < 3; i++) {
             //imagen[i] = new ImageIcon("C:\\Users\\minch\\Documents\\NetBeansProjects\\Proyecto3\\src\\main\\java\\com\\ipc1\\proyecto3\\imagenes\\rectangle" + i + ".png");
         }
         //barra8.setIcon(new ImageIcon(imagen[2].getImage().getScaledInstance(290, 40, Image.SCALE_REPLICATE)));
         //barra7.setIcon(new ImageIcon(imagen[1].getImage().getScaledInstance(290, 40, Image.SCALE_REPLICATE)));
         //barra6.setIcon(new ImageIcon(imagen[0].getImage().getScaledInstance(290, 40, Image.SCALE_REPLICATE)));
+        if (cantidaBarras < 8) {
+            barra1.setVisible(false);
+        }
+        if (cantidaBarras < 7) {
+            barra2.setVisible(false);
+        }
+        if (cantidaBarras < 6) {
+            barra3.setVisible(false);
+        }
+        if (cantidaBarras < 5) {
+            barra4.setVisible(false);
+        }
+        if (cantidaBarras < 4) {
+            barra5.setVisible(false);
+        }
     }
+     public void deshabilitarTodaslasBarras() {
+         barra1.setEnabled(false);
+         barra2.setEnabled(false);
+         barra3.setEnabled(false);
+         barra4.setEnabled(false);
+         barra5.setEnabled(false);
+         barra6.setEnabled(false);
+         barra7.setEnabled(false);
+         barra8.setEnabled(false);         
+    }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -225,9 +248,9 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         int id = 7;
         if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
             idClico = id;
-            System.out.println("clic barra "+(id+1)+" barrapeso:"+barras[id].getPeso()+" pesotorre:"+torres[barras[id].getIdTorreActual()].getPeso());
+            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
         }
-        System.out.println("clic barra "+(id+1));
+        System.out.println("clic barra " + (id + 1));
 
     }//GEN-LAST:event_barra8MouseClicked
 
@@ -236,9 +259,9 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         int id = 6;
         if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
             idClico = id;
-            System.out.println("clic barra "+(id+1)+" barrapeso:"+barras[id].getPeso()+" pesotorre:"+torres[barras[id].getIdTorreActual()].getPeso());
+            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
         }
-        System.out.println("clic barra "+(id+1));
+        System.out.println("clic barra " + (id + 1));
 
     }//GEN-LAST:event_barra7MouseClicked
 
@@ -247,9 +270,9 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         int id = 5;
         if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
             idClico = id;
-            System.out.println("clic barra "+(id+1)+" barrapeso:"+barras[id].getPeso()+" pesotorre:"+torres[barras[id].getIdTorreActual()].getPeso());
+            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
         }
-        System.out.println("clic barra "+(id+1));
+        System.out.println("clic barra " + (id + 1));
 
     }//GEN-LAST:event_barra6MouseClicked
 
@@ -258,9 +281,9 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         int id = 4;
         if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
             idClico = id;
-           System.out.println("clic barra "+(id+1)+" barrapeso:"+barras[id].getPeso()+" pesotorre:"+torres[barras[id].getIdTorreActual()].getPeso());
+            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
         }
-        System.out.println("clic barra "+(id+1));
+        System.out.println("clic barra " + (id + 1));
 
     }//GEN-LAST:event_barra5MouseClicked
 
@@ -269,9 +292,9 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         int id = 3;
         if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
             idClico = id;
-            System.out.println("clic barra "+(id+1)+" barrapeso:"+barras[id].getPeso()+" pesotorre:"+torres[barras[id].getIdTorreActual()].getPeso());
+            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
         }
-        System.out.println("clic barra "+(id+1));
+        System.out.println("clic barra " + (id + 1));
 
     }//GEN-LAST:event_barra4MouseClicked
 
@@ -280,9 +303,9 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         int id = 2;
         if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
             idClico = id;
-            System.out.println("clic barra "+(id+1)+" barrapeso:"+barras[id].getPeso()+" pesotorre:"+torres[barras[id].getIdTorreActual()].getPeso());
+            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
         }
-        System.out.println("clic barra "+(id+1));
+        System.out.println("clic barra " + (id + 1));
 
     }//GEN-LAST:event_barra3MouseClicked
 
@@ -291,9 +314,9 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         int id = 1;
         if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
             idClico = id;
-            System.out.println("clic barra "+(id+1)+" barrapeso:"+barras[id].getPeso()+" pesotorre:"+torres[barras[id].getIdTorreActual()].getPeso());
+            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
         }
-        System.out.println("clic barra "+(id+1));
+        System.out.println("clic barra " + (id + 1));
 
     }//GEN-LAST:event_barra2MouseClicked
 
@@ -302,35 +325,35 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         int id = 0;
         if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
             idClico = id;
-            System.out.println("clic barra "+(id+1)+" barrapeso:"+barras[id].getPeso()+" pesotorre:"+torres[barras[id].getIdTorreActual()].getPeso());
+            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
         }
-        System.out.println("clic barra "+(id+1));
+        System.out.println("clic barra " + (id + 1));
     }//GEN-LAST:event_barra1MouseClicked
 
     private void torre1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_torre1MouseClicked
         // TODO add your handling code here:
         int idTorre = 0;
-        System.out.println("clictorre 1 pesotorre:"+torres[idTorre].getPeso());
+        System.out.println("clictorre 1 pesotorre:" + torres[idTorre].getPeso());
         if (idClico != -1) {
             if (barras[idClico].getIdTorreActual() != idTorre) {
                 if (torres[idTorre].getPeso() >= barras[idClico].getPeso()) {
-                    moverBoton(idClico, 30,  ControladorHanoi.posY( idTorre,torres));
+                    moverBoton(idClico, 30, ControladorHanoi.posY(idTorre, torres));
                     //cambios torre Aterior
-                    System.out.println("clictorre "+(idTorre+1)+" posocuapas Anterior:"+torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
+                    System.out.println("clictorre " + (idTorre + 1) + " posocuapas Anterior:" + torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
                     torres[barras[idClico].getIdTorreActual()].quitarBarra();
-                    System.out.println("clictorre "+(idTorre+1)+" idclico:" +idClico);
-                    System.out.println("clictorre "+(idTorre+1)+" posocuapasAnterior:"+torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
-                    
+                    System.out.println("clictorre " + (idTorre + 1) + " idclico:" + idClico);
+                    System.out.println("clictorre " + (idTorre + 1) + " posocuapasAnterior:" + torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
+
                     torres[barras[idClico].getIdTorreActual()].setPeso(barras[idClico].getPesoAnterior());
-                    
-                     System.out.println("clictorre "+(idTorre+1)+" pesotorreanterior:"+barras[idClico].getPesoAnterior());
+
+                    System.out.println("clictorre " + (idTorre + 1) + " pesotorreanterior:" + barras[idClico].getPesoAnterior());
                     //cambios torreactual
                     barras[idClico].setPesoAnterior(torres[idTorre].getPeso());
-                    System.out.println("clictorre "+(idTorre+1)+" peso anterior a Guardar en barra:"+torres[idTorre].getPeso());
-                    torres[idTorre].setPeso(barras[idClico].getPeso()); 
-                    System.out.println("clictorre "+(idTorre+1)+" peso torre actual:"+barras[idClico].getPeso());
+                    System.out.println("clictorre " + (idTorre + 1) + " peso anterior a Guardar en barra:" + torres[idTorre].getPeso());
+                    torres[idTorre].setPeso(barras[idClico].getPeso());
+                    System.out.println("clictorre " + (idTorre + 1) + " peso torre actual:" + barras[idClico].getPeso());
                     torres[idTorre].agregarBarra();
-                    System.out.println("clictorre "+(idTorre+1)+" cantidad barras:"+torres[idTorre].getPosOcupadas());
+                    System.out.println("clictorre " + (idTorre + 1) + " cantidad barras:" + torres[idTorre].getPosOcupadas());
                     //cambios barras
                     barras[idClico].setIdTorreActual(idTorre);
                     idClico = -1;
@@ -343,27 +366,27 @@ public class TorresdeHanoi extends javax.swing.JFrame {
     private void torre2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_torre2MouseClicked
         // TODO add your handling code here:
         int idTorre = 1;
-        System.out.println("clictorre 2 pesotorre:"+torres[idTorre].getPeso());
+        System.out.println("clictorre 2 pesotorre:" + torres[idTorre].getPeso());
         if (idClico != -1) {
             if (barras[idClico].getIdTorreActual() != idTorre) {
                 if (torres[idTorre].getPeso() >= barras[idClico].getPeso()) {
-                    moverBoton(idClico, 330,  ControladorHanoi.posY( idTorre,torres));
+                    moverBoton(idClico, 330, ControladorHanoi.posY(idTorre, torres));
                     //cambios torre Aterior
-                    System.out.println("clictorre "+(idTorre+1)+" posocuapas Anterior:"+torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
+                    System.out.println("clictorre " + (idTorre + 1) + " posocuapas Anterior:" + torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
                     torres[barras[idClico].getIdTorreActual()].quitarBarra();
-                    System.out.println("clictorre "+(idTorre+1)+" idclico:" +idClico);
-                    System.out.println("clictorre "+(idTorre+1)+" posocuapasAnterior:"+torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
-                    
+                    System.out.println("clictorre " + (idTorre + 1) + " idclico:" + idClico);
+                    System.out.println("clictorre " + (idTorre + 1) + " posocuapasAnterior:" + torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
+
                     torres[barras[idClico].getIdTorreActual()].setPeso(barras[idClico].getPesoAnterior());
-                    
-                     System.out.println("clictorre "+(idTorre+1)+" pesotorreanterior:"+barras[idClico].getPesoAnterior());
+
+                    System.out.println("clictorre " + (idTorre + 1) + " pesotorreanterior:" + barras[idClico].getPesoAnterior());
                     //cambios torreactual
                     barras[idClico].setPesoAnterior(torres[idTorre].getPeso());
-                    System.out.println("clictorre "+(idTorre+1)+" peso anterior a Guardar en barra:"+torres[idTorre].getPeso());
-                    torres[idTorre].setPeso(barras[idClico].getPeso()); 
-                    System.out.println("clictorre "+(idTorre+1)+" peso torre actual:"+barras[idClico].getPeso());
+                    System.out.println("clictorre " + (idTorre + 1) + " peso anterior a Guardar en barra:" + torres[idTorre].getPeso());
+                    torres[idTorre].setPeso(barras[idClico].getPeso());
+                    System.out.println("clictorre " + (idTorre + 1) + " peso torre actual:" + barras[idClico].getPeso());
                     torres[idTorre].agregarBarra();
-                    System.out.println("clictorre "+(idTorre+1)+" cantidad barras:"+torres[idTorre].getPosOcupadas());
+                    System.out.println("clictorre " + (idTorre + 1) + " cantidad barras:" + torres[idTorre].getPosOcupadas());
                     //cambios barras
                     barras[idClico].setIdTorreActual(idTorre);
                     idClico = -1;
@@ -376,33 +399,38 @@ public class TorresdeHanoi extends javax.swing.JFrame {
     private void torre3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_torre3MouseClicked
         // TODO add your handling code here: 
         int idTorre = 2;
-        System.out.println("clictorre 3 pesotorre:"+torres[idTorre].getPeso());
+        System.out.println("clictorre 3 pesotorre:" + torres[idTorre].getPeso());
         if (idClico != -1) {
             if (barras[idClico].getIdTorreActual() != idTorre) {
                 if (torres[idTorre].getPeso() >= barras[idClico].getPeso()) {
-                    moverBoton(idClico, 630,  ControladorHanoi.posY( idTorre,torres));
+                    moverBoton(idClico, 630, ControladorHanoi.posY(idTorre, torres));
                     //cambios torre Aterior
-                    
-                    System.out.println("clictorre "+(idTorre+1)+" posocuapas Anterior:"+torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
+
+                    System.out.println("clictorre " + (idTorre + 1) + " posocuapas Anterior:" + torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
                     torres[barras[idClico].getIdTorreActual()].quitarBarra();
-                    System.out.println("clictorre "+(idTorre+1)+" idclico:" +idClico);
-                    System.out.println("clictorre "+(idTorre+1)+" posocuapasAnterior:"+torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
-                    
+                    System.out.println("clictorre " + (idTorre + 1) + " idclico:" + idClico);
+                    System.out.println("clictorre " + (idTorre + 1) + " posocuapasAnterior:" + torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
+
                     torres[barras[idClico].getIdTorreActual()].setPeso(barras[idClico].getPesoAnterior());
-                    
-                     System.out.println("clictorre "+(idTorre+1)+" pesotorreanterior:"+barras[idClico].getPesoAnterior());
+
+                    System.out.println("clictorre " + (idTorre + 1) + " pesotorreanterior:" + barras[idClico].getPesoAnterior());
                     //cambios torreactual
                     barras[idClico].setPesoAnterior(torres[idTorre].getPeso());
-                    System.out.println("clictorre "+(idTorre+1)+" peso anterior a Guardar en barra:"+torres[idTorre].getPeso());
-                    torres[idTorre].setPeso(barras[idClico].getPeso()); 
-                    System.out.println("clictorre "+(idTorre+1)+" peso torre actual:"+barras[idClico].getPeso());
+                    System.out.println("clictorre " + (idTorre + 1) + " peso anterior a Guardar en barra:" + torres[idTorre].getPeso());
+                    torres[idTorre].setPeso(barras[idClico].getPeso());
+                    System.out.println("clictorre " + (idTorre + 1) + " peso torre actual:" + barras[idClico].getPeso());
                     torres[idTorre].agregarBarra();
-                    System.out.println("clictorre "+(idTorre+1)+" cantidad barras:"+torres[idTorre].getPosOcupadas());
+                    System.out.println("clictorre " + (idTorre + 1) + " cantidad barras:" + torres[idTorre].getPosOcupadas());
                     //cambios barras
                     barras[idClico].setIdTorreActual(idTorre);
                     idClico = -1;
                 }
             }
+        }
+
+        if (cantidaBarras == torres[2].getPosOcupadas()) {
+            deshabilitarTodaslasBarras();
+            System.out.println("GANASTE");
         }
 
     }//GEN-LAST:event_torre3MouseClicked
