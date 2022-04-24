@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.ipc1.proyecto3.controladores;
+package com.ipc1.proyecto3.controladorHanoi;
 
-import com.ipc1.proyecto3.controladores.Torre;
-import com.ipc1.proyecto3.controladores.Barra;
+import com.ipc1.proyecto3.controladorHanoi.Torre;
+import com.ipc1.proyecto3.controladorHanoi.Barra;
 
 /**
  *

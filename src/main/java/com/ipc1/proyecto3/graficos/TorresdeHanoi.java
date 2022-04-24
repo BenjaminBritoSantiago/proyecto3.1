@@ -4,9 +4,10 @@
  */
 package com.ipc1.proyecto3.graficos;
 
-import com.ipc1.proyecto3.controladores.Barra;
-import com.ipc1.proyecto3.controladores.ControladorHanoi;
-import com.ipc1.proyecto3.controladores.Torre;
+import com.ipc1.proyecto3.Cronometro;
+import com.ipc1.proyecto3.controladorHanoi.Barra;
+import com.ipc1.proyecto3.controladorHanoi.ControladorHanoi;
+import com.ipc1.proyecto3.controladorHanoi.Torre;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -21,22 +22,22 @@ public class TorresdeHanoi extends javax.swing.JFrame {
     Torre[] torres = new Torre[3];
     private int idClico = -1;
     int cantidaBarras = 4;
+    Cronometro cronometro = new Cronometro();
 
     /**
      * Creates new form TorresdeHanoi
      */
     public TorresdeHanoi() {
-
+         this.add( cronometro);
+        //cronometro.setVisible(true);
+        //cronometro.setBounds(300, 3, 300, 50);
         initComponents();
-        //constructorH();
-
         this.setLocationRelativeTo(null);
         ControladorHanoi.instanciarBarras(barras, cantidaBarras);
         ControladorHanoi.instanciarTorres(torres);
         ControladorHanoi.iniciador(barras, torres, cantidaBarras);
         deshabilitarBarras();
-
-        //inciador ();
+        
         datos();
     }
 
@@ -192,7 +193,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
                 torre1MouseClicked(evt);
             }
         });
-        jPanel2.add(torre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 30, 380));
+        jPanel2.add(torre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 30, 350));
         torre1.getAccessibleContext().setAccessibleName("torre1");
 
         torre2.setBackground(new java.awt.Color(153, 51, 0));
@@ -203,7 +204,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
                 torre2MouseClicked(evt);
             }
         });
-        jPanel2.add(torre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 30, 380));
+        jPanel2.add(torre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 30, 350));
 
         torre3.setBackground(new java.awt.Color(153, 51, 0));
         torre3.setText("3");
@@ -213,7 +214,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
                 torre3MouseClicked(evt);
             }
         });
-        jPanel2.add(torre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 70, 30, 380));
+        jPanel2.add(torre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 100, 30, 350));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
