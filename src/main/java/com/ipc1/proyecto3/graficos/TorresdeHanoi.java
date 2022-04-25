@@ -4,7 +4,6 @@
  */
 package com.ipc1.proyecto3.graficos;
 
-import com.ipc1.proyecto3.Cronometro;
 import com.ipc1.proyecto3.controladorHanoi.Barra;
 import com.ipc1.proyecto3.controladorHanoi.ControladorHanoi;
 import com.ipc1.proyecto3.controladorHanoi.Torre;
