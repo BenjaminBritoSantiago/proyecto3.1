@@ -15,8 +15,8 @@ public class ControladorHanoi {
 
     public static void instanciarBarras(Barra[] arrayBarras, int numBarras) {
         for (int i = 7; i > 7 - numBarras; i--) {
-           // Barra( int idBarra, int peso, int idTorreActual, int posicionYActual, int pesoAnterior  )
-            arrayBarras[i] = new Barra(i, i, 0, i-7, i+1);
+            // Barra( int idBarra, int peso, int idTorreActual, int posicionYActual, int pesoAnterior  )
+            arrayBarras[i] = new Barra(i, i, 0, i - 7, i + 1);
         }
     }
 
@@ -29,9 +29,9 @@ public class ControladorHanoi {
     public static void iniciador(Barra[] arrayBarras, Torre[] arrayTorres, int cantBarras) {
         arrayTorres[0].setPeso(8 - cantBarras);
         arrayTorres[0].setPosOcupadas(cantBarras);
-     
+
     }
-   
+
     public static int posY(int idTorre, Torre[] arrayTorres) {
         int posInicial = 410;
         switch (arrayTorres[idTorre].getPosOcupadas()) {
@@ -62,6 +62,28 @@ public class ControladorHanoi {
             default:
                 return 0;
         }
+    }
+
+    public static void mover(int idTorre, int idClico, Torre[] torres, Barra[] barras) {
+        
+        //cambios torre Aterior
+        System.out.println("clictorre " + (idTorre + 1) + " posocuapas Anterior:" + torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
+        torres[barras[idClico].getIdTorreActual()].quitarBarra();
+        System.out.println("clictorre " + (idTorre + 1) + " idclico:" + idClico);
+        System.out.println("clictorre " + (idTorre + 1) + " posocuapasAnterior:" + torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
+
+        torres[barras[idClico].getIdTorreActual()].setPeso(barras[idClico].getPesoAnterior());
+
+        System.out.println("clictorre " + (idTorre + 1) + " pesotorreanterior:" + barras[idClico].getPesoAnterior());
+        //cambios torreactual
+        barras[idClico].setPesoAnterior(torres[idTorre].getPeso());
+        System.out.println("clictorre " + (idTorre + 1) + " peso anterior a Guardar en barra:" + torres[idTorre].getPeso());
+        torres[idTorre].setPeso(barras[idClico].getPeso());
+        System.out.println("clictorre " + (idTorre + 1) + " peso torre actual:" + barras[idClico].getPeso());
+        torres[idTorre].agregarBarra();
+        System.out.println("clictorre " + (idTorre + 1) + " cantidad barras:" + torres[idTorre].getPosOcupadas());
+        //cambios barras
+        barras[idClico].setIdTorreActual(idTorre);
     }
 
 }

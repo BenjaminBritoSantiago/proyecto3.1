@@ -9,6 +9,7 @@ import com.ipc1.proyecto3.controladorHanoi.Barra;
 import com.ipc1.proyecto3.controladorHanoi.ControladorHanoi;
 import com.ipc1.proyecto3.controladorHanoi.Torre;
 import java.awt.Image;
+import java.awt.PopupMenu;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -28,17 +29,22 @@ public class TorresdeHanoi extends javax.swing.JFrame {
      * Creates new form TorresdeHanoi
      */
     public TorresdeHanoi() {
-         this.add( cronometro);
-        //cronometro.setVisible(true);
-        //cronometro.setBounds(300, 3, 300, 50);
+
+        this.add(cronometro);
+        cronometro.setVisible(true);
+        cronometro.setBounds(300, 3, 300, 60);
         initComponents();
         this.setLocationRelativeTo(null);
         ControladorHanoi.instanciarBarras(barras, cantidaBarras);
         ControladorHanoi.instanciarTorres(torres);
         ControladorHanoi.iniciador(barras, torres, cantidaBarras);
         deshabilitarBarras();
-        
         datos();
+        
+        Runnable cro = new Cronometro() ;
+        Thread t = new Thread(cro);
+        t.start();
+
     }
 
     public void datos() {
@@ -46,6 +52,10 @@ public class TorresdeHanoi extends javax.swing.JFrame {
             System.out.println("peso tor " + i + ":" + torres[i].getPeso());
             System.out.println("ocupado tor " + i + ":" + torres[i].getPosOcupadas());
         }
+
+        //Runnable cronometro = new Cronometro();
+        //Thread  ter = new Thread(cronometro);
+        //ter.start(); 
     }
 
     public void deshabilitarBarras() {
@@ -71,19 +81,17 @@ public class TorresdeHanoi extends javax.swing.JFrame {
             barra5.setVisible(false);
         }
     }
-     public void deshabilitarTodaslasBarras() {
-         barra1.setEnabled(false);
-         barra2.setEnabled(false);
-         barra3.setEnabled(false);
-         barra4.setEnabled(false);
-         barra5.setEnabled(false);
-         barra6.setEnabled(false);
-         barra7.setEnabled(false);
-         barra8.setEnabled(false);         
+
+    public void deshabilitarTodaslasBarras() {
+        barra1.setEnabled(false);
+        barra2.setEnabled(false);
+        barra3.setEnabled(false);
+        barra4.setEnabled(false);
+        barra5.setEnabled(false);
+        barra6.setEnabled(false);
+        barra7.setEnabled(false);
+        barra8.setEnabled(false);
     }
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -339,24 +347,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
             if (barras[idClico].getIdTorreActual() != idTorre) {
                 if (torres[idTorre].getPeso() >= barras[idClico].getPeso()) {
                     moverBoton(idClico, 30, ControladorHanoi.posY(idTorre, torres));
-                    //cambios torre Aterior
-                    System.out.println("clictorre " + (idTorre + 1) + " posocuapas Anterior:" + torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
-                    torres[barras[idClico].getIdTorreActual()].quitarBarra();
-                    System.out.println("clictorre " + (idTorre + 1) + " idclico:" + idClico);
-                    System.out.println("clictorre " + (idTorre + 1) + " posocuapasAnterior:" + torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
-
-                    torres[barras[idClico].getIdTorreActual()].setPeso(barras[idClico].getPesoAnterior());
-
-                    System.out.println("clictorre " + (idTorre + 1) + " pesotorreanterior:" + barras[idClico].getPesoAnterior());
-                    //cambios torreactual
-                    barras[idClico].setPesoAnterior(torres[idTorre].getPeso());
-                    System.out.println("clictorre " + (idTorre + 1) + " peso anterior a Guardar en barra:" + torres[idTorre].getPeso());
-                    torres[idTorre].setPeso(barras[idClico].getPeso());
-                    System.out.println("clictorre " + (idTorre + 1) + " peso torre actual:" + barras[idClico].getPeso());
-                    torres[idTorre].agregarBarra();
-                    System.out.println("clictorre " + (idTorre + 1) + " cantidad barras:" + torres[idTorre].getPosOcupadas());
-                    //cambios barras
-                    barras[idClico].setIdTorreActual(idTorre);
+                    ControladorHanoi.mover(idTorre, idClico, torres, barras);
                     idClico = -1;
                 }
             }
@@ -372,24 +363,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
             if (barras[idClico].getIdTorreActual() != idTorre) {
                 if (torres[idTorre].getPeso() >= barras[idClico].getPeso()) {
                     moverBoton(idClico, 330, ControladorHanoi.posY(idTorre, torres));
-                    //cambios torre Aterior
-                    System.out.println("clictorre " + (idTorre + 1) + " posocuapas Anterior:" + torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
-                    torres[barras[idClico].getIdTorreActual()].quitarBarra();
-                    System.out.println("clictorre " + (idTorre + 1) + " idclico:" + idClico);
-                    System.out.println("clictorre " + (idTorre + 1) + " posocuapasAnterior:" + torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
-
-                    torres[barras[idClico].getIdTorreActual()].setPeso(barras[idClico].getPesoAnterior());
-
-                    System.out.println("clictorre " + (idTorre + 1) + " pesotorreanterior:" + barras[idClico].getPesoAnterior());
-                    //cambios torreactual
-                    barras[idClico].setPesoAnterior(torres[idTorre].getPeso());
-                    System.out.println("clictorre " + (idTorre + 1) + " peso anterior a Guardar en barra:" + torres[idTorre].getPeso());
-                    torres[idTorre].setPeso(barras[idClico].getPeso());
-                    System.out.println("clictorre " + (idTorre + 1) + " peso torre actual:" + barras[idClico].getPeso());
-                    torres[idTorre].agregarBarra();
-                    System.out.println("clictorre " + (idTorre + 1) + " cantidad barras:" + torres[idTorre].getPosOcupadas());
-                    //cambios barras
-                    barras[idClico].setIdTorreActual(idTorre);
+                    ControladorHanoi.mover(idTorre, idClico, torres, barras);
                     idClico = -1;
                 }
             }
@@ -405,25 +379,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
             if (barras[idClico].getIdTorreActual() != idTorre) {
                 if (torres[idTorre].getPeso() >= barras[idClico].getPeso()) {
                     moverBoton(idClico, 630, ControladorHanoi.posY(idTorre, torres));
-                    //cambios torre Aterior
-
-                    System.out.println("clictorre " + (idTorre + 1) + " posocuapas Anterior:" + torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
-                    torres[barras[idClico].getIdTorreActual()].quitarBarra();
-                    System.out.println("clictorre " + (idTorre + 1) + " idclico:" + idClico);
-                    System.out.println("clictorre " + (idTorre + 1) + " posocuapasAnterior:" + torres[barras[idClico].getIdTorreActual()].getPosOcupadas());
-
-                    torres[barras[idClico].getIdTorreActual()].setPeso(barras[idClico].getPesoAnterior());
-
-                    System.out.println("clictorre " + (idTorre + 1) + " pesotorreanterior:" + barras[idClico].getPesoAnterior());
-                    //cambios torreactual
-                    barras[idClico].setPesoAnterior(torres[idTorre].getPeso());
-                    System.out.println("clictorre " + (idTorre + 1) + " peso anterior a Guardar en barra:" + torres[idTorre].getPeso());
-                    torres[idTorre].setPeso(barras[idClico].getPeso());
-                    System.out.println("clictorre " + (idTorre + 1) + " peso torre actual:" + barras[idClico].getPeso());
-                    torres[idTorre].agregarBarra();
-                    System.out.println("clictorre " + (idTorre + 1) + " cantidad barras:" + torres[idTorre].getPosOcupadas());
-                    //cambios barras
-                    barras[idClico].setIdTorreActual(idTorre);
+                    ControladorHanoi.mover(idTorre, idClico, torres, barras);
                     idClico = -1;
                 }
             }
@@ -483,4 +439,5 @@ public class TorresdeHanoi extends javax.swing.JFrame {
     private javax.swing.JLabel torre2;
     private javax.swing.JLabel torre3;
     // End of variables declaration//GEN-END:variables
+
 }
