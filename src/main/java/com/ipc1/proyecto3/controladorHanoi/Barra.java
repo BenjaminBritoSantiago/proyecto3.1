@@ -4,13 +4,16 @@
  */
 package com.ipc1.proyecto3.controladorHanoi;
 
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 /**
  *
  * @author minch
  */
-public class Barra extends JButton{
+public class Barra extends JButton  implements ActionListener {
     
     private int idBarra;
     private int peso;
@@ -33,10 +36,12 @@ public class Barra extends JButton{
         this.boton.setVisible(true);
         boton.setText(numBoton);
     }
+
     
      private void botonMouseClicked(java.awt.event.MouseEvent evt) {                                    
         // TODO add your handling code here:
         idClico = idBarra;
+        System.out.println("se clico la torre id: "+idBarra);
     }     
 
     public JButton getBoton() {
@@ -87,10 +92,11 @@ public class Barra extends JButton{
     public void setPosicionYActual(int posicionYActual) {
         this.posicionYActual = posicionYActual;
     }
-    
-    
-    
-    
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("se clico la torre id: "+idBarra);
+    }
             
     
 }

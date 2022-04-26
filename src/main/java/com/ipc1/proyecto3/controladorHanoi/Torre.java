@@ -27,7 +27,7 @@ public class Torre extends JLabel {
         this.peso = peso;
         this.posOcupadas = posOcupadas;
         this.idTorre = idTorre;
-        torreG.setBounds(0, 0, 40, 300);
+        torreG.setBounds(0, 0, 40, 350);
         torreG.setOpaque(true);
         torreG.setBackground(Color.red);
         
@@ -36,11 +36,17 @@ public class Torre extends JLabel {
     private void torreMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
         idClico = idTorre;
+        System.out.println("se clico la torre id: "+idTorre);
     }
 
-    
-    
-    
+    public JLabel getTorreG() {
+        return torreG;
+    }
+
+    public void setTorreG(JLabel torreG) {
+        this.torreG = torreG;
+    }
+
     
     public void quitarBarra() {
 

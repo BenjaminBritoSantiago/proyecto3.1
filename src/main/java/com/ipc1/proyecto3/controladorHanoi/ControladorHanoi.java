@@ -12,7 +12,7 @@ import com.ipc1.proyecto3.controladorHanoi.Barra;
  * @author minch
  */
 public class ControladorHanoi {
-
+    
     public static void instanciarBarras(Barra[] arrayBarras, int numBarras) {
         for (int i = 7; i > 7 - numBarras; i--) {
             // Barra( int idBarra, int peso, int idTorreActual, int posicionYActual, int pesoAnterior  )
@@ -87,7 +87,7 @@ public class ControladorHanoi {
         barras[idClico].setIdTorreActual(idTorre);
     }
 
-    public static void verificador(Torre[] torres, Barra[] barras) {
+    public static int verificador(Torre[] torres, Barra[] barras) {
 
         if (Barra.idClico != -1 && Torre.idClico != -1) {
 
@@ -95,21 +95,25 @@ public class ControladorHanoi {
                 if (barras[Barra.idClico].getIdTorreActual() != Torre.idClico) {
                     if (torres[Torre.idClico].getPeso() >= barras[Barra.idClico].getPeso()) {
 
-                        moverBoton(Torre.idClico, Barra.idClico, 30, posY(Torre.idClico, torres),barras);
+                        moverBoton(Torre.idClico, Barra.idClico, 30, posY(Torre.idClico, torres), barras);
 
                         mover2(Torre.idClico, Barra.idClico, torres, barras);
 
                         Barra.idClico = -1;
                         Torre.idClico = -1;
+                        if (Barra.idClico!=0) {
+                            return torres[Torre.idClico].getPosOcupadas();
+                        }
                     }
                 }
             }
         }
+        
+        return 0;
 
     }
 
     public static void mover2(int idTorre, int idClico, Torre[] torres, Barra[] barras) {
-        int posX;
         //cambios torre Aterior
         torres[barras[idClico].getIdTorreActual()].quitarBarra();
         torres[barras[idClico].getIdTorreActual()].setPeso(barras[idClico].getPesoAnterior());
@@ -120,11 +124,10 @@ public class ControladorHanoi {
         torres[idTorre].agregarBarra();
         //cambios barras
         barras[idClico].setIdTorreActual(idTorre);
-          
+
     }
-    
-    
-    public static void moverBoton(int idTorre, int queBoton, int posX, int posY, Barra[] barras ) {
+
+    public static void moverBoton(int idTorre, int queBoton, int posX, int posY, Barra[] barras) {
 
         switch (idTorre) {
             case 0:
@@ -137,11 +140,8 @@ public class ControladorHanoi {
                 posX = 630;
                 break;
         }
-        
-        
-        
-        
-        
+
+        barras[queBoton].getBoton().setLocation(posX, posY);
 
     }
 

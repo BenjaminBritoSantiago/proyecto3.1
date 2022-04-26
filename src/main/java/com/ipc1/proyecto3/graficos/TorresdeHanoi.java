@@ -6,80 +6,72 @@ package com.ipc1.proyecto3.graficos;
 
 import com.ipc1.proyecto3.controladorHanoi.Barra;
 import com.ipc1.proyecto3.controladorHanoi.ControladorHanoi;
-import static com.ipc1.proyecto3.controladorHanoi.ControladorHanoi.verificador;
 import com.ipc1.proyecto3.controladorHanoi.Torre;
-import java.awt.Image;
-import java.awt.PopupMenu;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author minch
  */
-public class TorresdeHanoi extends javax.swing.JFrame {
+public class TorresdeHanoi extends javax.swing.JFrame{
 
     Barra[] barras = new Barra[8];
     Torre[] torres = new Torre[3];
     private int idClico = -1;
-    int cantidaBarras = 8;
-    Cronometro cronometro = new Cronometro();
-
+    int cantidaBarras = 3;
+    boolean terminar = false;
+    
     /**
      * Creates new form TorresdeHanoi
      */
     public TorresdeHanoi() {
         
-        this.add(cronometro);
-        cronometro.setVisible(true);
-        cronometro.setBounds(300, 3, 300, 60);
-       
-        this.setLocationRelativeTo(null);
-        ControladorHanoi.instanciarBarras(barras, cantidaBarras);
+         
+        //this.add(cronometro);
         
+        //cronometro.setVisible(true);
+        //cronometro.setBounds(300, 3, 300, 60);
+        Cronometro crnmt = new Cronometro(this);
+        Thread t = new Thread(crnmt);
+        
+        
+        ControladorHanoi.instanciarBarras(barras, cantidaBarras);
+
         ControladorHanoi.instanciarTorres(torres);
         ControladorHanoi.iniciador(barras, torres, cantidaBarras);
-        botones();
-         initComponents();
+        this.setLocationRelativeTo(null);
+        //botones();
+        
+        initComponents();
         deshabilitarBarras();
-        datos();
-        
-        
-        //Runnable cro = new Cronometro() ;
-        //Thread t = new Thread(cro);
-        //t.start();
+        //datos();
 
+        t.start();
+       
+    }
+
+    public boolean isTerminar() {
+        return terminar;
     }
     
-     public void juego(){
-         while(true){
-             verificador(torres, barras);
-         
-         
-         
-         }
-    
-    }
-   
-    public void botones(){
+
+    public void botones() {
         for (int i = 7; i > 7 - cantidaBarras; i--) {
             this.add(barras[i].getBoton());
-            barras[i].getBoton().setLocation(330,(i*40)+145);   
+            barras[i].getBoton().setLocation(330, (i * 40) + 145);
         }
-        for (int i = 0; i<3; i++) {
-            //this.add(torres[i].getBoton());
-            //barras[i].getBoton().setLocation(330,(i*40)+145);   
+        for (int i = 0; i < 3; i++) {
+            this.add(torres[i].getTorreG());
+            torres[i].getTorreG().setLocation(150 + (300 * i), 110);
         }
-    
+
     }
-    
-    
+
     public void datos() {
         for (int i = 0; i < 3; i++) {
             System.out.println("peso tor " + i + ":" + torres[i].getPeso());
             System.out.println("ocupado tor " + i + ":" + torres[i].getPosOcupadas());
         }
-        
 
         //Runnable cronometro = new Cronometro();
         //Thread  ter = new Thread(cronometro);
@@ -142,6 +134,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         torre1 = new javax.swing.JLabel();
         torre2 = new javax.swing.JLabel();
         torre3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -252,6 +245,14 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         });
         jPanel2.add(torre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 100, 30, 350));
 
+        jButton1.setText("termiar partida");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 540, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -272,40 +273,8 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void torre1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_torre1MouseClicked
-        // TODO add your handling code here:
-        int idTorre = 0;
-        System.out.println("clictorre 1 pesotorre:" + torres[idTorre].getPeso());
-        if (idClico != -1) {
-            if (barras[idClico].getIdTorreActual() != idTorre) {
-                if (torres[idTorre].getPeso() >= barras[idClico].getPeso()) {
-                    moverBoton(idClico, 30, ControladorHanoi.posY(idTorre, torres));
-                    ControladorHanoi.mover(idTorre, idClico, torres, barras);
-                    idClico = -1;
-                }
-            }
-        }
-
-    }//GEN-LAST:event_torre1MouseClicked
-
-    private void torre2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_torre2MouseClicked
-        // TODO add your handling code here:
-        int idTorre = 1;
-        System.out.println("clictorre 2 pesotorre:" + torres[idTorre].getPeso());
-        if (idClico != -1) {
-            if (barras[idClico].getIdTorreActual() != idTorre) {
-                if (torres[idTorre].getPeso() >= barras[idClico].getPeso()) {
-                    moverBoton(idClico, 330, ControladorHanoi.posY(idTorre, torres));
-                    ControladorHanoi.mover(idTorre, idClico, torres, barras);
-                    idClico = -1;
-                }
-            }
-        }
-
-    }//GEN-LAST:event_torre2MouseClicked
-
     private void torre3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_torre3MouseClicked
-        // TODO add your handling code here: 
+        // TODO add your handling code here:
         int idTorre = 2;
         System.out.println("clictorre 3 pesotorre:" + torres[idTorre].getPeso());
         if (idClico != -1) {
@@ -322,8 +291,37 @@ public class TorresdeHanoi extends javax.swing.JFrame {
             deshabilitarTodaslasBarras();
             System.out.println("GANASTE");
         }
-
     }//GEN-LAST:event_torre3MouseClicked
+
+    private void torre2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_torre2MouseClicked
+        // TODO add your handling code here:
+        int idTorre = 1;
+        System.out.println("clictorre 2 pesotorre:" + torres[idTorre].getPeso());
+        if (idClico != -1) {
+            if (barras[idClico].getIdTorreActual() != idTorre) {
+                if (torres[idTorre].getPeso() >= barras[idClico].getPeso()) {
+                    moverBoton(idClico, 330, ControladorHanoi.posY(idTorre, torres));
+                    ControladorHanoi.mover(idTorre, idClico, torres, barras);
+                    idClico = -1;
+                }
+            }
+        }
+    }//GEN-LAST:event_torre2MouseClicked
+
+    private void torre1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_torre1MouseClicked
+        // TODO add your handling code here:
+        int idTorre = 0;
+        System.out.println("clictorre 1 pesotorre:" + torres[idTorre].getPeso());
+        if (idClico != -1) {
+            if (barras[idClico].getIdTorreActual() != idTorre) {
+                if (torres[idTorre].getPeso() >= barras[idClico].getPeso()) {
+                    moverBoton(idClico, 30, ControladorHanoi.posY(idTorre, torres));
+                    ControladorHanoi.mover(idTorre, idClico, torres, barras);
+                    idClico = -1;
+                }
+            }
+        }
+    }//GEN-LAST:event_torre1MouseClicked
 
     private void barra8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barra8ActionPerformed
         // TODO add your handling code here:
@@ -413,6 +411,12 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         System.out.println("clic barra " + (id + 1));
     }//GEN-LAST:event_barra1MouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        terminar = true;
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void moverBoton(int queBoton, int posX, int posY) {
 
         switch (queBoton) {
@@ -455,10 +459,12 @@ public class TorresdeHanoi extends javax.swing.JFrame {
     private javax.swing.JButton barra6;
     private javax.swing.JButton barra7;
     private javax.swing.JButton barra8;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel torre1;
     private javax.swing.JLabel torre2;
     private javax.swing.JLabel torre3;
     // End of variables declaration//GEN-END:variables
+
 
 }

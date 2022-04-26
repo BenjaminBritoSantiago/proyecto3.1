@@ -6,6 +6,7 @@ package com.ipc1.proyecto3.graficos;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -16,9 +17,13 @@ public class Cronometro extends javax.swing.JPanel implements Runnable {
     private int hora = 01;
     private int minutos = 01;
     private int segundos = 01;
+    private TorresdeHanoi ventana;
 
-    public Cronometro() {
+    public Cronometro(TorresdeHanoi ventana) {
         initComponents();
+        this.ventana = ventana;
+        inciciar();
+
         //this.setBounds(350, 3, 225, 50);
     }
 
@@ -50,40 +55,24 @@ public class Cronometro extends javax.swing.JPanel implements Runnable {
     private javax.swing.JLabel contador;
     private javax.swing.JLabel tiempoText;
     // End of variables declaration//GEN-END:variables
-    
-    public void setContador( String contador){
+
+    public void setContador(String contador) {
         this.contador.setText(contador);
     }
-    
+
+    public void inciciar() {
+        ventana.add(this);
+        this.setVisible(true);
+        this.setBounds(200, 40, 300, 100);
+
+    }
+
     @Override
     public void run() {
         //String contador;
-         do {
-            String h = "", m = "", s = "";
-
-            if (hora < 10) {
-                System.out.print("0");
-                h.concat("0");
-            }
-            h.concat(String.valueOf(hora));
-            System.out.print(hora + ":");
-
-            if (minutos < 10) {
-                System.out.print("0");
-                m.concat("0");
-            }
-            m.concat(String.valueOf(minutos));
-            System.out.print(minutos + ":");
-
-            if (segundos < 10) {
-                System.out.print("0");
-                s.concat("0");
-            }
-            s.concat(String.valueOf(segundos));
-            System.out.println(segundos);
-            contador.setText(h + ":" + m + ":" + s);
-            System.out.println();
-
+        do {
+            contador.setText(cambiador(hora) + ":" + cambiador(minutos)+ ":" + cambiador(segundos));
+        
             segundos++;
 
             if (segundos == 60) {
@@ -96,15 +85,22 @@ public class Cronometro extends javax.swing.JPanel implements Runnable {
             }
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Cronometro.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        } while (true);
-        
-        
+        } while (!ventana.isTerminar());
     }
 
     
+    public String cambiador(int hms) {
+        String valHMS = "";
+        if (hms < 10) {
+            valHMS = ("0");
+        }
+        return valHMS + (String.valueOf(hms));
+        
+    }
+
 }
