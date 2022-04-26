@@ -6,6 +6,7 @@ package com.ipc1.proyecto3.graficos;
 
 import com.ipc1.proyecto3.controladorHanoi.Barra;
 import com.ipc1.proyecto3.controladorHanoi.ControladorHanoi;
+import static com.ipc1.proyecto3.controladorHanoi.ControladorHanoi.verificador;
 import com.ipc1.proyecto3.controladorHanoi.Torre;
 import java.awt.Image;
 import java.awt.PopupMenu;
@@ -21,36 +22,64 @@ public class TorresdeHanoi extends javax.swing.JFrame {
     Barra[] barras = new Barra[8];
     Torre[] torres = new Torre[3];
     private int idClico = -1;
-    int cantidaBarras = 4;
+    int cantidaBarras = 8;
     Cronometro cronometro = new Cronometro();
 
     /**
      * Creates new form TorresdeHanoi
      */
     public TorresdeHanoi() {
-
+        
         this.add(cronometro);
         cronometro.setVisible(true);
         cronometro.setBounds(300, 3, 300, 60);
-        initComponents();
+       
         this.setLocationRelativeTo(null);
         ControladorHanoi.instanciarBarras(barras, cantidaBarras);
+        
         ControladorHanoi.instanciarTorres(torres);
         ControladorHanoi.iniciador(barras, torres, cantidaBarras);
+        botones();
+         initComponents();
         deshabilitarBarras();
         datos();
         
-        Runnable cro = new Cronometro() ;
-        Thread t = new Thread(cro);
-        t.start();
+        
+        //Runnable cro = new Cronometro() ;
+        //Thread t = new Thread(cro);
+        //t.start();
 
     }
-
+    
+     public void juego(){
+         while(true){
+             verificador(torres, barras);
+         
+         
+         
+         }
+    
+    }
+   
+    public void botones(){
+        for (int i = 7; i > 7 - cantidaBarras; i--) {
+            this.add(barras[i].getBoton());
+            barras[i].getBoton().setLocation(330,(i*40)+145);   
+        }
+        for (int i = 0; i<3; i++) {
+            //this.add(torres[i].getBoton());
+            //barras[i].getBoton().setLocation(330,(i*40)+145);   
+        }
+    
+    }
+    
+    
     public void datos() {
         for (int i = 0; i < 3; i++) {
             System.out.println("peso tor " + i + ":" + torres[i].getPeso());
             System.out.println("ocupado tor " + i + ":" + torres[i].getPosOcupadas());
         }
+        
 
         //Runnable cronometro = new Cronometro();
         //Thread  ter = new Thread(cronometro);
@@ -243,101 +272,6 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void barra8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barra8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_barra8ActionPerformed
-
-    private void barra6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barra6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_barra6ActionPerformed
-
-    private void barra8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barra8MouseClicked
-        // TODO add your handling code here:
-        int id = 7;
-        if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
-            idClico = id;
-            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
-        }
-        System.out.println("clic barra " + (id + 1));
-
-    }//GEN-LAST:event_barra8MouseClicked
-
-    private void barra7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barra7MouseClicked
-        // TODO add your handling code here:
-        int id = 6;
-        if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
-            idClico = id;
-            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
-        }
-        System.out.println("clic barra " + (id + 1));
-
-    }//GEN-LAST:event_barra7MouseClicked
-
-    private void barra6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barra6MouseClicked
-        // TODO add your handling code here:
-        int id = 5;
-        if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
-            idClico = id;
-            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
-        }
-        System.out.println("clic barra " + (id + 1));
-
-    }//GEN-LAST:event_barra6MouseClicked
-
-    private void barra5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barra5MouseClicked
-        // TODO add your handling code here:
-        int id = 4;
-        if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
-            idClico = id;
-            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
-        }
-        System.out.println("clic barra " + (id + 1));
-
-    }//GEN-LAST:event_barra5MouseClicked
-
-    private void barra4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barra4MouseClicked
-        // TODO add your handling code here:
-        int id = 3;
-        if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
-            idClico = id;
-            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
-        }
-        System.out.println("clic barra " + (id + 1));
-
-    }//GEN-LAST:event_barra4MouseClicked
-
-    private void barra3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barra3MouseClicked
-        // TODO add your handling code here:
-        int id = 2;
-        if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
-            idClico = id;
-            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
-        }
-        System.out.println("clic barra " + (id + 1));
-
-    }//GEN-LAST:event_barra3MouseClicked
-
-    private void barra2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barra2MouseClicked
-        // TODO add your handling code here:
-        int id = 1;
-        if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
-            idClico = id;
-            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
-        }
-        System.out.println("clic barra " + (id + 1));
-
-    }//GEN-LAST:event_barra2MouseClicked
-
-    private void barra1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barra1MouseClicked
-        // TODO add your handling code here:
-        int id = 0;
-        if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
-            idClico = id;
-            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
-        }
-        System.out.println("clic barra " + (id + 1));
-    }//GEN-LAST:event_barra1MouseClicked
-
     private void torre1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_torre1MouseClicked
         // TODO add your handling code here:
         int idTorre = 0;
@@ -390,6 +324,94 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_torre3MouseClicked
+
+    private void barra8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barra8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_barra8ActionPerformed
+
+    private void barra8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barra8MouseClicked
+        // TODO add your handling code here:
+        int id = 7;
+        if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
+            idClico = id;
+            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
+        }
+        System.out.println("clic barra " + (id + 1));
+    }//GEN-LAST:event_barra8MouseClicked
+
+    private void barra7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barra7MouseClicked
+        // TODO add your handling code here:
+        int id = 6;
+        if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
+            idClico = id;
+            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
+        }
+        System.out.println("clic barra " + (id + 1));
+    }//GEN-LAST:event_barra7MouseClicked
+
+    private void barra6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barra6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_barra6ActionPerformed
+
+    private void barra6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barra6MouseClicked
+        // TODO add your handling code here:
+        int id = 5;
+        if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
+            idClico = id;
+            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
+        }
+        System.out.println("clic barra " + (id + 1));
+    }//GEN-LAST:event_barra6MouseClicked
+
+    private void barra5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barra5MouseClicked
+        // TODO add your handling code here:
+        int id = 4;
+        if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
+            idClico = id;
+            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
+        }
+        System.out.println("clic barra " + (id + 1));
+    }//GEN-LAST:event_barra5MouseClicked
+
+    private void barra4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barra4MouseClicked
+        // TODO add your handling code here:
+        int id = 3;
+        if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
+            idClico = id;
+            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
+        }
+        System.out.println("clic barra " + (id + 1));
+    }//GEN-LAST:event_barra4MouseClicked
+
+    private void barra3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barra3MouseClicked
+        // TODO add your handling code here:
+        int id = 2;
+        if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
+            idClico = id;
+            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
+        }
+        System.out.println("clic barra " + (id + 1));
+    }//GEN-LAST:event_barra3MouseClicked
+
+    private void barra2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barra2MouseClicked
+        // TODO add your handling code here:
+        int id = 1;
+        if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
+            idClico = id;
+            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
+        }
+        System.out.println("clic barra " + (id + 1));
+    }//GEN-LAST:event_barra2MouseClicked
+
+    private void barra1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barra1MouseClicked
+        // TODO add your handling code here:
+        int id = 0;
+        if (barras[id].getPeso() <= torres[barras[id].getIdTorreActual()].getPeso()) {
+            idClico = id;
+            System.out.println("clic barra " + (id + 1) + " barrapeso:" + barras[id].getPeso() + " pesotorre:" + torres[barras[id].getIdTorreActual()].getPeso());
+        }
+        System.out.println("clic barra " + (id + 1));
+    }//GEN-LAST:event_barra1MouseClicked
 
     public void moverBoton(int queBoton, int posX, int posY) {
 

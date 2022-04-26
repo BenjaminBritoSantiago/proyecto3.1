@@ -4,27 +4,49 @@
  */
 package com.ipc1.proyecto3.controladorHanoi;
 
+import javax.swing.JButton;
+
 /**
  *
  * @author minch
  */
-public class Barra {
+public class Barra extends JButton{
     
     private int idBarra;
     private int peso;
     private int idTorreActual;
     private int posicionYActual;
     private int pesoAnterior;
+    private JButton boton=  new JButton();
+    
+    public static int idClico=-1;
     
     
-    public Barra( int idBarra, int peso, int idTorreActual, int posicionYActual, int pesoAnterior  ) {
+    
+    public Barra( int idBarra, int peso, int idTorreActual, int posicionYActual, int pesoAnterior, int anchoBoton, int altoBoton, String numBoton) {
         this.peso = peso;
         this.idTorreActual = idTorreActual;
         this.posicionYActual = posicionYActual;
         this.idBarra = idBarra;
         this.pesoAnterior = pesoAnterior;
+        boton.setBounds(20, 20, anchoBoton, altoBoton);
+        this.boton.setVisible(true);
+        boton.setText(numBoton);
+    }
+    
+     private void botonMouseClicked(java.awt.event.MouseEvent evt) {                                    
+        // TODO add your handling code here:
+        idClico = idBarra;
+    }     
+
+    public JButton getBoton() {
+        return boton;
     }
 
+    public void setBoton(JButton boton) {
+        this.boton = boton;
+    }
+    
     public int getPesoAnterior() {
         return pesoAnterior;
     }

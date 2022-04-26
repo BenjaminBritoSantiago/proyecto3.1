@@ -4,32 +4,53 @@
  */
 package com.ipc1.proyecto3.controladorHanoi;
 
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.JLabel;
+
 /**
  *
  * @author minch
  */
-public class Torre {
-    
-    private int idBarra;
+public class Torre extends JLabel {
+
+    //private int idBarra;
     private int peso;
     private int posOcupadas;
+    private int idTorre;
+    JLabel torreG = new JLabel();
 
-    public Torre(int idBarra, int peso, int posOcupadas) {
-        this.idBarra=idBarra;
+    public static int idClico=-1;
+
+    public Torre(int idTorre, int peso, int posOcupadas) {
+        //this.idBarra=idBarra;
         this.peso = peso;
         this.posOcupadas = posOcupadas;
+        this.idTorre = idTorre;
+        torreG.setBounds(0, 0, 40, 300);
+        torreG.setOpaque(true);
+        torreG.setBackground(Color.red);
+        
     }
+
+    private void torreMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        idClico = idTorre;
+    }
+
+    
+    
     
     
     public void quitarBarra() {
-        
-        posOcupadas=posOcupadas-1;
+
+        posOcupadas = posOcupadas - 1;
     }
-    
+
     public void agregarBarra() {
-        posOcupadas=posOcupadas+1;
+        posOcupadas = posOcupadas + 1;
     }
-    
+
     public int getPeso() {
         return peso;
     }
@@ -45,8 +66,5 @@ public class Torre {
     public void setPosOcupadas(int posOcupadas) {
         this.posOcupadas = posOcupadas;
     }
-    
-    
-    
-    
+
 }
