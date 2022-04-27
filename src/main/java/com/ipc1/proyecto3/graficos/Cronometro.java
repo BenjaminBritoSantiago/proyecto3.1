@@ -86,7 +86,7 @@ public class Cronometro extends JPanel implements Runnable {
             }
 
             try {
-                Thread.sleep(10);
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Cronometro.class.getName()).log(Level.SEVERE, null, ex);
             }

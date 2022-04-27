@@ -7,6 +7,8 @@ package com.ipc1.proyecto3.graficos;
 import com.ipc1.proyecto3.controladorHanoi.Barra;
 import com.ipc1.proyecto3.controladorHanoi.BotonesTorres;
 import com.ipc1.proyecto3.controladorHanoi.Torre;
+import static java.lang.Math.round;
+import javax.swing.JLabel;
 
 /**
  *
@@ -19,7 +21,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
     private int idClico = -1;
     private int cantidaBarras = 3;
     private boolean terminar = false;
-
+    private int movActual=0;
     /**
      * Creates new form TorresdeHanoi
      */
@@ -29,6 +31,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         this.setBounds(0, 0, 1000, 700);
         this.setLocationRelativeTo(null);
         initComponents();
+        movMin.setText( String.valueOf(round(Math.pow(2,cantidaBarras)-1)));
         
         Thread t = new Thread(crnmt);
         t.start();
@@ -42,6 +45,12 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         return terminar;
     }
 
+    public void setMovActuales() {
+        ++movActual;
+        this.movActuales.setText( String.valueOf(movActual));
+    }
+    
+
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -49,6 +58,10 @@ public class TorresdeHanoi extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        movMin = new javax.swing.JLabel();
+        movActuales = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,19 +74,52 @@ public class TorresdeHanoi extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("Movimientos Minimos:");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("movimientos actuales:");
+
+        movMin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        movMin.setText("00");
+
+        movActuales.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        movActuales.setText("00");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(437, 437, 437)
-                .addComponent(jButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(437, 437, 437)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(movActuales))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(movMin)))))
                 .addContainerGap(419, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(545, Short.MAX_VALUE)
+                .addGap(47, 47, 47)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(movMin))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(movActuales))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 446, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(56, 56, 56))
         );
@@ -105,7 +151,11 @@ public class TorresdeHanoi extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel movActuales;
+    private javax.swing.JLabel movMin;
     // End of variables declaration//GEN-END:variables
 
 }

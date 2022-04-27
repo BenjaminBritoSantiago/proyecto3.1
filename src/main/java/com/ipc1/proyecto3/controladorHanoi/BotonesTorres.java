@@ -7,11 +7,6 @@ package com.ipc1.proyecto3.controladorHanoi;
 import com.ipc1.proyecto3.graficos.TorresdeHanoi;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  *
@@ -160,6 +155,7 @@ public class BotonesTorres extends Thread implements ActionListener {
                         }
                         Barra.idClico = -1;
                         Torre.idClico = -1;
+                        ventana.setMovActuales();
                     }
                 }
             }
