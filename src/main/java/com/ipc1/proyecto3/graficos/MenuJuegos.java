@@ -86,6 +86,7 @@ public class MenuJuegos extends javax.swing.JFrame {
         TorresdeHanoi ventanaHanoi = new TorresdeHanoi();
         ventanaHanoi.setVisible(true);
         this.setVisible(false);
+        ventanaHanoi.setDefaultCloseOperation( ventanaHanoi.EXIT_ON_CLOSE);
     }//GEN-LAST:event_JuegoHanoiMouseClicked
 
     /**

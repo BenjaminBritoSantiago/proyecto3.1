@@ -5,20 +5,24 @@
 package com.ipc1.proyecto3.controladorHanoi;
 
 import java.awt.Color;
-import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
-
+import javax.swing.JPanel;
+import javax.swing.event.AncestorEvent;
 /**
  *
  * @author minch
  */
-public class Torre extends JLabel {
+public class Torre extends JPanel {
 
     //private int idBarra;
     private int peso;
     private int posOcupadas;
     private int idTorre;
-    JLabel torreG = new JLabel();
+    private JButton torreG = new JButton();
 
     public static int idClico=-1;
 
@@ -28,22 +32,26 @@ public class Torre extends JLabel {
         this.posOcupadas = posOcupadas;
         this.idTorre = idTorre;
         torreG.setBounds(0, 0, 40, 350);
-        torreG.setOpaque(true);
-        torreG.setBackground(Color.red);
-        
+        torreG.setOpaque(true); 
+        torreG.setContentAreaFilled(false);
+        ImageIcon imgs =  new ImageIcon("C:\\Users\\minch\\Pictures\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto3\\imagenes\\Reflectivo-Amarillo-3M-1.jpg");
+        torreG.setIcon(imgs);
     }
 
-    private void torreMouseClicked(java.awt.event.MouseEvent evt) {
-        // TODO add your handling code here:
-        idClico = idTorre;
-        System.out.println("se clico la torre id: "+idTorre);
+    public int getIdTorre() {
+        return idTorre;
     }
 
-    public JLabel getTorreG() {
+    public void setIdTorre(int idTorre) {
+        this.idTorre = idTorre;
+    }
+    
+
+    public JButton getTorreG() {
         return torreG;
     }
 
-    public void setTorreG(JLabel torreG) {
+    public void setTorreG(JButton torreG) {
         this.torreG = torreG;
     }
 
@@ -72,5 +80,11 @@ public class Torre extends JLabel {
     public void setPosOcupadas(int posOcupadas) {
         this.posOcupadas = posOcupadas;
     }
+
+    
+
+   
+
+    
 
 }

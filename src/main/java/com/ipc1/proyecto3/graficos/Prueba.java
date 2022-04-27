@@ -4,6 +4,8 @@
  */
 package com.ipc1.proyecto3.graficos;
 
+import com.ipc1.proyecto3.controladorHanoi.BotonesTorres;
+
 /**
  *
  * @author minch
@@ -15,6 +17,7 @@ public class Prueba extends javax.swing.JFrame {
      */
     public Prueba() {
         initComponents();
+       
     }
     
 

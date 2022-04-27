@@ -6,25 +6,26 @@ package com.ipc1.proyecto3.graficos;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
  * @author minch
  */
-public class Cronometro extends javax.swing.JPanel implements Runnable {
+public class Cronometro extends JPanel implements Runnable {
 
-    private int hora = 01;
-    private int minutos = 01;
-    private int segundos = 01;
+    private int hora = 00;
+    private int minutos = 00;
+    private int segundos = 00;
     private TorresdeHanoi ventana;
 
     public Cronometro(TorresdeHanoi ventana) {
         initComponents();
         this.ventana = ventana;
-        inciciar();
-
-        //this.setBounds(350, 3, 225, 50);
+        this.tiempoText.setVisible(true);
+        this.setBounds(400, 20, 250, 70);
+        this.ventana.add(this);
+        
     }
 
     //public void contador()
@@ -34,7 +35,10 @@ public class Cronometro extends javax.swing.JPanel implements Runnable {
 
         contador = new javax.swing.JLabel();
         tiempoText = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
+        setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 0, 204)));
+        setPreferredSize(new java.awt.Dimension(300, 60));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         contador.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -42,17 +46,22 @@ public class Cronometro extends javax.swing.JPanel implements Runnable {
         contador.setText("00:00:00");
         contador.setToolTipText("");
         contador.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        add(contador, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 100, 30));
+        add(contador, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 100, 30));
 
         tiempoText.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         tiempoText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tiempoText.setText("TIEMPO:");
-        add(tiempoText, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        add(tiempoText, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 110, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("hh:mm:ss");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel contador;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel tiempoText;
     // End of variables declaration//GEN-END:variables
 
@@ -60,19 +69,11 @@ public class Cronometro extends javax.swing.JPanel implements Runnable {
         this.contador.setText(contador);
     }
 
-    public void inciciar() {
-        ventana.add(this);
-        this.setVisible(true);
-        this.setBounds(200, 40, 300, 100);
-
-    }
 
     @Override
     public void run() {
-        //String contador;
         do {
             contador.setText(cambiador(hora) + ":" + cambiador(minutos)+ ":" + cambiador(segundos));
-        
             segundos++;
 
             if (segundos == 60) {
@@ -85,7 +86,7 @@ public class Cronometro extends javax.swing.JPanel implements Runnable {
             }
 
             try {
-                Thread.sleep(100);
+                Thread.sleep(10);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Cronometro.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -99,8 +100,7 @@ public class Cronometro extends javax.swing.JPanel implements Runnable {
         if (hms < 10) {
             valHMS = ("0");
         }
-        return valHMS + (String.valueOf(hms));
-        
+        return valHMS + (String.valueOf(hms));  
     }
 
 }

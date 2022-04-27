@@ -20,6 +20,6 @@ public class Proyecto3 {
         //ventanaHanoi.setVisible(true);
         MenuUsuario inicio = new MenuUsuario();
         inicio.setVisible(true);
-        //ventanaHanoi.setDefaultCloseOperation(ventanaHanoi.EXIT_ON_CLOSE);
+        inicio.setDefaultCloseOperation(inicio.EXIT_ON_CLOSE);
     }
 }

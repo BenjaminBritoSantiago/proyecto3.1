@@ -88,6 +88,8 @@ public class MenuUsuario extends javax.swing.JFrame {
 
     private void crearUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearUsuarioMouseClicked
         // TODO add your handling code here:
+        Prueba prub = new Prueba();
+        prub.setVisible(true);
     }//GEN-LAST:event_crearUsuarioMouseClicked
 
     private void elegirUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_elegirUsuarioMouseClicked
@@ -95,6 +97,7 @@ public class MenuUsuario extends javax.swing.JFrame {
         MenuJuegos juegos = new MenuJuegos();
         juegos.setVisible(true);
         this.setVisible(false);
+        juegos.setDefaultCloseOperation(juegos.EXIT_ON_CLOSE);
     }//GEN-LAST:event_elegirUsuarioMouseClicked
 
     /**

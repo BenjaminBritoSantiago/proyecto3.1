@@ -13,6 +13,7 @@ import com.ipc1.proyecto3.controladorHanoi.Barra;
  */
 public class ControladorHanoi {
     
+    
     public static void instanciarBarras(Barra[] arrayBarras, int numBarras) {
         for (int i = 7; i > 7 - numBarras; i--) {
             // Barra( int idBarra, int peso, int idTorreActual, int posicionYActual, int pesoAnterior  )
