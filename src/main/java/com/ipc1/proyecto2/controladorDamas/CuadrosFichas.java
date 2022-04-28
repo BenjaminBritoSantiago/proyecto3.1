@@ -73,7 +73,7 @@ public class CuadrosFichas extends Thread implements ActionListener {
             }
         }
 
-        ImageIcon imgs = new ImageIcon("C:\\Users\\minch\\Documents\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto3\\imagenes\\fondoNegro.jpg");
+        ImageIcon imgs = new ImageIcon("C:\\Users\\minch\\Documents\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\fondoNegro.jpg");
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
                 cuadros[x][y] = new Cuadricula();
