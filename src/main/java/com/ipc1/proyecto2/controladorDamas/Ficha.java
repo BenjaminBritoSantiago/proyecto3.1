@@ -24,13 +24,13 @@ public class Ficha{
     private int numFicha;
     
     public Ficha(int numFicha) {
-         ImageIcon imgs = new ImageIcon("C:\\Users\\minch\\Documents\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\rojo.jpg");
+         ImageIcon imgs = new ImageIcon("C:\\Users\\minch\\Documents\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\rojo.png");
         this.numFicha=numFicha;
         ficha.setSize(60, 60); 
-        //ficha.setOpaque(true);
-        //ficha.setContentAreaFilled(true);
+        ficha.setOpaque(true);
+        ficha.setContentAreaFilled(false);
+        ficha.setBorder(new Bordes (50));
         ficha.setIcon(new ImageIcon(imgs.getImage().getScaledInstance(ficha.getWidth() , ficha.getHeight(), Image.SCALE_SMOOTH)));
-        ficha.setBorder(new Bordes (40) );
        
         
         

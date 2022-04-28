@@ -31,7 +31,7 @@ public class Torre extends JPanel {
         torreG.setBounds(0, 0, 40, 350);
         torreG.setOpaque(true); 
         torreG.setContentAreaFilled(false);
-        ImageIcon imgs =  new ImageIcon("C:\\Users\\minch\\Pictures\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\Reflectivo-Amarillo-3M-1.jpg");
+        ImageIcon imgs =  new ImageIcon("C:\\Users\\minch\\Documents\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\amarillo.jpg");
         torreG.setIcon(imgs);
     }
 
