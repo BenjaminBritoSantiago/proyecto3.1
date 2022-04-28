@@ -63,7 +63,7 @@ public class CuadrosFichas extends Thread implements ActionListener {
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 8; x++) {
                 if ((x % 2 == 0 && y % 2 == 0) || (x % 2 != 0 && y % 2 != 0)) {
-                    fichas[contador].getFicha().setLocation(250 + (x * 60), 80 + (y * 50));
+                    fichas[contador].getFicha().setLocation(250 + (x * 60), 80 + (y * 60));
                     ++contador;
                     if (contador == 12) {
                         break;

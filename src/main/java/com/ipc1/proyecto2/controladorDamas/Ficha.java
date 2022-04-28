@@ -7,7 +7,9 @@ package com.ipc1.proyecto2.controladorDamas;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Insets;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.Border;
 
@@ -22,10 +24,17 @@ public class Ficha{
     private int numFicha;
     
     public Ficha(int numFicha) {
-        
+         ImageIcon imgs = new ImageIcon("C:\\Users\\minch\\Documents\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\rojo.jpg");
         this.numFicha=numFicha;
-        ficha.setSize(40, 40); 
-        ficha.setBackground(Color.red);
+        ficha.setSize(60, 60); 
+        //ficha.setOpaque(true);
+        //ficha.setContentAreaFilled(true);
+        ficha.setIcon(new ImageIcon(imgs.getImage().getScaledInstance(ficha.getWidth() , ficha.getHeight(), Image.SCALE_SMOOTH)));
+        ficha.setBorder(new Bordes (40) );
+       
+        
+        
+        
     }
 
     public JButton getFicha() {
