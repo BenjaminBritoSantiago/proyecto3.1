@@ -78,6 +78,10 @@ public class MenuJuegos extends javax.swing.JFrame {
 
     private void juegoDamasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_juegoDamasMouseClicked
         // TODO add your handling code here:
+        TableroDamas damas = new TableroDamas();
+        damas.setVisible(true);
+        this.setVisible(false);
+        //damas.setDefaultCloseOperation(damas.EXIT_ON_CLOSE);
 
     }//GEN-LAST:event_juegoDamasMouseClicked
 

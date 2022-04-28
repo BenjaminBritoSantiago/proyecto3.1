@@ -8,7 +8,7 @@ import com.ipc1.proyecto3.controladorHanoi.Barra;
 import com.ipc1.proyecto3.controladorHanoi.BotonesTorres;
 import com.ipc1.proyecto3.controladorHanoi.Torre;
 import static java.lang.Math.round;
-import javax.swing.JLabel;
+
 
 /**
  *
