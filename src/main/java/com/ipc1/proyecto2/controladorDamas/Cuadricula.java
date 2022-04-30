@@ -4,22 +4,37 @@
  */
 package com.ipc1.proyecto2.controladorDamas;
 
-import com.ipc1.proyecto2.graficos.TableroDamas;
-import java.awt.Color;
 import javax.swing.JButton;
-
 
 /**
  *
  * @author minch
  */
-public class Cuadricula{
-    
-    private boolean ocupado=false;
+public class Cuadricula {
+    private int numero;
+    private int idFichaOcupando = -1;
+    private boolean ocupado = false;
     JButton cuadro = new JButton();
-    
-    public Cuadricula() {
+
+    public Cuadricula(int numero) {
         cuadro.setSize(60, 60);
+        this.numero = numero;
+    }
+
+    public int getIdFichaOcupando() {
+        return idFichaOcupando;
+    }
+
+    public void setIdFichaOcupando(int idFichaOcupando) {
+        this.idFichaOcupando = idFichaOcupando;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
     public boolean isOcupado() {
@@ -37,8 +52,5 @@ public class Cuadricula{
     public void setCuadro(JButton cuadro) {
         this.cuadro = cuadro;
     }
-    
-    
-    
-    
+
 }

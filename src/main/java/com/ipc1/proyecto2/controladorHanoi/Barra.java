@@ -6,9 +6,6 @@ package com.ipc1.proyecto2.controladorHanoi;
 
 
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 import javax.swing.JButton;
 
 /**

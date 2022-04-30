@@ -5,7 +5,6 @@
 package com.ipc1.proyecto2;
 
 import com.ipc1.proyecto2.graficos.MenuUsuario;
-import com.ipc1.proyecto2.graficos.TorresdeHanoi;
 
 /**
  *

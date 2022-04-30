@@ -4,14 +4,11 @@
  */
 package com.ipc1.proyecto2.controladorDamas;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
+
 import java.awt.Image;
-import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.border.Border;
+
 
 /**
  *
@@ -20,21 +17,39 @@ import javax.swing.border.Border;
 public class Ficha{
     
     JButton ficha = new JButton();
+    Cuadricula CuadroActual;
     private boolean tipo1=true;
     private int numFicha;
+    private boolean corono = false;
     
-    public Ficha(int numFicha) {
-         ImageIcon imgs = new ImageIcon("C:\\Users\\minch\\Documents\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\rojo.png");
+    public Ficha(int numFicha, int grupo12 ) {
+         ImageIcon imgs = new ImageIcon("C:\\Users\\minch\\Documents\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\damas"+grupo12+".png");
         this.numFicha=numFicha;
         ficha.setSize(60, 60); 
         ficha.setOpaque(true);
         ficha.setContentAreaFilled(false);
         ficha.setBorder(new Bordes (50));
         ficha.setIcon(new ImageIcon(imgs.getImage().getScaledInstance(ficha.getWidth() , ficha.getHeight(), Image.SCALE_SMOOTH)));
-       
-        
-        
-        
+         
+    }
+
+
+
+    public Cuadricula getCuadroActual() {
+        return CuadroActual;
+    }
+
+    public void setCuadroActual(Cuadricula cuadroActual) {
+        CuadroActual = cuadroActual;
+    }
+
+
+    public boolean getCorono() {
+        return corono;
+    }
+
+    public void setCorono(boolean corono) {
+        this.corono = corono;
     }
 
     public JButton getFicha() {

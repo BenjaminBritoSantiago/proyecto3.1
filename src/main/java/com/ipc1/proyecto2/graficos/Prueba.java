@@ -4,7 +4,6 @@
  */
 package com.ipc1.proyecto2.graficos;
 
-import com.ipc1.proyecto2.controladorHanoi.BotonesTorres;
 
 /**
  *
