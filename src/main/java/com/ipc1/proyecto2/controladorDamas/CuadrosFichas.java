@@ -70,7 +70,7 @@ public class CuadrosFichas extends Thread implements ActionListener {
 
         /** DETECTOR DE FICHA 1 CLICLADO */
         for (int i = 0; i < 12; i++) {
-            if (queBoton == fichas1[i].getFicha()) {
+            if (turno1 && queBoton == fichas1[i].getFicha()) {
                 System.out.println("NO FICHA1  + " + i);
                 NumFichasClico = i;
                 break;
@@ -80,7 +80,7 @@ public class CuadrosFichas extends Thread implements ActionListener {
 
         /** DETECTOR DE FICHA 2 CLICLADO */
         for (int i = 0; i < 12; i++) {
-            if (queBoton == fichas2[i].getFicha()) {
+            if (!turno1 && queBoton == fichas2[i].getFicha()) {
                 System.out.println("NO FICHA2  + " + i);
                 NumFichasClico = i;
                 break;
@@ -213,7 +213,7 @@ public class CuadrosFichas extends Thread implements ActionListener {
     }
 
     public void MovPosible() {
-        if (cuadros2[NumCuadroClico].getIdFichaOcupando() == -1) {
+        if (cuadros2[NumCuadroClico].getIdFichaOcupando() == -1 && NumFichasClico != -1) {
 
             switch (fichastmp[NumFichasClico].getFicha().getY() - cuadros2[NumCuadroClico].getCuadro().getY()) {
                 case 60:
@@ -236,7 +236,15 @@ public class CuadrosFichas extends Thread implements ActionListener {
                     System.out.println("entra a 120");
                     if ((distaciaX() == 120 || distaciaX() == -120)
                             && (turno1 || (!turno1 && fichastmp[NumFichasClico].getCorono()))) {
-                        cambiosGenerales();
+
+                        if (distaciaX() == 120
+                                && cuadros2[NumCuadroClico + 4 + tipoCuadro()].getIdFichaOcupando() != -1) {
+                            cambiosGenerales();
+
+                        } else if (distaciaX() == -120 && cuadros2[NumCuadroClico + 3 + tipoCuadro()].getIdFichaOcupando() != -1) {
+                            cambiosGenerales();
+                        }
+
                     }
 
                     break;
@@ -244,11 +252,15 @@ public class CuadrosFichas extends Thread implements ActionListener {
                     System.out.println("entra a --120");
                     if ((distaciaX() == 120 || distaciaX() == -120)
                             && (!turno1 || (turno1 && fichastmp[NumFichasClico].getCorono()))) {
-                        cambiosGenerales();
+
+                        if (distaciaX() == 120 && cuadros2[NumCuadroClico - 5 + tipoCuadro()].getIdFichaOcupando() != -1) {
+                            cambiosGenerales();
+                        } else if (distaciaX() == -120 && cuadros2[NumCuadroClico - 4 + tipoCuadro()].getIdFichaOcupando() != -1) {
+                            cambiosGenerales();
+                        }
                     }
 
                     break;
-
                 default:
                     System.out.println("no se puede nunguna");
                     break;
@@ -256,7 +268,18 @@ public class CuadrosFichas extends Thread implements ActionListener {
         }
     }
 
+    public int tipoCuadro() {
+        if (NumCuadroClico >= 0 && NumCuadroClico < 4 || NumCuadroClico >= 8 && NumCuadroClico < 12
+                || NumCuadroClico >= 16 && NumCuadroClico < 20 || NumCuadroClico >= 24 && NumCuadroClico < 28) {
+            return 1;
+        }
+        return 0;
+
+    }
+
     public int distaciaX() {
+        System.out.println(
+                "que pas " + (fichastmp[NumFichasClico].ficha.getX() - cuadros2[NumCuadroClico].getCuadro().getX()));
 
         return fichastmp[NumFichasClico].ficha.getX() - cuadros2[NumCuadroClico].getCuadro().getX();
 
