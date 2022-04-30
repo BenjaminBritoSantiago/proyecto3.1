@@ -26,8 +26,7 @@ public class CuadrosFichas extends Thread implements ActionListener {
     private Ficha[] fichas2 = new Ficha[12];
     private Ficha[] fichastmp;
 
-    private int NumFichas1Clico = -1;
-    private int NumFichas2Clico = -1;
+    private int NumFichasClico = -1;
     private int NumCuadroClico = -1;
 
     private boolean turno1 = true;
@@ -73,7 +72,7 @@ public class CuadrosFichas extends Thread implements ActionListener {
         for (int i = 0; i < 12; i++) {
             if (queBoton == fichas1[i].getFicha()) {
                 System.out.println("NO FICHA1  + " + i);
-                NumFichas1Clico = i;
+                NumFichasClico = i;
                 break;
             }
 
@@ -83,7 +82,7 @@ public class CuadrosFichas extends Thread implements ActionListener {
         for (int i = 0; i < 12; i++) {
             if (queBoton == fichas2[i].getFicha()) {
                 System.out.println("NO FICHA2  + " + i);
-                NumFichas2Clico = i;
+                NumFichasClico = i;
                 break;
             }
 
@@ -181,12 +180,12 @@ public class CuadrosFichas extends Thread implements ActionListener {
         for (int i = 0; i < 12; i++) {
             cuadros2[i].setOcupado(true);
             cuadros2[i].setIdFichaOcupando(i);
-            fichas2[i].setCuadroActual(cuadros2[i]);
+            fichas2[i].setIdCuadroActual(i);
         }
         for (int i = 20; i < 32; i++) {
             cuadros2[i].setOcupado(true);
             cuadros2[i].setIdFichaOcupando(i - 20);
-            fichas1[i-20].setCuadroActual(cuadros2[i]);
+            fichas1[i - 20].setIdCuadroActual(i);
         }
 
         /** SE INSERTA la tabla de fondo */
@@ -200,12 +199,13 @@ public class CuadrosFichas extends Thread implements ActionListener {
     }
 
     public boolean condicionesValidas() {
-        if (turno1 && NumFichas1Clico != -1 && NumCuadroClico!=-1) {
+
+        if (turno1 && NumFichasClico != -1) {
             fichastmp = fichas1;
             return true;
         }
 
-        if (!turno1 && NumFichas2Clico != -1 && NumCuadroClico!=-1) {
+        if (!turno1 && NumFichasClico != -1) {
             fichastmp = fichas2;
             return true;
         }
@@ -213,41 +213,71 @@ public class CuadrosFichas extends Thread implements ActionListener {
     }
 
     public void MovPosible() {
-        if (turno1 && cuadros2[NumCuadroClico].getIdFichaOcupando()==-1) {
-            if (fichas1[NumFichas1Clico].ficha.getY()-cuadros2[NumCuadroClico].getCuadro().getY()>0 ) {
-                mover(fichas1[NumFichas1Clico].ficha.getY()-cuadros2[NumCuadroClico].getCuadro().getY());
+        if (cuadros2[NumCuadroClico].getIdFichaOcupando() == -1) {
 
-            } else if(fichas1[NumFichas1Clico].ficha.getY()-cuadros2[NumCuadroClico].getCuadro().getY()<0 && fichas1[NumFichas1Clico].getCorono()){
-                mover(fichas1[NumFichas1Clico].ficha.getY()-cuadros2[NumCuadroClico].getCuadro().getY());
+            switch (fichastmp[NumFichasClico].getFicha().getY() - cuadros2[NumCuadroClico].getCuadro().getY()) {
+                case 60:
+                    System.out.println("entra a 60");
+                    if ((distaciaX() == 60 || distaciaX() == -60)
+                            && (turno1 || (!turno1 && fichastmp[NumFichasClico].getCorono()))) {
+                        cambiosGenerales();
+                    }
+
+                    break;
+                case -60:
+                    System.out.println("entra a --60");
+                    if ((distaciaX() == 60 || distaciaX() == -60)
+                            && (!turno1 || (turno1 && fichastmp[NumFichasClico].getCorono()))) {
+                        cambiosGenerales();
+                    }
+
+                    break;
+                case 120:
+                    System.out.println("entra a 120");
+                    if ((distaciaX() == 120 || distaciaX() == -120)
+                            && (turno1 || (!turno1 && fichastmp[NumFichasClico].getCorono()))) {
+                        cambiosGenerales();
+                    }
+
+                    break;
+                case -120:
+                    System.out.println("entra a --120");
+                    if ((distaciaX() == 120 || distaciaX() == -120)
+                            && (!turno1 || (turno1 && fichastmp[NumFichasClico].getCorono()))) {
+                        cambiosGenerales();
+                    }
+
+                    break;
+
+                default:
+                    System.out.println("no se puede nunguna");
+                    break;
             }
-
-        }else{
-
         }
+    }
+
+    public int distaciaX() {
+
+        return fichastmp[NumFichasClico].ficha.getX() - cuadros2[NumCuadroClico].getCuadro().getX();
 
     }
 
-    public void mover(int hacia) {
+    public void cambiosGenerales() {
+        fichastmp[NumFichasClico].getFicha().setLocation(cuadros2[NumCuadroClico].getCuadro().getX(),
+                cuadros2[NumCuadroClico].getCuadro().getY());
 
-        if (turno1) {
-            if (hacia==60 ) {
-                fichas1[NumFichas1Clico].getFicha().setLocation(cuadros2[NumCuadroClico].getCuadro().getX(), cuadros2[NumCuadroClico].getCuadro().getY());
-                fichas1[NumFichas1Clico].getCuadroActual().setIdFichaOcupando(-1);
-                fichas1[NumFichas1Clico].setCuadroActual( cuadros2[NumCuadroClico]);
-                cuadros2[NumCuadroClico].setIdFichaOcupando(NumFichas1Clico);
-                idFichaOcupa();
-            } else if (hacia==120) {
-
-            }
-            
-        }
-        
+        cuadros2[fichastmp[NumFichasClico].getIdCuadroActual()].setIdFichaOcupando(-1);
+        fichastmp[NumFichasClico].setIdCuadroActual(NumCuadroClico);
+        cuadros2[NumCuadroClico].setIdFichaOcupando(NumFichasClico);
+        NumFichasClico = -1;
+        NumCuadroClico = -1;
+        turno1 = !turno1;
+        idFichaOcupa();
     }
-
 
     public void idFichaOcupa() {
         for (int i = 0; i < 32; i++) {
-            System.out.println(i+": "+cuadros2[i].getIdFichaOcupando());
+            System.out.println(i + ": " + cuadros2[i].getIdFichaOcupando());
         }
     }
 

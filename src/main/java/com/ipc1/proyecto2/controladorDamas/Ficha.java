@@ -17,10 +17,10 @@ import javax.swing.JButton;
 public class Ficha{
     
     JButton ficha = new JButton();
-    Cuadricula CuadroActual;
     private boolean tipo1=true;
     private int numFicha;
     private boolean corono = false;
+    private int idCuadroActual;
     
     public Ficha(int numFicha, int grupo12 ) {
          ImageIcon imgs = new ImageIcon("C:\\Users\\minch\\Documents\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\damas"+grupo12+".png");
@@ -33,16 +33,15 @@ public class Ficha{
          
     }
 
-
-
-    public Cuadricula getCuadroActual() {
-        return CuadroActual;
+    
+    public int getIdCuadroActual() {
+        return idCuadroActual;
     }
 
-    public void setCuadroActual(Cuadricula cuadroActual) {
-        CuadroActual = cuadroActual;
-    }
 
+    public void setIdCuadroActual(int idCuadroActual) {
+        this.idCuadroActual = idCuadroActual;
+    }
 
     public boolean getCorono() {
         return corono;
