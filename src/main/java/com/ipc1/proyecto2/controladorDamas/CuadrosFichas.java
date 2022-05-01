@@ -67,6 +67,14 @@ public class CuadrosFichas extends Thread implements ActionListener {
                 break;
             }
         }
+        if ( !continuaJuego(fichas1,fichas2)) {
+            if (hayDamas(fichas1)) {
+                desHabilitarFichas(fichas1); 
+            }else{
+                desHabilitarFichas(fichas2);
+            }  
+        }
+       
 
         /** DETECTOR DE FICHA 1 CLICLADO */
         for (int i = 0; i < 12; i++) {
@@ -89,6 +97,7 @@ public class CuadrosFichas extends Thread implements ActionListener {
         }
 
     }
+
 
     public void instanciador() {
         // instaciador del fichas1.
@@ -366,6 +375,14 @@ public class CuadrosFichas extends Thread implements ActionListener {
         }  
     }
 
+    public static boolean continuaJuego(Ficha [] fichas1, Ficha [] fichas2) {
+        
+        if (hayDamas(fichas1) && hayDamas(fichas2)) {
+            return true;
+        } 
+        return false; 
+    }
+
     public static boolean hayDamas(Ficha[] fichas12 ) {
         for (int i = 0; i < 12; i++) {
             if (fichas12[i].getDisponible()) {
@@ -378,6 +395,12 @@ public class CuadrosFichas extends Thread implements ActionListener {
     public void idFichaOcupa() {
         for (int i = 0; i < 32; i++) {
             System.out.println(i + ": " + cuadros2[i].getIdFichaOcupando());
+        }
+    }
+
+    public static void desHabilitarFichas(Ficha [] fichas) {
+        for (int i = 0; i < 12; i++) {
+            fichas[i].getFicha().setEnabled(false);
         }
     }
 
