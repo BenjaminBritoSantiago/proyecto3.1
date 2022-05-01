@@ -60,7 +60,7 @@ public class CuadrosFichas extends Thread implements ActionListener {
                         + cuadros2[y].getIdFichaOcupando());
                 NumCuadroClico = y;
 
-                if (condicionesValidas()) {
+                if (!cuadros2[y].getOcupado() && condicionesValidas()) {
                     MovPosible();
                 }
 
@@ -102,7 +102,7 @@ public class CuadrosFichas extends Thread implements ActionListener {
 
         for (int y = 5; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
-                if ((x % 2 == 0 && y % 2 == 0) || (x % 2 != 0 && y % 2 != 0)) {
+                if ((x % 2 != 0 && y % 2 == 0) || (x % 2 == 0 && y % 2 != 0)) {
                     fichas1[contador].getFicha().setLocation(250 + (x * 60), 80 + (y * 60));
                     ++contador;
                     if (contador == 12) {
@@ -124,7 +124,7 @@ public class CuadrosFichas extends Thread implements ActionListener {
 
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 8; x++) {
-                if ((x % 2 == 0 && y % 2 == 0) || (x % 2 != 0 && y % 2 != 0)) {
+                if ((x % 2 != 0 && y % 2 == 0) || (x % 2 == 0 && y % 2 != 0)) {
                     fichas2[contador].getFicha().setLocation(250 + (x * 60), 80 + (y * 60));
                     ++contador;
                     if (contador == 12) {
@@ -169,7 +169,7 @@ public class CuadrosFichas extends Thread implements ActionListener {
 
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
-                if ((x % 2 == 0 && y % 2 == 0) || (x % 2 != 0 && y % 2 != 0)) {
+                if ((x % 2 != 0 && y % 2 == 0) || (x % 2 == 0 && y % 2 != 0)) {
                     cuadros2[contador].getCuadro().setLocation(250 + (x * 60), 80 + (y * 60));
                     ++contador;
                 }
@@ -180,10 +180,13 @@ public class CuadrosFichas extends Thread implements ActionListener {
         for (int i = 0; i < 12; i++) {
             cuadros2[i].setOcupado(true);
             cuadros2[i].setIdFichaOcupando(i);
+            cuadros2[i].setTipoOcupa12(2);
             fichas2[i].setIdCuadroActual(i);
+
         }
         for (int i = 20; i < 32; i++) {
             cuadros2[i].setOcupado(true);
+            cuadros2[i].setTipoOcupa12(1);
             cuadros2[i].setIdFichaOcupando(i - 20);
             fichas1[i - 20].setIdCuadroActual(i);
         }
@@ -234,15 +237,25 @@ public class CuadrosFichas extends Thread implements ActionListener {
                     break;
                 case 120:
                     System.out.println("entra a 120");
-                    if ((distaciaX() == 120 || distaciaX() == -120)
-                            && (turno1 || (!turno1 && fichastmp[NumFichasClico].getCorono()))) {
+                    if ((turno1 || (!turno1 && fichastmp[NumFichasClico].getCorono()))) {
 
-                        if (distaciaX() == 120
-                                && cuadros2[NumCuadroClico + 4 + tipoCuadro()].getIdFichaOcupando() != -1) {
-                            cambiosGenerales();
+                        if (distaciaX() == 120 && cuadros2[NumCuadroClico + 4 + tipoCuadro()].getIdFichaOcupando() != -1) {
+
+                            if ((turno1 && cuadros2[NumCuadroClico + 4 + tipoCuadro()].getTipoOcupa12() == 2)
+                                || (!turno1 && cuadros2[NumCuadroClico + 4 + tipoCuadro()].getTipoOcupa12() == 1)) {
+
+                                    comerFicha(cuadros2[NumCuadroClico + 4 + tipoCuadro()].getIdFichaOcupando());
+                                    cambiosGenerales();
+                             }
 
                         } else if (distaciaX() == -120 && cuadros2[NumCuadroClico + 3 + tipoCuadro()].getIdFichaOcupando() != -1) {
-                            cambiosGenerales();
+
+                                    if ((turno1 && cuadros2[NumCuadroClico + 3 + tipoCuadro()].getTipoOcupa12() == 2)
+                                    || (!turno1 && cuadros2[NumCuadroClico + 3 + tipoCuadro()].getTipoOcupa12() == 1)) {
+
+                                        comerFicha(cuadros2[NumCuadroClico + 3 + tipoCuadro()].getIdFichaOcupando());
+                                        cambiosGenerales();
+                                    }
                         }
 
                     }
@@ -250,13 +263,24 @@ public class CuadrosFichas extends Thread implements ActionListener {
                     break;
                 case -120:
                     System.out.println("entra a --120");
-                    if ((distaciaX() == 120 || distaciaX() == -120)
-                            && (!turno1 || (turno1 && fichastmp[NumFichasClico].getCorono()))) {
+                    if ((!turno1 || (turno1 && fichastmp[NumFichasClico].getCorono()))) {
 
-                        if (distaciaX() == 120 && cuadros2[NumCuadroClico - 5 + tipoCuadro()].getIdFichaOcupando() != -1) {
-                            cambiosGenerales();
-                        } else if (distaciaX() == -120 && cuadros2[NumCuadroClico - 4 + tipoCuadro()].getIdFichaOcupando() != -1) {
-                            cambiosGenerales();
+                        if (distaciaX() == 120 && cuadros2[NumCuadroClico - 4 + tipoCuadro()].getIdFichaOcupando() != -1) {
+
+                            if ((turno1 && cuadros2[NumCuadroClico - 4 + tipoCuadro()].getTipoOcupa12() == 2)
+                            || (!turno1 && cuadros2[NumCuadroClico - 4 + tipoCuadro()].getTipoOcupa12() == 1)) {
+
+                                comerFicha(cuadros2[NumCuadroClico - 4 + tipoCuadro()].getIdFichaOcupando());
+                                cambiosGenerales();
+                             }
+
+                        } else if (distaciaX() == -120 && cuadros2[NumCuadroClico - 5 + tipoCuadro()].getIdFichaOcupando() != -1) {
+                            if ((turno1 && cuadros2[NumCuadroClico - 5 + tipoCuadro()].getTipoOcupa12() == 2)
+                            || (!turno1 && cuadros2[NumCuadroClico - 5 + tipoCuadro()].getTipoOcupa12() == 1)) {
+
+                                comerFicha(cuadros2[NumCuadroClico - 5 + tipoCuadro()].getIdFichaOcupando());
+                                cambiosGenerales();
+                             }
                         }
                     }
 
@@ -268,13 +292,24 @@ public class CuadrosFichas extends Thread implements ActionListener {
         }
     }
 
+    public void coronar() {
+        if (turno1 && (NumCuadroClico >= 0 && NumCuadroClico < 4) && !fichastmp[NumFichasClico].getCorono()) {
+            fichastmp[NumFichasClico].setCorono(true);
+            System.out.println("CORONO JUGADOR 1");
+
+        }
+        if (!turno1 && (NumCuadroClico >= 28 && NumCuadroClico < 32) && !fichastmp[NumFichasClico].getCorono()) {
+            fichastmp[NumFichasClico].setCorono(true);
+            System.out.println("CORONO JUGADOR 2");
+        }
+    }
+
     public int tipoCuadro() {
         if (NumCuadroClico >= 0 && NumCuadroClico < 4 || NumCuadroClico >= 8 && NumCuadroClico < 12
                 || NumCuadroClico >= 16 && NumCuadroClico < 20 || NumCuadroClico >= 24 && NumCuadroClico < 28) {
             return 1;
         }
         return 0;
-
     }
 
     public int distaciaX() {
@@ -282,20 +317,62 @@ public class CuadrosFichas extends Thread implements ActionListener {
                 "que pas " + (fichastmp[NumFichasClico].ficha.getX() - cuadros2[NumCuadroClico].getCuadro().getX()));
 
         return fichastmp[NumFichasClico].ficha.getX() - cuadros2[NumCuadroClico].getCuadro().getX();
-
     }
 
     public void cambiosGenerales() {
+        int tipoOcupa12 = 2;
+        if (turno1) {
+            tipoOcupa12 = 1;
+        }
+
+        /** CABIOS CUADRO ACTUAL */
+        cuadros2[NumCuadroClico].setIdFichaOcupando(NumFichasClico);
+        cuadros2[NumCuadroClico].setOcupado(true);
+        cuadros2[NumCuadroClico].setTipoOcupa12(tipoOcupa12);
+
+        /** CABIOS CUADRO ANTERIOR */
+        cuadros2[fichastmp[NumFichasClico].getIdCuadroActual()].setOcupado(false);
+        cuadros2[fichastmp[NumFichasClico].getIdCuadroActual()].setIdFichaOcupando(-1);
+        cuadros2[fichastmp[NumFichasClico].getIdCuadroActual()].setTipoOcupa12(-1);
+
+        /** CABIOS A LA FICHA */
         fichastmp[NumFichasClico].getFicha().setLocation(cuadros2[NumCuadroClico].getCuadro().getX(),
                 cuadros2[NumCuadroClico].getCuadro().getY());
-
-        cuadros2[fichastmp[NumFichasClico].getIdCuadroActual()].setIdFichaOcupando(-1);
         fichastmp[NumFichasClico].setIdCuadroActual(NumCuadroClico);
-        cuadros2[NumCuadroClico].setIdFichaOcupando(NumFichasClico);
+
+        coronar();
         NumFichasClico = -1;
         NumCuadroClico = -1;
         turno1 = !turno1;
-        idFichaOcupa();
+        // idFichaOcupa();
+    }
+
+    public void comerFicha(int idFicha) {
+        if (turno1) {
+            fichas2[idFicha].getFicha().setVisible(false);
+            fichas2[idFicha].setDisponible(false);
+
+            cuadros2[fichas2[idFicha].getIdCuadroActual()].setOcupado(false);
+            cuadros2[fichas2[idFicha].getIdCuadroActual()].setIdFichaOcupando(-1);
+            cuadros2[fichas2[idFicha].getIdCuadroActual()].setTipoOcupa12(-1);
+
+        }else{
+            fichas1[idFicha].getFicha().setVisible(false);
+            fichas1[idFicha].setDisponible(false);
+
+            cuadros2[fichas1[idFicha].getIdCuadroActual()].setOcupado(false);
+            cuadros2[fichas1[idFicha].getIdCuadroActual()].setIdFichaOcupando(-1);
+            cuadros2[fichas1[idFicha].getIdCuadroActual()].setTipoOcupa12(-1);
+        }  
+    }
+
+    public static boolean hayDamas(Ficha[] fichas12 ) {
+        for (int i = 0; i < 12; i++) {
+            if (fichas12[i].getDisponible()) {
+                return true;
+            }  
+        }
+        return false;   
     }
 
     public void idFichaOcupa() {

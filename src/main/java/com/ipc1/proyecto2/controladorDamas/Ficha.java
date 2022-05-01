@@ -19,6 +19,7 @@ public class Ficha{
     JButton ficha = new JButton();
     private boolean tipo1=true;
     private int numFicha;
+    private boolean disponible=true;
     private boolean corono = false;
     private int idCuadroActual;
     
@@ -34,6 +35,16 @@ public class Ficha{
     }
 
     
+    public boolean getDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+
+
+
     public int getIdCuadroActual() {
         return idCuadroActual;
     }
