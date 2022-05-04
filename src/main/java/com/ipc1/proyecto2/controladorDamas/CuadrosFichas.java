@@ -5,6 +5,7 @@
 package com.ipc1.proyecto2.controladorDamas;
 
 import com.ipc1.proyecto2.graficos.TableroDamas;
+import com.ipc1.proyecto2.graficos.TableroDamas2;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -31,9 +32,9 @@ public class CuadrosFichas extends Thread implements ActionListener {
 
     private boolean turno1 = true;
 
-    TableroDamas tablero;
+    TableroDamas2 tablero;
 
-    public CuadrosFichas(TableroDamas tablero) {
+    public CuadrosFichas(TableroDamas2 tablero) {
         this.tablero = tablero;
         instanciador();
 
@@ -118,7 +119,6 @@ public class CuadrosFichas extends Thread implements ActionListener {
                         break;
                     }
                 }
-
             }
         }
 
@@ -182,7 +182,6 @@ public class CuadrosFichas extends Thread implements ActionListener {
                     cuadros2[contador].getCuadro().setLocation(250 + (x * 60), 80 + (y * 60));
                     ++contador;
                 }
-
             }
         }
 

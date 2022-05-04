@@ -203,5 +203,11 @@ public class BotonesTorres extends Thread implements ActionListener {
         } 
           ventana.setTerminar(true);
     }
+     
+     
+     public void ventanaTermino(){
+         
+     
+     }
 
 }

@@ -4,6 +4,8 @@
  */
 package com.ipc1.proyecto2.graficos;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author minch
@@ -13,9 +15,13 @@ public class MenuJuegos extends javax.swing.JFrame {
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuJuegos() {
+      private MenuUsuario menuUsuario;  
+      
+    public MenuJuegos(MenuUsuario menuUsuario) {
+        this.menuUsuario= menuUsuario;
         initComponents();
         this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -31,6 +37,7 @@ public class MenuJuegos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         juegoDamas = new javax.swing.JButton();
         JuegoHanoi = new javax.swing.JButton();
+        volverMenuInicio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,6 +65,19 @@ public class MenuJuegos extends javax.swing.JFrame {
         });
         jPanel1.add(JuegoHanoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, -1, -1));
 
+        volverMenuInicio.setText("volver a menu Inicial");
+        volverMenuInicio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                volverMenuInicioMouseClicked(evt);
+            }
+        });
+        volverMenuInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volverMenuInicioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(volverMenuInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,20 +98,36 @@ public class MenuJuegos extends javax.swing.JFrame {
 
     private void juegoDamasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_juegoDamasMouseClicked
         // TODO add your handling code here:
-        TableroDamas damas = new TableroDamas();
+        TableroDamas2 damas = new TableroDamas2(this);
         damas.setVisible(true);
         this.setVisible(false);
-        //damas.setDefaultCloseOperation(damas.EXIT_ON_CLOSE);
+        damas.setDefaultCloseOperation(damas.DISPOSE_ON_CLOSE);
 
     }//GEN-LAST:event_juegoDamasMouseClicked
 
     private void JuegoHanoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JuegoHanoiMouseClicked
         // TODO add your handling code here:
-        TorresdeHanoi ventanaHanoi = new TorresdeHanoi();
+        //Object [] numeros ={"3","4","5","5","7"};
+        Object [] numeros ={3,4,5,6,7,8};
+        int cBarras=3;
+        Object c = JOptionPane.showInputDialog(null,"Cuantas Barras quiere", "Elegir",JOptionPane.QUESTION_MESSAGE,null,numeros, numeros[0]);
+        cBarras = (int) c;
+        TorresdeHanoi ventanaHanoi = new TorresdeHanoi(cBarras, this);
         ventanaHanoi.setVisible(true);
         this.setVisible(false);
         ventanaHanoi.setDefaultCloseOperation( ventanaHanoi.EXIT_ON_CLOSE);
     }//GEN-LAST:event_JuegoHanoiMouseClicked
+
+    private void volverMenuInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverMenuInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_volverMenuInicioActionPerformed
+
+    private void volverMenuInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverMenuInicioMouseClicked
+        // TODO add your handling code here:
+        menuUsuario.setVisible(true);
+        dispose();
+         
+    }//GEN-LAST:event_volverMenuInicioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -102,5 +138,7 @@ public class MenuJuegos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton juegoDamas;
+    private javax.swing.JButton volverMenuInicio;
     // End of variables declaration//GEN-END:variables
 }
+

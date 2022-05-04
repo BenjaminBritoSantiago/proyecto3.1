@@ -12,14 +12,14 @@ import javax.swing.JPanel;
  *
  * @author minch
  */
-public class Cronometro extends JPanel implements Runnable {
+public class CronometroTorres extends JPanel implements Runnable {
 
     private int hora = 00;
     private int minutos = 00;
     private int segundos = 00;
     private TorresdeHanoi ventana;
 
-    public Cronometro(TorresdeHanoi ventana) {
+    public CronometroTorres(TorresdeHanoi ventana) {
         initComponents();
         this.ventana = ventana;
         this.tiempoText.setVisible(true);
@@ -88,7 +88,7 @@ public class Cronometro extends JPanel implements Runnable {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
-                Logger.getLogger(Cronometro.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CronometroTorres.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } while (!ventana.isTerminar());

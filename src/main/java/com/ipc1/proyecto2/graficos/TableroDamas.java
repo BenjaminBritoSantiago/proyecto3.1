@@ -17,9 +17,9 @@ public class TableroDamas extends javax.swing.JFrame {
      */
     public TableroDamas() {
         initComponents();
-        this.setBounds(0,0,1000,700);
-         this.setLocationRelativeTo(null);
-         new CuadrosFichas(this);
+        //this.setBounds(0,0,1000,700);
+         //this.setLocationRelativeTo(null);
+         //new CuadrosFichas(this);
     }
 
     /**

@@ -19,14 +19,17 @@ public class TorresdeHanoi extends javax.swing.JFrame {
     Barra[] barras = new Barra[8];
     Torre[] torres = new Torre[3];
     private int idClico = -1;
-    private int cantidaBarras = 3;
+    private int cantidaBarras;
     private boolean terminar = false;
     private int movActual=0;
+    private MenuJuegos menuJuegos;
     /**
      * Creates new form TorresdeHanoi
      */
-    public TorresdeHanoi() {
-         Cronometro crnmt = new Cronometro(this);
+    public TorresdeHanoi(int cantidaBarras, MenuJuegos menuJuegos) {
+        this.menuJuegos = menuJuegos;
+        this.cantidaBarras = cantidaBarras;
+         CronometroTorres crnmt = new CronometroTorres(this);
         BotonesTorres graficos = new BotonesTorres(this, cantidaBarras);
         this.setBounds(0, 0, 1000, 700);
         this.setLocationRelativeTo(null);
@@ -57,20 +60,21 @@ public class TorresdeHanoi extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        AbandonarPartida = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         movMin = new javax.swing.JLabel();
         movActuales = new javax.swing.JLabel();
+        GuardarPartida = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("termiar partida");
-        jButton1.setVerifyInputWhenFocusTarget(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        AbandonarPartida.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AbandonarPartida.setText("Abandonar Partida");
+        AbandonarPartida.setVerifyInputWhenFocusTarget(false);
+        AbandonarPartida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                AbandonarPartidaActionPerformed(evt);
             }
         });
 
@@ -86,15 +90,19 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         movActuales.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         movActuales.setText("00");
 
+        GuardarPartida.setText("Guardar Partida");
+        GuardarPartida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarPartidaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(437, 437, 437)
-                        .addComponent(jButton1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -105,8 +113,13 @@ public class TorresdeHanoi extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(movMin)))))
-                .addContainerGap(419, Short.MAX_VALUE))
+                                .addComponent(movMin))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(276, 276, 276)
+                        .addComponent(AbandonarPartida)
+                        .addGap(195, 195, 195)
+                        .addComponent(GuardarPartida)))
+                .addContainerGap(310, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,9 +132,11 @@ public class TorresdeHanoi extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(movActuales))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 446, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(56, 56, 56))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 445, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AbandonarPartida)
+                    .addComponent(GuardarPartida))
+                .addGap(57, 57, 57))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,7 +145,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 32, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,15 +157,22 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void AbandonarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbandonarPartidaActionPerformed
         // TODO add your handling code here:
         terminar = true;
+        dispose();
+        menuJuegos.setVisible(true);
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_AbandonarPartidaActionPerformed
+
+    private void GuardarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarPartidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GuardarPartidaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton AbandonarPartida;
+    private javax.swing.JButton GuardarPartida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
