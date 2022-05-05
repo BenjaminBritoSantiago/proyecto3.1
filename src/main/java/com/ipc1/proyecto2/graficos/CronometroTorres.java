@@ -28,6 +28,19 @@ public class CronometroTorres extends JPanel implements Runnable {
         
     }
 
+    public int getHora() {
+        return hora;
+    }
+
+    public int getMinutos() {
+        return minutos;
+    }
+
+    public int getSegundos() {
+        return segundos;
+    }
+    
+
     //public void contador()
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

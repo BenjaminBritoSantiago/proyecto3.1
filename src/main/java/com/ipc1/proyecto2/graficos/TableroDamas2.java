@@ -5,6 +5,7 @@
 package com.ipc1.proyecto2.graficos;
 
 import com.ipc1.proyecto2.controladorDamas.CuadrosFichas;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,10 +18,10 @@ public class TableroDamas2 extends javax.swing.JFrame {
      */
     
     private boolean terminar = false;
-    private MenuJuegos ventanaMenu;
+    private MenuJuegos menuJuegos;
     
-    public TableroDamas2(MenuJuegos ventanaMenu) {
-        this.ventanaMenu = ventanaMenu;
+    public TableroDamas2(MenuJuegos menuJuegos) {
+        this.menuJuegos = menuJuegos;
         
         CronometroDamas crnmt = new CronometroDamas(this);
         initComponents();
@@ -104,15 +105,36 @@ public class TableroDamas2 extends javax.swing.JFrame {
 
     private void rendirseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rendirseMouseClicked
         // TODO add your handling code here:
-        terminar = true;
-        dispose();
-        ventanaMenu.setVisible(true);
+        
+        Object[] options = {"SI", "NO"};
+        Object c;
+            c=JOptionPane.showOptionDialog(null, "Quieres Abandonar la Partida ", "RENDIRSE",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                null, options, options[0]);
+
+        if((int)c==0 ){
+             terminar = true;
+            dispose();
+            menuJuegos.setVisible(true);
+        }
+        
+          
         
     }//GEN-LAST:event_rendirseMouseClicked
 
     private void guardarPartidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarPartidaMouseClicked
         // TODO add your handling code here:
-        terminar = true;
+        Object[] options = {"SI", "NO"};
+        Object c;
+        c=JOptionPane.showOptionDialog(null, "Quieres Guardar la partida ", "Guardar",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                null, options, options[0]);
+
+        if((int)c==0 ){
+             terminar = true;
+            dispose();
+            menuJuegos.setVisible(true);
+        }
     }//GEN-LAST:event_guardarPartidaMouseClicked
 
     /**

@@ -110,12 +110,18 @@ public class MenuJuegos extends javax.swing.JFrame {
         //Object [] numeros ={"3","4","5","5","7"};
         Object [] numeros ={3,4,5,6,7,8};
         int cBarras=3;
-        Object c = JOptionPane.showInputDialog(null,"Cuantas Barras quiere", "Elegir",JOptionPane.QUESTION_MESSAGE,null,numeros, numeros[0]);
-        cBarras = (int) c;
-        TorresdeHanoi ventanaHanoi = new TorresdeHanoi(cBarras, this);
-        ventanaHanoi.setVisible(true);
-        this.setVisible(false);
-        ventanaHanoi.setDefaultCloseOperation( ventanaHanoi.EXIT_ON_CLOSE);
+        try{
+            Object c = JOptionPane.showInputDialog(null,"Cuantas Barras quiere", "Elegir",JOptionPane.QUESTION_MESSAGE,null,numeros, numeros[0]);
+            cBarras = (int) c;
+             TorresdeHanoi ventanaHanoi = new TorresdeHanoi(cBarras, this);
+            ventanaHanoi.setVisible(true);
+            this.setVisible(false);
+            ventanaHanoi.setDefaultCloseOperation( ventanaHanoi.EXIT_ON_CLOSE);
+        }catch(Exception e){
+        }
+        
+       
+       
     }//GEN-LAST:event_JuegoHanoiMouseClicked
 
     private void volverMenuInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverMenuInicioActionPerformed

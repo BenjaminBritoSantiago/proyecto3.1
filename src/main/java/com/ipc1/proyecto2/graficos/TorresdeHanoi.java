@@ -7,8 +7,11 @@ package com.ipc1.proyecto2.graficos;
 import com.ipc1.proyecto2.controladorHanoi.Barra;
 import com.ipc1.proyecto2.controladorHanoi.BotonesTorres;
 import com.ipc1.proyecto2.controladorHanoi.Torre;
+import java.awt.Color;
 import static java.lang.Math.round;
-
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -21,27 +24,30 @@ public class TorresdeHanoi extends javax.swing.JFrame {
     private int idClico = -1;
     private int cantidaBarras;
     private boolean terminar = false;
-    private int movActual=0;
+    private int movActual = 0;
     private MenuJuegos menuJuegos;
+    CronometroTorres crnmt;
+
     /**
      * Creates new form TorresdeHanoi
      */
     public TorresdeHanoi(int cantidaBarras, MenuJuegos menuJuegos) {
         this.menuJuegos = menuJuegos;
         this.cantidaBarras = cantidaBarras;
-         CronometroTorres crnmt = new CronometroTorres(this);
-        BotonesTorres graficos = new BotonesTorres(this, cantidaBarras);
+
+        crnmt = new CronometroTorres(this);
+        BotonesTorres graficos = new BotonesTorres(this, cantidaBarras, menuJuegos);
         this.setBounds(0, 0, 1000, 700);
         this.setLocationRelativeTo(null);
         initComponents();
-        movMin.setText( String.valueOf(round(Math.pow(2,cantidaBarras)-1)));
-        
+        movMin.setText(String.valueOf(round(Math.pow(2, cantidaBarras) - 1)));
+
         Thread t = new Thread(crnmt);
         t.start();
     }
-    
+
     public void setTerminar(boolean terminar) {
-        this.terminar= terminar;
+        this.terminar = terminar;
     }
 
     public boolean isTerminar() {
@@ -50,11 +56,17 @@ public class TorresdeHanoi extends javax.swing.JFrame {
 
     public void setMovActuales() {
         ++movActual;
-        this.movActuales.setText( String.valueOf(movActual));
+        this.movActuales.setText(String.valueOf(movActual));
     }
-    
 
-   
+    public JLabel getMovActuales() {
+        return movActuales;
+    }
+
+    public JLabel getMovMin() {
+        return movMin;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -70,7 +82,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         AbandonarPartida.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AbandonarPartida.setText("Abandonar Partida");
+        AbandonarPartida.setText("Rendirse");
         AbandonarPartida.setVerifyInputWhenFocusTarget(false);
         AbandonarPartida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +102,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         movActuales.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         movActuales.setText("00");
 
+        GuardarPartida.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         GuardarPartida.setText("Guardar Partida");
         GuardarPartida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,14 +172,38 @@ public class TorresdeHanoi extends javax.swing.JFrame {
 
     private void AbandonarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbandonarPartidaActionPerformed
         // TODO add your handling code here:
-        terminar = true;
-        dispose();
-        menuJuegos.setVisible(true);
+
+        Object[] options = {"SI", "NO"};
+        Object c;
+        c = JOptionPane.showOptionDialog(null, "Quieres Abandonar la Partida ", "RENDIRSE",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                null, options, options[0]);
+
+        if ((int) c == 0) {
+            terminar = true;
+            dispose();
+            menuJuegos.setVisible(true);
+        }
+
 
     }//GEN-LAST:event_AbandonarPartidaActionPerformed
 
     private void GuardarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarPartidaActionPerformed
         // TODO add your handling code here:
+
+        Object[] options = {"SI", "NO"};
+        Object c;
+        c = JOptionPane.showOptionDialog(null, "Quieres Guardar la partida ", "Guardar",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                null, options, options[0]);
+
+        if ((int) c == 0) {
+            System.out.println("segundos utilizados: " + crnmt.getSegundos());
+            terminar = true;
+            dispose();
+            menuJuegos.setVisible(true);
+        }
+
     }//GEN-LAST:event_GuardarPartidaActionPerformed
 
 

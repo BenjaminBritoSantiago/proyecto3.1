@@ -4,9 +4,11 @@
  */
 package com.ipc1.proyecto2.controladorHanoi;
 
+import com.ipc1.proyecto2.graficos.MenuJuegos;
 import com.ipc1.proyecto2.graficos.TorresdeHanoi;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,10 +19,12 @@ public class BotonesTorres extends Thread implements ActionListener {
     private Barra[] barras = new Barra[8];
     private Torre[] torres = new Torre[3];
     private int cantidaBarras;
+    private MenuJuegos menuJuegos;
 
     private TorresdeHanoi ventana;
 
-    public BotonesTorres(TorresdeHanoi ventana, int cantidaBarras) {
+    public BotonesTorres(TorresdeHanoi ventana, int cantidaBarras, MenuJuegos menuJuegos) {
+         this.menuJuegos = menuJuegos;
         this.ventana = ventana;
         this.cantidaBarras = cantidaBarras;
         instanciarBarras();
@@ -147,15 +151,16 @@ public class BotonesTorres extends Thread implements ActionListener {
                         moverBoton(Torre.idClico, Barra.idClico, 30, posY(Torre.idClico, torres), barras);
 
                         mover2(Torre.idClico, Barra.idClico, torres, barras);
+                        ventana.setMovActuales();
 
                         if (Torre.idClico != 0) {
                             if ( torres[Torre.idClico].getPosOcupadas()==cantidaBarras) {
                                     deshabilitarTodaslasBarras();
+                                    ventanaTermino();
                             }
                         }
                         Barra.idClico = -1;
                         Torre.idClico = -1;
-                        ventana.setMovActuales();
                     }
                 }
             }
@@ -206,7 +211,17 @@ public class BotonesTorres extends Thread implements ActionListener {
      
      
      public void ventanaTermino(){
+         int mov= Integer.parseInt(ventana.getMovActuales().getText());
+         int min = Integer.parseInt(ventana.getMovMin().getText());
          
+         String mensaje="         LO LOGRASTE \ncon los movimientos minimos";
+         if( mov>min){
+              mensaje="terminaste, usaste "+(mov-min)+ " movimientos de mas";
+         }
+         
+        JOptionPane.showMessageDialog(null,mensaje, "TERMINASTE",1);  
+         ventana.dispose();
+         menuJuegos.setVisible(true);
      
      }
 
