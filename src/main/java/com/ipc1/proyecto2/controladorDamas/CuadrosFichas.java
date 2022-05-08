@@ -4,6 +4,8 @@
  */
 package com.ipc1.proyecto2.controladorDamas;
 
+import com.ipc1.proyecto2.graficos.CronometroDamas;
+import com.ipc1.proyecto2.graficos.MenuJuegos;
 import com.ipc1.proyecto2.graficos.TableroDamas;
 import com.ipc1.proyecto2.graficos.TableroDamas2;
 
@@ -12,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,9 +35,13 @@ public class CuadrosFichas extends Thread implements ActionListener {
 
     private boolean turno1 = true;
 
-    TableroDamas2 tablero;
+    private TableroDamas2 tablero;
+    private CronometroDamas crnmt;
+    private MenuJuegos menuJuegos;
 
-    public CuadrosFichas(TableroDamas2 tablero) {
+    public CuadrosFichas(TableroDamas2 tablero,CronometroDamas crnmt, MenuJuegos menuJuegos) {
+        this.crnmt = crnmt;
+        this.menuJuegos = menuJuegos;
         this.tablero = tablero;
         instanciador();
 
@@ -69,11 +76,14 @@ public class CuadrosFichas extends Thread implements ActionListener {
             }
         }
         if ( !continuaJuego(fichas1,fichas2)) {
+            tablero.setTerminar(true); 
             if (hayDamas(fichas1)) {
                 desHabilitarFichas(fichas1); 
+                ventanaTermino("jugador 1");
             }else{
                 desHabilitarFichas(fichas2);
-            }  
+                ventanaTermino("jugador 2");
+            } 
         }
        
 
@@ -402,5 +412,14 @@ public class CuadrosFichas extends Thread implements ActionListener {
             fichas[i].getFicha().setEnabled(false);
         }
     }
+    
+    
+    public void ventanaTermino(String nomJugadorGano){
+     
+        JOptionPane.showMessageDialog(null,"Gano: "+nomJugadorGano +"\n Tiempo:"+crnmt.tiempo(), "FIN JUEGO",1);  
+         tablero.dispose();
+         menuJuegos.setVisible(true);
+     
+     }
 
 }

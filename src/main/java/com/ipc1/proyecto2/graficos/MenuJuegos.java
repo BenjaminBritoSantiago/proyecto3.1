@@ -101,8 +101,6 @@ public class MenuJuegos extends javax.swing.JFrame {
         TableroDamas2 damas = new TableroDamas2(this);
         damas.setVisible(true);
         this.setVisible(false);
-        damas.setDefaultCloseOperation(damas.DISPOSE_ON_CLOSE);
-
     }//GEN-LAST:event_juegoDamasMouseClicked
 
     private void JuegoHanoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JuegoHanoiMouseClicked
@@ -116,7 +114,6 @@ public class MenuJuegos extends javax.swing.JFrame {
              TorresdeHanoi ventanaHanoi = new TorresdeHanoi(cBarras, this);
             ventanaHanoi.setVisible(true);
             this.setVisible(false);
-            ventanaHanoi.setDefaultCloseOperation( ventanaHanoi.EXIT_ON_CLOSE);
         }catch(Exception e){
         }
         

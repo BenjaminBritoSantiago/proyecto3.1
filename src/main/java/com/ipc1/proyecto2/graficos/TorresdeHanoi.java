@@ -36,7 +36,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         this.cantidaBarras = cantidaBarras;
 
         crnmt = new CronometroTorres(this);
-        BotonesTorres graficos = new BotonesTorres(this, cantidaBarras, menuJuegos);
+        BotonesTorres graficos = new BotonesTorres(this, cantidaBarras, menuJuegos,crnmt);
         this.setBounds(0, 0, 1000, 700);
         this.setLocationRelativeTo(null);
         initComponents();
@@ -79,7 +79,12 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         movActuales = new javax.swing.JLabel();
         GuardarPartida = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                validarCierre(evt);
+            }
+        });
 
         AbandonarPartida.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         AbandonarPartida.setText("Rendirse");
@@ -173,18 +178,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
     private void AbandonarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbandonarPartidaActionPerformed
         // TODO add your handling code here:
 
-        Object[] options = {"SI", "NO"};
-        Object c;
-        c = JOptionPane.showOptionDialog(null, "Quieres Abandonar la Partida ", "RENDIRSE",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-                null, options, options[0]);
-
-        if ((int) c == 0) {
-            terminar = true;
-            dispose();
-            menuJuegos.setVisible(true);
-        }
-
+        rendirse();
 
     }//GEN-LAST:event_AbandonarPartidaActionPerformed
 
@@ -206,6 +200,25 @@ public class TorresdeHanoi extends javax.swing.JFrame {
 
     }//GEN-LAST:event_GuardarPartidaActionPerformed
 
+    private void validarCierre(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_validarCierre
+        // TODO add your handling code here:
+        
+        rendirse();
+    }//GEN-LAST:event_validarCierre
+    
+    public void rendirse(){
+        Object[] options = {"SI", "NO"};
+        Object c;
+        c = JOptionPane.showOptionDialog(null, "Quieres Abandonar la Partida \n       (perderas el Juego)", "RENDIRSE",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                null, options, options[0]);
+
+        if ((int) c == 0) {
+            terminar = true;
+            dispose();
+            menuJuegos.setVisible(true);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AbandonarPartida;

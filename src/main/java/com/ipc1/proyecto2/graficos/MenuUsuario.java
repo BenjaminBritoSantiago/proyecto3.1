@@ -88,8 +88,9 @@ public class MenuUsuario extends javax.swing.JFrame {
 
     private void crearUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearUsuarioMouseClicked
         // TODO add your handling code here:
-        Prueba prub = new Prueba();
-        prub.setVisible(true);
+        CrearUsuario nuevoU = new CrearUsuario(this);
+        nuevoU.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_crearUsuarioMouseClicked
 
     private void elegirUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_elegirUsuarioMouseClicked

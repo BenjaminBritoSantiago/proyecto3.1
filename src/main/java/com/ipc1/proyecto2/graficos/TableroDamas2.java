@@ -26,7 +26,7 @@ public class TableroDamas2 extends javax.swing.JFrame {
         CronometroDamas crnmt = new CronometroDamas(this);
         initComponents();
         this.setLocationRelativeTo(null);
-        new CuadrosFichas(this);
+        new CuadrosFichas(this, crnmt, menuJuegos);
          
          Thread t = new Thread(crnmt);
         t.start();
@@ -36,6 +36,13 @@ public class TableroDamas2 extends javax.swing.JFrame {
     public boolean getTerminar() {
         return terminar;
     }
+
+    public void setTerminar(boolean terminar) {
+        this.terminar = terminar;
+    }
+
+    
+    
     
     
 
@@ -51,8 +58,13 @@ public class TableroDamas2 extends javax.swing.JFrame {
         rendirse = new javax.swing.JButton();
         guardarPartida = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 700));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                ValidarCierre(evt);
+            }
+        });
 
         rendirse.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         rendirse.setText("Rendirse");
@@ -105,18 +117,9 @@ public class TableroDamas2 extends javax.swing.JFrame {
 
     private void rendirseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rendirseMouseClicked
         // TODO add your handling code here:
+        rendirse();
         
-        Object[] options = {"SI", "NO"};
-        Object c;
-            c=JOptionPane.showOptionDialog(null, "Quieres Abandonar la Partida ", "RENDIRSE",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-                null, options, options[0]);
-
-        if((int)c==0 ){
-             terminar = true;
-            dispose();
-            menuJuegos.setVisible(true);
-        }
+        
         
           
         
@@ -137,6 +140,28 @@ public class TableroDamas2 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_guardarPartidaMouseClicked
 
+    private void ValidarCierre(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_ValidarCierre
+        // TODO add your handling code here:
+        rendirse();
+    }//GEN-LAST:event_ValidarCierre
+
+    
+    
+    public void rendirse(){
+        Object[] options = {"SI", "NO"};
+        Object c;
+            c=JOptionPane.showOptionDialog(null, "Quieres Abandonar la Partida \n       (perderas el Juego)", "RENDIRSE",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                null, options, options[0]);
+
+        if((int)c==0 ){
+             terminar = true;
+            dispose();
+            menuJuegos.setVisible(true);
+        }
+    
+    }
+    
     /**
      * @param args the command line arguments
      */

@@ -16,8 +16,9 @@ public class CronometroTorres extends JPanel implements Runnable {
 
     private int hora = 00;
     private int minutos = 00;
-    private int segundos = 00;
+    private int segundos = -01;
     private TorresdeHanoi ventana;
+  
 
     public CronometroTorres(TorresdeHanoi ventana) {
         initComponents();
@@ -81,14 +82,17 @@ public class CronometroTorres extends JPanel implements Runnable {
     public void setContador(String contador) {
         this.contador.setText(contador);
     }
+    
+    public String tiempo(){
+        return ""+hora + ":" + minutos+ ":" + segundos;
+    }
+    
 
 
     @Override
     public void run() {
         do {
-            contador.setText(cambiador(hora) + ":" + cambiador(minutos)+ ":" + cambiador(segundos));
             segundos++;
-
             if (segundos == 60) {
                 segundos = 0;
                 minutos++;
@@ -97,6 +101,8 @@ public class CronometroTorres extends JPanel implements Runnable {
                     hora++;
                 }
             }
+            contador.setText(cambiador(hora) + ":" + cambiador(minutos)+ ":" + cambiador(segundos));
+            
 
             try {
                 Thread.sleep(1000);

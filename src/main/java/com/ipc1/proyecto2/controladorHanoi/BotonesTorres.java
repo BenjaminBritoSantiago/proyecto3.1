@@ -4,6 +4,7 @@
  */
 package com.ipc1.proyecto2.controladorHanoi;
 
+import com.ipc1.proyecto2.graficos.CronometroTorres;
 import com.ipc1.proyecto2.graficos.MenuJuegos;
 import com.ipc1.proyecto2.graficos.TorresdeHanoi;
 import java.awt.event.ActionEvent;
@@ -20,10 +21,12 @@ public class BotonesTorres extends Thread implements ActionListener {
     private Torre[] torres = new Torre[3];
     private int cantidaBarras;
     private MenuJuegos menuJuegos;
+    CronometroTorres crnmt;
 
     private TorresdeHanoi ventana;
 
-    public BotonesTorres(TorresdeHanoi ventana, int cantidaBarras, MenuJuegos menuJuegos) {
+    public BotonesTorres(TorresdeHanoi ventana, int cantidaBarras, MenuJuegos menuJuegos,CronometroTorres crnmt) {
+        this.crnmt = crnmt;
          this.menuJuegos = menuJuegos;
         this.ventana = ventana;
         this.cantidaBarras = cantidaBarras;
@@ -219,7 +222,7 @@ public class BotonesTorres extends Thread implements ActionListener {
               mensaje="terminaste, usaste "+(mov-min)+ " movimientos de mas";
          }
          
-        JOptionPane.showMessageDialog(null,mensaje, "TERMINASTE",1);  
+        JOptionPane.showMessageDialog(null,mensaje +"\n movimeitos:"+ mov +"\n Tiempo:"+crnmt.tiempo(), "TERMINASTE",1);  
          ventana.dispose();
          menuJuegos.setVisible(true);
      
