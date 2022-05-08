@@ -21,14 +21,14 @@ public class ElegirUsuario extends javax.swing.JFrame implements ActionListener 
     /**
      * Creates new form NewJFrame
      */
-    private  MenuUsuario menuUsuario = new  MenuUsuario();
+    private MenuUsuario menuUsuario = new MenuUsuario();
     private JButton[] users = new JButton[Proyecto2.getUsuarios().length];
     private boolean eligio = false;
 
-    public ElegirUsuario( MenuUsuario menuUsuario) {
+    public ElegirUsuario(MenuUsuario menuUsuario) {
         initComponents();
         mostrarUsuarios();
-         this.menuUsuario= menuUsuario;
+        this.menuUsuario = menuUsuario;
         this.setLocationRelativeTo(null);
     }
 
@@ -121,7 +121,12 @@ public class ElegirUsuario extends javax.swing.JFrame implements ActionListener 
     private void ElegirSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ElegirSalirMouseClicked
         // TODO add your handling code here:
         if (eligio) {
+            
+            MenuJuegos juegos = new MenuJuegos( menuUsuario);
+            juegos.setVisible(true);
+            juegos.setDefaultCloseOperation(juegos.EXIT_ON_CLOSE);
             dispose();
+
         } else {
             ventanaNoEligio();
         }
@@ -131,8 +136,8 @@ public class ElegirUsuario extends javax.swing.JFrame implements ActionListener 
         // TODO add your handling code here:
         dispose();
         menuUsuario.setVisible(true);
-        
-        
+
+
     }//GEN-LAST:event_VolverMenuMouseClicked
 
 
