@@ -151,33 +151,25 @@ public class CrearUsuario extends javax.swing.JFrame {
 
     private void VolverAMenuUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverAMenuUsuarioActionPerformed
         // TODO add your handling code here:
-        if (areaDeTexto.getText().equalsIgnoreCase(mensajeFinal) || areaDeTexto.getText().isEmpty() || areaDeTexto.getText().isBlank() || areaDeTexto.getText() == null) {
-            this.dispose();
-            menuUsuario.setVisible(true);
-
-        } else {
-            this.dispose();
-            menuUsuario.setVisible(true);
-        }
 
     }//GEN-LAST:event_VolverAMenuUsuarioActionPerformed
 
     private void VolverAMenuUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VolverAMenuUsuarioMouseClicked
         // TODO add your handling code here:
-       ValidarSalir();
+       validarSalir();
 
     }//GEN-LAST:event_VolverAMenuUsuarioMouseClicked
 
     private void ValidarCierre(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_ValidarCierre
         // TODO add your handling code here:
-        ValidarSalir();
+        validarSalir();
     }//GEN-LAST:event_ValidarCierre
 
     public void ventanaVacio() {
         JOptionPane.showMessageDialog(null, "Debe de ingesar un nombre", "Ingrese Nombre", 0);
     }
 
-    public void ValidarSalir() {
+    public void validarSalir() {
 
         if (areaDeTexto.getText().equalsIgnoreCase(mensajeFinal) || areaDeTexto.getText().isEmpty() || areaDeTexto.getText().isBlank() || areaDeTexto.getText() == null) {
             this.dispose();
@@ -195,7 +187,6 @@ public class CrearUsuario extends javax.swing.JFrame {
                 menuUsuario.setVisible(true);
             }
         }
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
