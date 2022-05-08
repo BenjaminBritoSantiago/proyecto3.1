@@ -4,6 +4,7 @@
  */
 package com.ipc1.proyecto2.graficos;
 
+import com.ipc1.proyecto2.Usuarios;
 import com.ipc1.proyecto2.controladorHanoi.Barra;
 import com.ipc1.proyecto2.controladorHanoi.BotonesTorres;
 import com.ipc1.proyecto2.controladorHanoi.Torre;
@@ -18,7 +19,8 @@ import javax.swing.JPanel;
  * @author minch
  */
 public class TorresdeHanoi extends javax.swing.JFrame {
-
+    
+    private Usuarios usuario;
     Barra[] barras = new Barra[8];
     Torre[] torres = new Torre[3];
     private int idClico = -1;
@@ -45,6 +47,11 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         Thread t = new Thread(crnmt);
         t.start();
     }
+    
+    
+    
+    
+    
 
     public void setTerminar(boolean terminar) {
         this.terminar = terminar;

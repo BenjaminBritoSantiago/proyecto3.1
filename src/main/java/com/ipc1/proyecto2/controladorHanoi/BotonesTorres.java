@@ -4,6 +4,7 @@
  */
 package com.ipc1.proyecto2.controladorHanoi;
 
+import com.ipc1.proyecto2.Usuarios;
 import com.ipc1.proyecto2.graficos.CronometroTorres;
 import com.ipc1.proyecto2.graficos.MenuJuegos;
 import com.ipc1.proyecto2.graficos.TorresdeHanoi;
@@ -16,22 +17,38 @@ import javax.swing.JOptionPane;
  * @author minch
  */
 public class BotonesTorres extends Thread implements ActionListener {
-
+    
+    
+    private Usuarios usuario;
     private Barra[] barras = new Barra[8];
     private Torre[] torres = new Torre[3];
     private int cantidaBarras;
     private MenuJuegos menuJuegos;
-    CronometroTorres crnmt;
+    private CronometroTorres crnmt;
 
     private TorresdeHanoi ventana;
 
-    public BotonesTorres(TorresdeHanoi ventana, int cantidaBarras, MenuJuegos menuJuegos,CronometroTorres crnmt) {
+    public BotonesTorres(TorresdeHanoi ventana, int cantidaBarras, MenuJuegos menuJuegos,CronometroTorres crnmt ) {
         this.crnmt = crnmt;
-         this.menuJuegos = menuJuegos;
+        this.menuJuegos = menuJuegos;
         this.ventana = ventana;
         this.cantidaBarras = cantidaBarras;
         instanciarBarras();
         instanciarTorres();
+    }
+    
+    public BotonesTorres(TorresdeHanoi ventana, int cantidaBarras, MenuJuegos menuJuegos,CronometroTorres crnmt, Barra[] barras, Torre[] torres) {
+        this.crnmt = crnmt;
+        this.menuJuegos = menuJuegos;
+        this.ventana = ventana;
+        this.cantidaBarras = cantidaBarras;
+         this.barras = barras;
+        this.torres = torres;
+        for (int i = 7; i > 7 - cantidaBarras; i--) {
+            colocarBarra(i);
+        }
+        
+        
     }
     
     
@@ -46,6 +63,7 @@ public class BotonesTorres extends Thread implements ActionListener {
                 break;
             }
         }
+        
         for (int i = 0; i < 3; i++) {
             if (queBoton == torres[i].getTorreG()) {
                 System.out.println("torre que pulso>:" + torres[i].getIdTorre());
@@ -55,8 +73,24 @@ public class BotonesTorres extends Thread implements ActionListener {
         }
 
         verificador();
-
     }
+    
+    public void colocarBarra(int i){
+    
+        barras[i].setVisible(true);
+        ventana.add(barras[i].getBoton());
+        barras[i].getBoton().addActionListener(this);
+    }
+    
+    public void colocarTorre(){
+        for (int i = 0; i < 3; i++) {
+            torres[i].getTorreG().setVisible(true);
+            ventana.add(torres[i].getTorreG());
+            torres[i].getTorreG().addActionListener(this);
+        }   
+    }
+    
+    
 
     public void instanciarBarras() {
 
@@ -64,9 +98,7 @@ public class BotonesTorres extends Thread implements ActionListener {
             // Barra( int idBarra, int peso, int idTorreActual, int posicionYActual, int pesoAnterior  )
             barras[i] = new Barra(i, i, 0, i - 7, i + 1, 280, 40, String.valueOf(i + 1));
             barras[i].getBoton().setLocation(30, (i * 40) + 140);
-            barras[i].setVisible(true);
-            ventana.add(barras[i].getBoton());
-            barras[i].getBoton().addActionListener(this);
+            colocarBarra(i);
         }
 
     }
@@ -222,7 +254,7 @@ public class BotonesTorres extends Thread implements ActionListener {
               mensaje="terminaste, usaste "+(mov-min)+ " movimientos de mas";
          }
          
-        JOptionPane.showMessageDialog(null,mensaje +"\n movimeitos:"+ mov +"\n Tiempo:"+crnmt.tiempo(), "TERMINASTE",1);  
+        JOptionPane.showMessageDialog(null,mensaje +"\n movimientos:"+ mov +"\n Tiempo:"+crnmt.tiempo(), "TERMINASTE",1);  
          ventana.dispose();
          menuJuegos.setVisible(true);
      

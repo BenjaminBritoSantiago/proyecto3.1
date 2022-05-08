@@ -10,7 +10,15 @@ import com.ipc1.proyecto2.graficos.MenuUsuario;
  *
  * @author minch
  */
+
+
+
 public class Proyecto2 {
+    
+    
+    private static Usuarios [] usuarios = new Usuarios[10];
+    private static Usuarios usuario;
+    
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
@@ -21,4 +29,26 @@ public class Proyecto2 {
         inicio.setVisible(true);
         inicio.setDefaultCloseOperation(inicio.EXIT_ON_CLOSE);
     }
+
+    
+    public static Usuarios getUsuario() {
+        return usuario;
+    }
+
+    public static void setUsuario(Usuarios usuario) {
+        Proyecto2.usuario = usuario;
+    }
+    
+    
+
+    public static Usuarios[] getUsuarios() {
+        return usuarios;
+    }
+
+    public static void setUsuarios(Usuarios[] usuarios) {
+        Proyecto2.usuarios = usuarios;
+    }
+    
+    
+    
 }

@@ -95,10 +95,15 @@ public class MenuUsuario extends javax.swing.JFrame {
 
     private void elegirUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_elegirUsuarioMouseClicked
         // TODO add your handling code here:
+        ElegirUsuario usuarios = new ElegirUsuario(this);
+        usuarios.setVisible(true);
+        this.setVisible(false);
+         /**
         MenuJuegos juegos = new MenuJuegos(this);
         juegos.setVisible(true);
         this.setVisible(false);
         juegos.setDefaultCloseOperation(juegos.EXIT_ON_CLOSE);
+        * */
     }//GEN-LAST:event_elegirUsuarioMouseClicked
 
     /**

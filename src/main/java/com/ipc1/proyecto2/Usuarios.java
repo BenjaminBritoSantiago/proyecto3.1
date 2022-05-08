@@ -4,6 +4,9 @@
  */
 package com.ipc1.proyecto2;
 
+import com.ipc1.proyecto2.controladorHanoi.Barra;
+import com.ipc1.proyecto2.controladorHanoi.Torre;
+
 /**
  *
  * @author minch
@@ -18,6 +21,18 @@ public class Usuarios {
     private int totalMovRealizo;
     private int promMovRealizo;
     private int[][]  movTiempPatida = new int [10][2];
+    
+    
+    /*VARIABLES DE JUEGO DEL USUARIO **/
+    private int [] tiempoHanoi = new int [3];
+    private int [] tiempoDamas = new int [3];
+    
+    private Barra Barras;
+    private Torre torres;
+    private boolean guardoHanoi=false;
+    
+    
+    
 
     public Usuarios(int id, String nombre) {
         this.id = id;
@@ -37,8 +52,49 @@ public class Usuarios {
         this.totalMovRealizo = totalMovRealizo;
         this.promMovRealizo = promMovRealizo;
     }
+
+    public boolean isGuardoHanoi() {
+        return guardoHanoi;
+    }
+
+    public void setGuardoHanoi(boolean guardoHanoi) {
+        this.guardoHanoi = guardoHanoi;
+    }
     
 
+    public int[] getTiempoHanoi() {
+        return tiempoHanoi;
+    }
+
+    public void setTiempoHanoi(int[] tiempoHanoi) {
+        this.tiempoHanoi = tiempoHanoi;
+    }
+
+    public int[] getTiempoDamas() {
+        return tiempoDamas;
+    }
+
+    public void setTiempoDamas(int[] tiempoDamas) {
+        this.tiempoDamas = tiempoDamas;
+    }
+
+    public Barra getBarras() {
+        return Barras;
+    }
+
+    public void setBarras(Barra Barras) {
+        this.Barras = Barras;
+    }
+
+    public Torre getTorres() {
+        return torres;
+    }
+
+    public void setTorres(Torre torres) {
+        this.torres = torres;
+    }
+    
+    
     public int getId() {
         return id;
     }
