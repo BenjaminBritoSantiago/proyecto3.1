@@ -4,12 +4,11 @@
  */
 package com.ipc1.proyecto2.graficos;
 
-import com.ipc1.proyecto2.Proyecto2;
+import com.ipc1.proyecto2.InfoJuego;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,7 +21,7 @@ public class ElegirUsuario extends javax.swing.JFrame implements ActionListener 
      * Creates new form NewJFrame
      */
     private MenuUsuario menuUsuario = new MenuUsuario();
-    private JButton[] users = new JButton[Proyecto2.getUsuarios().length];
+    private JButton[] users = new JButton[InfoJuego.getUsuarios().length];
     private boolean eligio = false;
 
     public ElegirUsuario(MenuUsuario menuUsuario) {
@@ -33,14 +32,14 @@ public class ElegirUsuario extends javax.swing.JFrame implements ActionListener 
     }
 
     public void mostrarUsuarios() {
-        for (int i = 0; i < Proyecto2.getUsuarios().length; i++) {
-            if ( /*Proyecto2.getUsuarios()[i] != null*/true) {
+        for (int i = 0; i <InfoJuego.getCantUsuarios(); i++) {
+            if ( InfoJuego.getUsuarios()[i] != null) {
 
-                users[i] = new JButton("Holas" /*Proyecto2.getUsuarios()[i].getNombre()*/);
+                users[i] = new JButton(InfoJuego.getUsuarios()[i].getNombre());
+                System.out.println(InfoJuego.getUsuarios()[i].getNombre());
                 this.add(users[i]);
                 users[i].setOpaque(true);
                 users[i].setBackground(Color.WHITE);
-                //users[i].setContentAreaFilled(false);
                 users[i].setBounds(200, 100 + (i * 32), 300, 30);
                 users[i].addActionListener(this);
             }
@@ -126,7 +125,6 @@ public class ElegirUsuario extends javax.swing.JFrame implements ActionListener 
             juegos.setVisible(true);
             juegos.setDefaultCloseOperation(juegos.EXIT_ON_CLOSE);
             dispose();
-
         } else {
             ventanaNoEligio();
         }
@@ -151,10 +149,10 @@ public class ElegirUsuario extends javax.swing.JFrame implements ActionListener 
     public void actionPerformed(ActionEvent e) {
         Object queUsuario = e.getSource();
 
-        for (int i = 0; i < Proyecto2.getUsuarios().length; i++) {
+        for (int i = 0; i < InfoJuego.getCantUsuarios(); i++) {
             if (queUsuario == users[i]) {
                 if (users[i].getText() != null) {
-                    Proyecto2.setUsuario(Proyecto2.getUsuarios()[i]);
+                    InfoJuego.setUsuario(InfoJuego.getUsuarios()[i]);
                     System.out.println("Ususario Eligio pulso>:" + users[i].getText());
                     PintarElegido(i);
                     eligio = true;
@@ -165,12 +163,10 @@ public class ElegirUsuario extends javax.swing.JFrame implements ActionListener 
     }
 
     public void PintarElegido(int i) {
-
-        for (int x = 0; x < Proyecto2.getUsuarios().length; x++) {
+        for (int x = 0; x < InfoJuego.getCantUsuarios(); x++) {
             users[x].setBackground(Color.WHITE);
         }
         users[i].setBackground(Color.LIGHT_GRAY);
-
     }
 
     public void ventanaNoEligio() {

@@ -4,6 +4,8 @@
  */
 package com.ipc1.proyecto2.graficos;
 
+import com.ipc1.proyecto2.InfoJuego;
+import com.ipc1.proyecto2.Usuarios;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,6 +17,7 @@ public class CrearUsuario extends javax.swing.JFrame {
     /**
      * Creates new form CrearUsuario
      */
+    
     private MenuUsuario menuUsuario;
     private boolean primerClic = true;
     private String mensajeFinal;
@@ -142,6 +145,10 @@ public class CrearUsuario extends javax.swing.JFrame {
             ventanaVacio();
 
         } else {
+             InfoJuego.getUsuarios()[ InfoJuego.getCantUsuarios() ]= new Usuarios(InfoJuego.getCantUsuarios(), areaDeTexto.getText());
+            InfoJuego.setCantUsuarios(InfoJuego.getCantUsuarios()+1 );
+            System.out.println("nombre ingresado: " + areaDeTexto.getText());
+            
             this.dispose();
             menuUsuario.setVisible(true);
         }
@@ -172,6 +179,7 @@ public class CrearUsuario extends javax.swing.JFrame {
     public void validarSalir() {
 
         if (areaDeTexto.getText().equalsIgnoreCase(mensajeFinal) || areaDeTexto.getText().isEmpty() || areaDeTexto.getText().isBlank() || areaDeTexto.getText() == null) {
+           
             this.dispose();
             menuUsuario.setVisible(true);
 
