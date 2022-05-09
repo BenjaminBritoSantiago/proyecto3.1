@@ -35,6 +35,9 @@ public class MenuUsuario extends javax.swing.JFrame {
         elegirUsuario = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         ReporteDamas = new javax.swing.JButton();
+        rutacambio = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        rutasJL = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,6 +78,21 @@ public class MenuUsuario extends javax.swing.JFrame {
             }
         });
         jPanel1.add(ReporteDamas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, -1, -1));
+
+        rutacambio.setText("rutas");
+        rutacambio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rutacambioMouseClicked(evt);
+            }
+        });
+        jPanel1.add(rutacambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, -1, -1));
+
+        rutasJL.setColumns(20);
+        rutasJL.setRows(5);
+        rutasJL.setText("ruta");
+        jScrollPane1.setViewportView(rutasJL);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 380, 180, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,6 +144,16 @@ public class MenuUsuario extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_ReporteDamasMouseClicked
 
+    private void rutacambioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rutacambioMouseClicked
+        // TODO add your handling code here:
+        if(!rutasJL.getText().equalsIgnoreCase("ruta")){
+            ruta = rutasJL.getText();
+            System.out.println("SE ACTUALIZA: "+rutasJL.getText());
+        }else{
+            System.out.println("NO SE ACTUALIZA RUTA");
+        }
+    }//GEN-LAST:event_rutacambioMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -136,5 +164,8 @@ public class MenuUsuario extends javax.swing.JFrame {
     private javax.swing.JButton elegirUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton rutacambio;
+    private javax.swing.JTextArea rutasJL;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,7 +21,6 @@ public class Torre extends JPanel {
     private int posOcupadas;
     private int idTorre;
     private JButton torreG = new JButton();
-
     public static int idClico=-1;
 
     public Torre(int idTorre, int peso, int posOcupadas) {
