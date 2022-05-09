@@ -4,6 +4,7 @@
  */
 package com.ipc1.proyecto2.controladorDamas;
 
+import com.ipc1.proyecto2.Usuarios;
 import com.ipc1.proyecto2.graficos.CronometroDamas;
 import com.ipc1.proyecto2.graficos.MenuJuegos;
 import com.ipc1.proyecto2.graficos.TableroDamas;
@@ -22,8 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class CuadrosFichas extends Thread implements ActionListener {
 
-    private Cuadricula[][] cuadros = new Cuadricula[8][8];
-
+    private Usuarios usuario;
     private Cuadricula[] cuadros2 = new Cuadricula[32];
 
     private Ficha[] fichas1 = new Ficha[12];
@@ -39,11 +39,60 @@ public class CuadrosFichas extends Thread implements ActionListener {
     private CronometroDamas crnmt;
     private MenuJuegos menuJuegos;
 
-    public CuadrosFichas(TableroDamas2 tablero,CronometroDamas crnmt, MenuJuegos menuJuegos) {
+    public CuadrosFichas(TableroDamas2 tablero, CronometroDamas crnmt, MenuJuegos menuJuegos, Usuarios usuario) {
+        this.usuario = usuario;
+        this.turno1 = usuario.getTurno1();
         this.crnmt = crnmt;
         this.menuJuegos = menuJuegos;
         this.tablero = tablero;
-        instanciador();
+
+        if (usuario.getGuardoDamas()) {
+            asignarFichas();
+            colocarTablero();
+            fondo();
+        } else {
+            instanciador();
+        }
+
+    }
+
+    public void asignarFichas() {
+        this.fichas1 = usuario.getFichas1();
+        this.fichas2 = usuario.getFichas2();
+        this.cuadros2 = usuario.getTablero();
+        colocar();
+
+    }
+
+    public void colocar() {
+        for (int i = 0; i < 12; i++) {
+            tablero.add(fichas1[i].getFicha());
+            fichas1[i].getFicha().addActionListener(this);
+
+            tablero.add(fichas2[i].getFicha());
+            fichas2[i].getFicha().addActionListener(this);
+        }
+    }
+
+    public void colocarTablero() {
+        cuadros2 = usuario.getTablero();
+        for (int i = 0; i < 32; i++) {
+            tablero.add(cuadros2[i].getCuadro());
+            cuadros2[i].getCuadro().setVisible(true);
+            cuadros2[i].getCuadro().addActionListener(this);
+        }
+    }
+
+    public void fondo() {
+        /**
+         * SE INSERTA la tabla de fondo
+         */
+        JLabel tableroP = new JLabel();
+        tableroP.setBounds(250, 80, 480, 480);
+        tableroP.setOpaque(true);
+        tableroP.setBackground(Color.lightGray);
+        tableroP.setVisible(true);
+        tablero.add(tableroP);
 
     }
 
@@ -51,17 +100,14 @@ public class CuadrosFichas extends Thread implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object queBoton = e.getSource();
         /**
-         * for (int y = 0; y < 8; y++) {
-         * for (int x = 0; x < 8; x++) {
-         * 
-         * if (queBoton == cuadros[x][y].getCuadro()) {
-         * System.out.println(" CUADRO EN posX:" + x + " posY:" + y);
-         * break;
-         * }
-         * }
-         * }
+         * for (int y = 0; y < 8; y++) { for (int x = 0; x < 8; x++) {
+         *
+         * if (queBoton == cuadros[x][y].getCuadro()) { System.out.println("
+         * CUADRO EN posX:" + x + " posY:" + y); break; } } }
          */
-        /** DETECTOR DE CUADRO CLICLADO */
+        /**
+         * DETECTOR DE CUADRO CLICLADO
+         */
         for (int y = 0; y < 32; y++) {
             if (queBoton == cuadros2[y].getCuadro()) {
                 System.out.println(" CUADRO EN  no:" + cuadros2[y].getNumero() + "num fichaOcupa "
@@ -75,19 +121,20 @@ public class CuadrosFichas extends Thread implements ActionListener {
                 break;
             }
         }
-        if ( !continuaJuego(fichas1,fichas2)) {
-            tablero.setTerminar(true); 
+        if (!continuaJuego(fichas1, fichas2)) {
+            tablero.setTerminar(true);
             if (hayDamas(fichas1)) {
-                desHabilitarFichas(fichas1); 
-                ventanaTermino("jugador 1");
-            }else{
+                desHabilitarFichas(fichas1);
+                ventanaTermino("ROJO");
+            } else {
                 desHabilitarFichas(fichas2);
-                ventanaTermino("jugador 2");
-            } 
+                ventanaTermino("BLANCO");
+            }
         }
-       
 
-        /** DETECTOR DE FICHA 1 CLICLADO */
+        /**
+         * DETECTOR DE FICHA 1 CLICLADO
+         */
         for (int i = 0; i < 12; i++) {
             if (turno1 && queBoton == fichas1[i].getFicha()) {
                 System.out.println("NO FICHA1  + " + i);
@@ -97,7 +144,9 @@ public class CuadrosFichas extends Thread implements ActionListener {
 
         }
 
-        /** DETECTOR DE FICHA 2 CLICLADO */
+        /**
+         * DETECTOR DE FICHA 2 CLICLADO
+         */
         for (int i = 0; i < 12; i++) {
             if (!turno1 && queBoton == fichas2[i].getFicha()) {
                 System.out.println("NO FICHA2  + " + i);
@@ -108,7 +157,6 @@ public class CuadrosFichas extends Thread implements ActionListener {
         }
 
     }
-
 
     public void instanciador() {
         // instaciador del fichas1.
@@ -154,35 +202,30 @@ public class CuadrosFichas extends Thread implements ActionListener {
         }
 
         // instaciador del tablero
-
         ImageIcon imgs = new ImageIcon(
                 "C:\\Users\\minch\\Documents\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\fondoNegro.jpg");
         /**
-         * for (int y = 0; y < 8; y++) {
-         * for (int x = 0; x < 8; x++) {
+         * for (int y = 0; y < 8; y++) { for (int x = 0; x < 8; x++) {
          * cuadros[x][y] = new Cuadricula();
          * cuadros[x][y].getCuadro().setLocation(250 + (x * 60), 80 + (y * 60));
          * cuadros[x][y].getCuadro().setVisible(true);
          * tablero.add(cuadros[x][y].getCuadro());
          * cuadros[x][y].getCuadro().addActionListener(this);
-         * 
+         *
          * cuadros[x][y].getCuadro().setOpaque(true);
-         * cuadros[x][y].getCuadro().setContentAreaFilled(false);
-         * if ((x % 2 == 0 && y % 2 == 0) || (x % 2 != 0 && y % 2 != 0)) {
-         * cuadros[x][y].getCuadro().setIcon(imgs);
-         * }
-         * }
-         * }
+         * cuadros[x][y].getCuadro().setContentAreaFilled(false); if ((x % 2 ==
+         * 0 && y % 2 == 0) || (x % 2 != 0 && y % 2 != 0)) {
+         * cuadros[x][y].getCuadro().setIcon(imgs); } } }
          */
 
         for (int i = 0; i < 32; i++) {
             cuadros2[i] = new Cuadricula(i);
             tablero.add(cuadros2[i].getCuadro());
             cuadros2[i].getCuadro().setVisible(true);
-            cuadros2[i].getCuadro().addActionListener(this);
             cuadros2[i].getCuadro().setOpaque(true);
             cuadros2[i].getCuadro().setContentAreaFilled(false);
             cuadros2[i].getCuadro().setIcon(imgs);
+            cuadros2[i].getCuadro().addActionListener(this);
         }
         contador = 0;
 
@@ -209,13 +252,10 @@ public class CuadrosFichas extends Thread implements ActionListener {
             fichas1[i - 20].setIdCuadroActual(i);
         }
 
-        /** SE INSERTA la tabla de fondo */
-        JLabel tableroP = new JLabel();
-        tableroP.setBounds(250, 80, 480, 480);
-        tableroP.setOpaque(true);
-        tableroP.setBackground(Color.lightGray);
-        tableroP.setVisible(true);
-        tablero.add(tableroP);
+        /**
+         * SE INSERTA la tabla de fondo
+         */
+        fondo();
 
     }
 
@@ -260,20 +300,20 @@ public class CuadrosFichas extends Thread implements ActionListener {
                         if (distaciaX() == 120 && cuadros2[NumCuadroClico + 4 + tipoCuadro()].getIdFichaOcupando() != -1) {
 
                             if ((turno1 && cuadros2[NumCuadroClico + 4 + tipoCuadro()].getTipoOcupa12() == 2)
-                                || (!turno1 && cuadros2[NumCuadroClico + 4 + tipoCuadro()].getTipoOcupa12() == 1)) {
+                                    || (!turno1 && cuadros2[NumCuadroClico + 4 + tipoCuadro()].getTipoOcupa12() == 1)) {
 
-                                    comerFicha(cuadros2[NumCuadroClico + 4 + tipoCuadro()].getIdFichaOcupando());
-                                    cambiosGenerales();
-                             }
+                                comerFicha(cuadros2[NumCuadroClico + 4 + tipoCuadro()].getIdFichaOcupando());
+                                cambiosGenerales();
+                            }
 
                         } else if (distaciaX() == -120 && cuadros2[NumCuadroClico + 3 + tipoCuadro()].getIdFichaOcupando() != -1) {
 
-                                    if ((turno1 && cuadros2[NumCuadroClico + 3 + tipoCuadro()].getTipoOcupa12() == 2)
+                            if ((turno1 && cuadros2[NumCuadroClico + 3 + tipoCuadro()].getTipoOcupa12() == 2)
                                     || (!turno1 && cuadros2[NumCuadroClico + 3 + tipoCuadro()].getTipoOcupa12() == 1)) {
 
-                                        comerFicha(cuadros2[NumCuadroClico + 3 + tipoCuadro()].getIdFichaOcupando());
-                                        cambiosGenerales();
-                                    }
+                                comerFicha(cuadros2[NumCuadroClico + 3 + tipoCuadro()].getIdFichaOcupando());
+                                cambiosGenerales();
+                            }
                         }
 
                     }
@@ -286,19 +326,19 @@ public class CuadrosFichas extends Thread implements ActionListener {
                         if (distaciaX() == 120 && cuadros2[NumCuadroClico - 4 + tipoCuadro()].getIdFichaOcupando() != -1) {
 
                             if ((turno1 && cuadros2[NumCuadroClico - 4 + tipoCuadro()].getTipoOcupa12() == 2)
-                            || (!turno1 && cuadros2[NumCuadroClico - 4 + tipoCuadro()].getTipoOcupa12() == 1)) {
+                                    || (!turno1 && cuadros2[NumCuadroClico - 4 + tipoCuadro()].getTipoOcupa12() == 1)) {
 
                                 comerFicha(cuadros2[NumCuadroClico - 4 + tipoCuadro()].getIdFichaOcupando());
                                 cambiosGenerales();
-                             }
+                            }
 
                         } else if (distaciaX() == -120 && cuadros2[NumCuadroClico - 5 + tipoCuadro()].getIdFichaOcupando() != -1) {
                             if ((turno1 && cuadros2[NumCuadroClico - 5 + tipoCuadro()].getTipoOcupa12() == 2)
-                            || (!turno1 && cuadros2[NumCuadroClico - 5 + tipoCuadro()].getTipoOcupa12() == 1)) {
+                                    || (!turno1 && cuadros2[NumCuadroClico - 5 + tipoCuadro()].getTipoOcupa12() == 1)) {
 
                                 comerFicha(cuadros2[NumCuadroClico - 5 + tipoCuadro()].getIdFichaOcupando());
                                 cambiosGenerales();
-                             }
+                            }
                         }
                     }
 
@@ -343,17 +383,23 @@ public class CuadrosFichas extends Thread implements ActionListener {
             tipoOcupa12 = 1;
         }
 
-        /** CABIOS CUADRO ACTUAL */
+        /**
+         * CABIOS CUADRO ACTUAL
+         */
         cuadros2[NumCuadroClico].setIdFichaOcupando(NumFichasClico);
         cuadros2[NumCuadroClico].setOcupado(true);
         cuadros2[NumCuadroClico].setTipoOcupa12(tipoOcupa12);
 
-        /** CABIOS CUADRO ANTERIOR */
+        /**
+         * CABIOS CUADRO ANTERIOR
+         */
         cuadros2[fichastmp[NumFichasClico].getIdCuadroActual()].setOcupado(false);
         cuadros2[fichastmp[NumFichasClico].getIdCuadroActual()].setIdFichaOcupando(-1);
         cuadros2[fichastmp[NumFichasClico].getIdCuadroActual()].setTipoOcupa12(-1);
 
-        /** CABIOS A LA FICHA */
+        /**
+         * CABIOS A LA FICHA
+         */
         fichastmp[NumFichasClico].getFicha().setLocation(cuadros2[NumCuadroClico].getCuadro().getX(),
                 cuadros2[NumCuadroClico].getCuadro().getY());
         fichastmp[NumFichasClico].setIdCuadroActual(NumCuadroClico);
@@ -373,32 +419,34 @@ public class CuadrosFichas extends Thread implements ActionListener {
             cuadros2[fichas2[idFicha].getIdCuadroActual()].setOcupado(false);
             cuadros2[fichas2[idFicha].getIdCuadroActual()].setIdFichaOcupando(-1);
             cuadros2[fichas2[idFicha].getIdCuadroActual()].setTipoOcupa12(-1);
+            tablero.SumarContadorRojo();
 
-        }else{
+        } else {
             fichas1[idFicha].getFicha().setVisible(false);
             fichas1[idFicha].setDisponible(false);
 
             cuadros2[fichas1[idFicha].getIdCuadroActual()].setOcupado(false);
             cuadros2[fichas1[idFicha].getIdCuadroActual()].setIdFichaOcupando(-1);
             cuadros2[fichas1[idFicha].getIdCuadroActual()].setTipoOcupa12(-1);
-        }  
+            tablero.SumarContadoBlanco();
+        }
     }
 
-    public static boolean continuaJuego(Ficha [] fichas1, Ficha [] fichas2) {
-        
+    public static boolean continuaJuego(Ficha[] fichas1, Ficha[] fichas2) {
+
         if (hayDamas(fichas1) && hayDamas(fichas2)) {
             return true;
-        } 
-        return false; 
+        }
+        return false;
     }
 
-    public static boolean hayDamas(Ficha[] fichas12 ) {
+    public static boolean hayDamas(Ficha[] fichas12) {
         for (int i = 0; i < 12; i++) {
             if (fichas12[i].getDisponible()) {
                 return true;
-            }  
+            }
         }
-        return false;   
+        return false;
     }
 
     public void idFichaOcupa() {
@@ -407,19 +455,43 @@ public class CuadrosFichas extends Thread implements ActionListener {
         }
     }
 
-    public static void desHabilitarFichas(Ficha [] fichas) {
+    public static void desHabilitarFichas(Ficha[] fichas) {
         for (int i = 0; i < 12; i++) {
             fichas[i].getFicha().setEnabled(false);
         }
     }
-    
-    
-    public void ventanaTermino(String nomJugadorGano){
-     
-        JOptionPane.showMessageDialog(null,"Gano: "+nomJugadorGano +"\n Tiempo:"+crnmt.tiempo(), "FIN JUEGO",1);  
-         tablero.dispose();
-         menuJuegos.setVisible(true);
-     
-     }
+
+    public void ventanaTermino(String nomJugadorGano) {
+
+        JOptionPane.showMessageDialog(null, "Gano: " + nomJugadorGano + "\n Tiempo:" + crnmt.tiempo(), "FIN JUEGO", 1);
+        tablero.dispose();
+        menuJuegos.setVisible(true);
+    }
+
+    public void guardar() {
+        for (int i = 0; i > 12; i++) {
+            fichas1[i].getFicha().removeActionListener(this);
+            fichas2[i].getFicha().removeActionListener(this);
+        }
+        for (int i = 0; i < 32; i++) {
+
+            cuadros2[i].getCuadro().removeActionListener(this);
+        }
+
+        usuario.setFichas1(fichas1);
+        usuario.setFichas2(fichas2);
+        usuario.setComio1(tablero.getComioRojo());
+        usuario.setComio2(tablero.getComioBlanco());
+        usuario.setTablero(cuadros2);
+
+        usuario.getTiempoDamas()[0] = crnmt.getHora();
+        usuario.getTiempoDamas()[1] = crnmt.getMinutos();
+        usuario.getTiempoDamas()[2] = crnmt.getSegundos();
+         usuario.setTurno1(turno1);
+
+        usuario.setGuardoDamas(true);
+        this.tablero.dispose();
+
+    }
 
 }

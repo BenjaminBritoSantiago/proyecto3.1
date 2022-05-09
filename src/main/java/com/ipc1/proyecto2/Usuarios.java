@@ -4,6 +4,8 @@
  */
 package com.ipc1.proyecto2;
 
+import com.ipc1.proyecto2.controladorDamas.Cuadricula;
+import com.ipc1.proyecto2.controladorDamas.Ficha;
 import com.ipc1.proyecto2.controladorHanoi.Barra;
 import com.ipc1.proyecto2.controladorHanoi.Torre;
 
@@ -26,13 +28,24 @@ public class Usuarios {
     /*VARIABLES DE JUEGO DEL USUARIO **/
     private int [] tiempoHanoi = new int [3];
     private int [] tiempoDamas = new int [3];
-    
+   
+    //varibales HANOI
     private Barra[] Barras;
     private int cBarras;
     private int MovActual;
     private Torre[] torres;
     private boolean guardoHanoi=false;
     private int perdioHanoi=0;
+    
+    //varibales damas
+    private Cuadricula [] tablero;
+    private Ficha [] Fichas1;
+    private Ficha [] Fichas2;
+    private int Comio1;
+    private int Comio2;
+    private boolean turno1;
+    
+    private boolean guardoDamas=false;
     
     
     
@@ -55,6 +68,68 @@ public class Usuarios {
         this.totalMovRealizo = totalMovRealizo;
         this.promMovRealizo = promMovRealizo;
     }
+
+    public boolean getTurno1() {
+        return turno1;
+    }
+
+    public void setTurno1(boolean turno1) {
+        this.turno1 = turno1;
+    }
+    
+    
+
+    public int getComio1() {
+        return Comio1;
+    }
+
+    public void setComio1(int Comio1) {
+        this.Comio1 = Comio1;
+    }
+
+    public int getComio2() {
+        return Comio2;
+    }
+
+    public void setComio2(int Comio2) {
+        this.Comio2 = Comio2;
+    }
+    
+    
+    
+    public Cuadricula[] getTablero() {
+        return tablero;
+    }
+
+    public void setTablero(Cuadricula[] tablero) {
+        this.tablero = tablero;
+    }
+
+    public Ficha[] getFichas1() {
+        return Fichas1;
+    }
+
+    public void setFichas1(Ficha[] Fichas1) {
+        this.Fichas1 = Fichas1;
+    }
+
+    public Ficha[] getFichas2() {
+        return Fichas2;
+    }
+
+    public void setFichas2(Ficha[] Fichas2) {
+        this.Fichas2 = Fichas2;
+    }
+
+    public boolean getGuardoDamas() {
+        return guardoDamas;
+    }
+
+    public void setGuardoDamas(boolean guardoDamas) {
+        this.guardoDamas = guardoDamas;
+    }
+    
+    
 
     public int getPerdioHanoi() {
         return perdioHanoi;

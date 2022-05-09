@@ -24,10 +24,21 @@ public class CronometroDamas extends JPanel implements Runnable {
         this.ventana = ventana;
         this.tiempoText.setVisible(true);
         this.setBounds(400, 5, 250, 70);
-        this.ventana.add(this);
-        
-        
+        this.ventana.add(this);   
     }
+    
+    public CronometroDamas(TableroDamas2 ventana, int hora, int minutos, int segundos ) {
+        this.hora = hora;
+        this.minutos = minutos;
+        this.segundos = segundos;
+        initComponents();
+        setContador(""+hora + ":" + minutos+ ":" + segundos);
+        this.ventana = ventana;
+        this.tiempoText.setVisible(true);
+        this.setBounds(400, 5, 250, 70);
+        this.ventana.add(this);   
+    }
+    
 
     //public void contador()
     @SuppressWarnings("unchecked")
@@ -74,7 +85,31 @@ public class CronometroDamas extends JPanel implements Runnable {
         return ""+hora + ":" + minutos+ ":" + segundos;
     }
 
+    public int getHora() {
+        return hora;
+    }
 
+    public void setHora(int hora) {
+        this.hora = hora;
+    }
+
+    public int getMinutos() {
+        return minutos;
+    }
+
+    public void setMinutos(int minutos) {
+        this.minutos = minutos;
+    }
+
+    public int getSegundos() {
+        return segundos;
+    }
+
+    public void setSegundos(int segundos) {
+        this.segundos = segundos;
+    }
+     
+    
     @Override
     public void run() {
         do {
