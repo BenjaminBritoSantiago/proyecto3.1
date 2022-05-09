@@ -27,8 +27,10 @@ public class Usuarios {
     private int [] tiempoHanoi = new int [3];
     private int [] tiempoDamas = new int [3];
     
-    private Barra Barras;
-    private Torre torres;
+    private Barra[] Barras;
+    private int cBarras;
+    private int MovActual;
+    private Torre[] torres;
     private boolean guardoHanoi=false;
     
     
@@ -52,8 +54,28 @@ public class Usuarios {
         this.totalMovRealizo = totalMovRealizo;
         this.promMovRealizo = promMovRealizo;
     }
+    
 
-    public boolean isGuardoHanoi() {
+    public int getMovActual() {
+        return MovActual;
+    }
+
+    public void setMovActual(int MovActual) {
+        this.MovActual = MovActual;
+    }
+    
+    
+    public int getcBarras() {
+        return cBarras;
+    }
+
+    public void setcBarras(int cBarras) {
+        this.cBarras = cBarras;
+    } 
+    
+    
+
+    public boolean getGuardoHanoi() {
         return guardoHanoi;
     }
 
@@ -77,22 +99,26 @@ public class Usuarios {
     public void setTiempoDamas(int[] tiempoDamas) {
         this.tiempoDamas = tiempoDamas;
     }
+    
+    
 
-    public Barra getBarras() {
+    public Barra[] getBarras() {
         return Barras;
     }
 
-    public void setBarras(Barra Barras) {
+    public void setBarras(Barra[] Barras) {
         this.Barras = Barras;
     }
 
-    public Torre getTorres() {
+    public Torre[] getTorres() {
         return torres;
     }
 
-    public void setTorres(Torre torres) {
+    public void setTorres(Torre[] torres) {
         this.torres = torres;
     }
+
+    
     
     
     public int getId() {

@@ -25,9 +25,23 @@ public class CronometroTorres extends JPanel implements Runnable {
         this.ventana = ventana;
         this.tiempoText.setVisible(true);
         this.setBounds(400, 20, 250, 70);
-        this.ventana.add(this);
-        
+        this.ventana.add(this);    
     }
+    
+    public CronometroTorres(TorresdeHanoi ventana,int hora,int minutos,int segundos ) {
+        
+        this.hora=hora;
+        this.minutos = minutos;
+        this.segundos= segundos;
+        
+        initComponents();
+        this.ventana = ventana;
+        this.tiempoText.setVisible(true);
+        this.setBounds(400, 20, 250, 70);
+        this.ventana.add(this);    
+    }
+    
+    
 
     public int getHora() {
         return hora;

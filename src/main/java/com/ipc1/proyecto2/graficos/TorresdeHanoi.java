@@ -4,22 +4,21 @@
  */
 package com.ipc1.proyecto2.graficos;
 
+import com.ipc1.proyecto2.InfoJuego;
 import com.ipc1.proyecto2.Usuarios;
 import com.ipc1.proyecto2.controladorHanoi.Barra;
 import com.ipc1.proyecto2.controladorHanoi.BotonesTorres;
 import com.ipc1.proyecto2.controladorHanoi.Torre;
-import java.awt.Color;
 import static java.lang.Math.round;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *
  * @author minch
  */
 public class TorresdeHanoi extends javax.swing.JFrame {
-    
+
     private Usuarios usuario;
     Barra[] barras = new Barra[8];
     Torre[] torres = new Torre[3];
@@ -27,18 +26,22 @@ public class TorresdeHanoi extends javax.swing.JFrame {
     private int cantidaBarras;
     private boolean terminar = false;
     private int movActual = 0;
+
     private MenuJuegos menuJuegos;
-    CronometroTorres crnmt;
+    private CronometroTorres crnmt;
+    private BotonesTorres graficos;
 
     /**
      * Creates new form TorresdeHanoi
      */
     public TorresdeHanoi(int cantidaBarras, MenuJuegos menuJuegos) {
+        this.usuario = InfoJuego.getUsuario();
         this.menuJuegos = menuJuegos;
         this.cantidaBarras = cantidaBarras;
-
+        
         crnmt = new CronometroTorres(this);
-        BotonesTorres graficos = new BotonesTorres(this, cantidaBarras, menuJuegos,crnmt);
+        this.graficos = new BotonesTorres(this, cantidaBarras, menuJuegos, crnmt, usuario);
+
         this.setBounds(0, 0, 1000, 700);
         this.setLocationRelativeTo(null);
         initComponents();
@@ -47,11 +50,26 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         Thread t = new Thread(crnmt);
         t.start();
     }
-    
-    
-    
-    
-    
+
+    public TorresdeHanoi(MenuJuegos menuJuegos) {
+        this.usuario = InfoJuego.getUsuario();
+        this.menuJuegos = menuJuegos;
+        this.cantidaBarras = usuario.getcBarras();
+
+        crnmt = new CronometroTorres(this, usuario.getTiempoHanoi()[0], usuario.getTiempoHanoi()[1], usuario.getTiempoHanoi()[2]);
+        
+        this.graficos = new BotonesTorres(this, cantidaBarras, menuJuegos, crnmt, usuario);
+        
+       
+        this.setBounds(0, 0, 1000, 700);
+        this.setLocationRelativeTo(null);
+        initComponents();
+        this.movActual = usuario.getMovActual();
+        movMin.setText(String.valueOf(round(Math.pow(2, cantidaBarras) - 1)));
+
+        Thread tc = new Thread(crnmt);
+        tc.start();
+    }
 
     public void setTerminar(boolean terminar) {
         this.terminar = terminar;
@@ -199,8 +217,9 @@ public class TorresdeHanoi extends javax.swing.JFrame {
                 null, options, options[0]);
 
         if ((int) c == 0) {
-            System.out.println("segundos utilizados: " + crnmt.getSegundos());
             terminar = true;
+            System.out.println("segundos utilizados: " + crnmt.getSegundos());
+            graficos.guardar(movActual);
             dispose();
             menuJuegos.setVisible(true);
         }
@@ -209,11 +228,10 @@ public class TorresdeHanoi extends javax.swing.JFrame {
 
     private void validarCierre(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_validarCierre
         // TODO add your handling code here:
-        
         rendirse();
     }//GEN-LAST:event_validarCierre
-    
-    public void rendirse(){
+
+    public void rendirse() {
         Object[] options = {"SI", "NO"};
         Object c;
         c = JOptionPane.showOptionDialog(null, "Quieres Abandonar la Partida \n       (perderas el Juego)", "RENDIRSE",
@@ -221,6 +239,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
                 null, options, options[0]);
 
         if ((int) c == 0) {
+            usuario.setGuardoHanoi(false);
             terminar = true;
             dispose();
             menuJuegos.setVisible(true);

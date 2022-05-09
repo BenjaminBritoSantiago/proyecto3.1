@@ -4,6 +4,7 @@
  */
 package com.ipc1.proyecto2.controladorHanoi;
 
+import com.ipc1.proyecto2.InfoJuego;
 import com.ipc1.proyecto2.Usuarios;
 import com.ipc1.proyecto2.graficos.CronometroTorres;
 import com.ipc1.proyecto2.graficos.MenuJuegos;
@@ -17,41 +18,32 @@ import javax.swing.JOptionPane;
  * @author minch
  */
 public class BotonesTorres extends Thread implements ActionListener {
-    
-    
+
     private Usuarios usuario;
     private Barra[] barras = new Barra[8];
     private Torre[] torres = new Torre[3];
     private int cantidaBarras;
     private MenuJuegos menuJuegos;
     private CronometroTorres crnmt;
-
     private TorresdeHanoi ventana;
 
-    public BotonesTorres(TorresdeHanoi ventana, int cantidaBarras, MenuJuegos menuJuegos,CronometroTorres crnmt ) {
+    public BotonesTorres(TorresdeHanoi ventana, int cantidaBarras, MenuJuegos menuJuegos, CronometroTorres crnmt, Usuarios usuario) {
+        this.usuario = usuario;
         this.crnmt = crnmt;
         this.menuJuegos = menuJuegos;
         this.ventana = ventana;
         this.cantidaBarras = cantidaBarras;
-        instanciarBarras();
-        instanciarTorres();
-    }
-    
-    public BotonesTorres(TorresdeHanoi ventana, int cantidaBarras, MenuJuegos menuJuegos,CronometroTorres crnmt, Barra[] barras, Torre[] torres) {
-        this.crnmt = crnmt;
-        this.menuJuegos = menuJuegos;
-        this.ventana = ventana;
-        this.cantidaBarras = cantidaBarras;
-         this.barras = barras;
-        this.torres = torres;
-        for (int i = 7; i > 7 - cantidaBarras; i--) {
-            colocarBarra(i);
+
+        if (usuario.getGuardoHanoi()) {
+            colocarBarras();
+            colocarTorres();
+
+        } else {
+            instanciarBarras();
+            instanciarTorres();
         }
-        
-        
     }
-    
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -63,7 +55,7 @@ public class BotonesTorres extends Thread implements ActionListener {
                 break;
             }
         }
-        
+
         for (int i = 0; i < 3; i++) {
             if (queBoton == torres[i].getTorreG()) {
                 System.out.println("torre que pulso>:" + torres[i].getIdTorre());
@@ -74,23 +66,40 @@ public class BotonesTorres extends Thread implements ActionListener {
 
         verificador();
     }
-    
-    public void colocarBarra(int i){
-    
-        barras[i].setVisible(true);
-        ventana.add(barras[i].getBoton());
-        barras[i].getBoton().addActionListener(this);
+
+    public void colocarBarra() {
+        for (int i = 7; i > 7 - cantidaBarras; i--) {
+            barras[i].setVisible(true);
+            ventana.add(barras[i].getBoton());
+            barras[i].getBoton().addActionListener(this);
+            /* if(!usuario.getGuardoHanoi()){
+             barras[i].getBoton().addActionListener(this);
+            }*/
+        }
+
     }
-    
-    public void colocarTorre(){
+
+    public void colocarTorre() {
+
         for (int i = 0; i < 3; i++) {
             torres[i].getTorreG().setVisible(true);
             ventana.add(torres[i].getTorreG());
             torres[i].getTorreG().addActionListener(this);
-        }   
+            /*if(!usuario.getGuardoHanoi()){
+            torres[i].getTorreG().addActionListener(this);
+            }*/
+        }
     }
-    
-    
+
+    public void colocarBarras() {
+        this.barras = usuario.getBarras();
+        colocarBarra();
+    }
+
+    public void colocarTorres() {
+        this.torres = usuario.getTorres();
+        colocarTorre();
+    }
 
     public void instanciarBarras() {
 
@@ -98,8 +107,9 @@ public class BotonesTorres extends Thread implements ActionListener {
             // Barra( int idBarra, int peso, int idTorreActual, int posicionYActual, int pesoAnterior  )
             barras[i] = new Barra(i, i, 0, i - 7, i + 1, 280, 40, String.valueOf(i + 1));
             barras[i].getBoton().setLocation(30, (i * 40) + 140);
-            colocarBarra(i);
+
         }
+        colocarBarra();
 
     }
 
@@ -189,9 +199,9 @@ public class BotonesTorres extends Thread implements ActionListener {
                         ventana.setMovActuales();
 
                         if (Torre.idClico != 0) {
-                            if ( torres[Torre.idClico].getPosOcupadas()==cantidaBarras) {
-                                    deshabilitarTodaslasBarras();
-                                    ventanaTermino();
+                            if (torres[Torre.idClico].getPosOcupadas() == cantidaBarras) {
+                                deshabilitarTodaslasBarras();
+                                ventanaTermino();
                             }
                         }
                         Barra.idClico = -1;
@@ -234,30 +244,53 @@ public class BotonesTorres extends Thread implements ActionListener {
         barras[queBoton].getBoton().setLocation(posX, posY);
 
     }
-    
-    
-     public  void deshabilitarTodaslasBarras() {
-          for (int i = 7; i > 7 - cantidaBarras; i--) {
+
+    public void deshabilitarTodaslasBarras() {
+        for (int i = 7; i > 7 - cantidaBarras; i--) {
             // Barra( int idBarra, int peso, int idTorreActual, int posicionYActual, int pesoAnterior  )
             barras[i].getBoton().setEnabled(false);
-        } 
-          ventana.setTerminar(true);
+        }
+        ventana.setTerminar(true);
     }
-     
-     
-     public void ventanaTermino(){
-         int mov= Integer.parseInt(ventana.getMovActuales().getText());
-         int min = Integer.parseInt(ventana.getMovMin().getText());
-         
-         String mensaje="         LO LOGRASTE \ncon los movimientos minimos";
-         if( mov>min){
-              mensaje="terminaste, usaste "+(mov-min)+ " movimientos de mas";
-         }
-         
-        JOptionPane.showMessageDialog(null,mensaje +"\n movimientos:"+ mov +"\n Tiempo:"+crnmt.tiempo(), "TERMINASTE",1);  
-         ventana.dispose();
-         menuJuegos.setVisible(true);
-     
-     }
+
+    public void ventanaTermino() {
+        InfoJuego.getUsuario().setGuardoHanoi(false);
+
+        int mov = Integer.parseInt(ventana.getMovActuales().getText());
+        int min = Integer.parseInt(ventana.getMovMin().getText());
+
+        String mensaje = "         LO LOGRASTE \ncon los movimientos minimos";
+        if (mov > min) {
+            mensaje = "terminaste, usaste " + (mov - min) + " movimientos de mas";
+        }
+
+        JOptionPane.showMessageDialog(null, mensaje + "\n movimientos:" + mov + "\n Tiempo:" + crnmt.tiempo(), "TERMINASTE", 1);
+        this.ventana.dispose();
+        menuJuegos.setVisible(true);
+
+    }
+
+    public void guardar(int movActual) {
+
+        for (int i = 7; i > 7 - cantidaBarras; i--) {
+            barras[i].getBoton().removeActionListener(this);
+        }
+        for (int i = 0; i < 3; i++) {
+            torres[i].getTorreG().removeActionListener(this);
+        }
+
+        usuario.setBarras(barras);
+        usuario.setcBarras(cantidaBarras);
+        usuario.setMovActual(movActual);
+        System.out.println("movimietos que se guardan " + movActual);
+        usuario.setTorres(torres);
+        usuario.getTiempoHanoi()[0] = crnmt.getHora();
+        usuario.getTiempoHanoi()[1] = crnmt.getMinutos();
+        usuario.getTiempoHanoi()[2] = crnmt.getSegundos();
+
+        usuario.setGuardoHanoi(true);
+        this.ventana.dispose();
+
+    }
 
 }
