@@ -32,6 +32,7 @@ public class Usuarios {
     private int MovActual;
     private Torre[] torres;
     private boolean guardoHanoi=false;
+    private int perdioHanoi=0;
     
     
     
@@ -54,7 +55,14 @@ public class Usuarios {
         this.totalMovRealizo = totalMovRealizo;
         this.promMovRealizo = promMovRealizo;
     }
-    
+
+    public int getPerdioHanoi() {
+        return perdioHanoi;
+    }
+
+    public void setPerdioHanoi() {
+        ++this.perdioHanoi;
+    }
 
     public int getMovActual() {
         return MovActual;

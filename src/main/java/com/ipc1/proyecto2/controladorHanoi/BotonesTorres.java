@@ -53,14 +53,19 @@ public class BotonesTorres extends Thread implements ActionListener {
                 System.out.println("boton pulso>:" + barras[i].getIdBarra());
                 Barra.idClico = barras[i].getIdBarra();
                 break;
+
             }
         }
 
         for (int i = 0; i < 3; i++) {
             if (queBoton == torres[i].getTorreG()) {
-                System.out.println("torre que pulso>:" + torres[i].getIdTorre());
-                Torre.idClico = torres[i].getIdTorre();
-                break;
+
+                if (Barra.idClico != -1) {
+                    System.out.println("torre que pulso>:" + torres[i].getIdTorre());
+                    Torre.idClico = torres[i].getIdTorre();
+                    break;
+                }
+
             }
         }
 
@@ -278,6 +283,8 @@ public class BotonesTorres extends Thread implements ActionListener {
         for (int i = 0; i < 3; i++) {
             torres[i].getTorreG().removeActionListener(this);
         }
+        Barra.idClico = -1;
+        Torre.idClico = -1;
 
         usuario.setBarras(barras);
         usuario.setcBarras(cantidaBarras);

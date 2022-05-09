@@ -116,12 +116,18 @@ public class MenuJuegos extends javax.swing.JFrame {
         } else {
             Object[] numeros = {3, 4, 5, 6, 7, 8};
             int cBarras = 3;
-
-                Object c = JOptionPane.showInputDialog(null, "Cuantas Barras quiere", "Elegir", JOptionPane.QUESTION_MESSAGE, null, numeros, numeros[0]);
+            try{
+                 Object c = JOptionPane.showInputDialog(null, "Cuantas Barras quiere", "Elegir", JOptionPane.QUESTION_MESSAGE, null, numeros, numeros[0]);
                 cBarras = (int) c;
                 TorresdeHanoi ventanaHanoi = new TorresdeHanoi(cBarras, this);
                 ventanaHanoi.setVisible(true);
                 this.setVisible(false);
+            
+            }catch(Exception e ){
+                System.out.println("ERROR AL CARGAR HANOI");
+            
+            }
+               
             
         }
 

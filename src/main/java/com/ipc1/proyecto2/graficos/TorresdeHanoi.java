@@ -65,6 +65,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         initComponents();
         this.movActual = usuario.getMovActual();
+        movActuales.setText(""+movActual);
         movMin.setText(String.valueOf(round(Math.pow(2, cantidaBarras) - 1)));
 
         Thread tc = new Thread(crnmt);
@@ -130,7 +131,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         movMin.setText("00");
 
         movActuales.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        movActuales.setText("00");
+        movActuales.setText("0");
 
         GuardarPartida.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         GuardarPartida.setText("Guardar Partida");
@@ -239,6 +240,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
                 null, options, options[0]);
 
         if ((int) c == 0) {
+            usuario.setPerdioHanoi();
             usuario.setGuardoHanoi(false);
             terminar = true;
             dispose();
