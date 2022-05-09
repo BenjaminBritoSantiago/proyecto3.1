@@ -6,6 +6,7 @@ package com.ipc1.proyecto2.controladorHanoi;
 
 
 
+import java.awt.Font;
 import javax.swing.JButton;
 
 /**
@@ -32,7 +33,8 @@ public class Barra extends JButton{
         this.pesoAnterior = pesoAnterior;
         boton.setBounds(20, 20, anchoBoton, altoBoton);
         this.boton.setVisible(true);
-        boton.setText(numBoton);  
+        boton.setText(numBoton);
+        boton.setFont(new Font("Arial", Font.PLAIN, 25));
     }
     
     public JButton getBoton() {

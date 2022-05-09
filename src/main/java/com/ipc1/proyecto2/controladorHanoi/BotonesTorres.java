@@ -9,9 +9,12 @@ import com.ipc1.proyecto2.Usuarios;
 import com.ipc1.proyecto2.graficos.CronometroTorres;
 import com.ipc1.proyecto2.graficos.MenuJuegos;
 import com.ipc1.proyecto2.graficos.TorresdeHanoi;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -107,11 +110,21 @@ public class BotonesTorres extends Thread implements ActionListener {
     }
 
     public void instanciarBarras() {
+        //ImageIcon[] imgs = null;
 
         for (int i = 7; i > 7 - cantidaBarras; i--) {
-            // Barra( int idBarra, int peso, int idTorreActual, int posicionYActual, int pesoAnterior  )
-            barras[i] = new Barra(i, i, 0, i - 7, i + 1, 280, 40, String.valueOf(i + 1));
+            ImageIcon imgs = new ImageIcon("C:\\Users\\minch\\Documents\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\barra" + i + ".png");
+            // Barra( int idBarra, int peso, int idTorreActual, int posicionYActual, int pesoAnterior)
+            barras[i] = new Barra(i, i, 0, i - 7, i + 1 , 280, 40, String.valueOf(i + 1));
             barras[i].getBoton().setLocation(30, (i * 40) + 140);
+            
+            //barras[i].getBoton().setOpaque(true);
+            barras[i].getBoton().setBorder(null);
+            barras[i].getBoton().setContentAreaFilled(false);
+            
+            barras[i].getBoton().setIcon(new ImageIcon(imgs.getImage().getScaledInstance(280, 40, Image.SCALE_SMOOTH )  )  );
+            barras[i].getBoton().setHorizontalTextPosition(SwingConstants.CENTER);
+            barras[i].getBoton().setVerticalTextPosition(SwingConstants.CENTER);
 
         }
         colocarBarra();
