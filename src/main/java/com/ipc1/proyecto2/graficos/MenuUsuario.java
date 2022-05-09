@@ -31,6 +31,7 @@ public class MenuUsuario extends javax.swing.JFrame {
         crearUsuario = new javax.swing.JButton();
         elegirUsuario = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        ReporteDamas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,7 +49,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                 crearUsuarioActionPerformed(evt);
             }
         });
-        jPanel1.add(crearUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, -1, -1));
+        jPanel1.add(crearUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
 
         elegirUsuario.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         elegirUsuario.setText("ELEGIR USUARIO");
@@ -57,11 +58,20 @@ public class MenuUsuario extends javax.swing.JFrame {
                 elegirUsuarioMouseClicked(evt);
             }
         });
-        jPanel1.add(elegirUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 260, -1, -1));
+        jPanel1.add(elegirUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setText("MENU INICIAL");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
+
+        ReporteDamas.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        ReporteDamas.setText("Reportes Damas");
+        ReporteDamas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ReporteDamasMouseClicked(evt);
+            }
+        });
+        jPanel1.add(ReporteDamas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,11 +116,19 @@ public class MenuUsuario extends javax.swing.JFrame {
         * */
     }//GEN-LAST:event_elegirUsuarioMouseClicked
 
+    private void ReporteDamasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReporteDamasMouseClicked
+        // TODO add your handling code here:
+        ReportesDamas reporte = new ReportesDamas(this);
+        reporte.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_ReporteDamasMouseClicked
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ReporteDamas;
     private javax.swing.JButton crearUsuario;
     private javax.swing.JButton elegirUsuario;
     private javax.swing.JLabel jLabel1;

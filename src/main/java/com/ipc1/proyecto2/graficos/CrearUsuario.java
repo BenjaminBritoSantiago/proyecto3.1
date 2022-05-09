@@ -145,7 +145,7 @@ public class CrearUsuario extends javax.swing.JFrame {
             ventanaVacio();
 
         } else {
-             InfoJuego.getUsuarios()[ InfoJuego.getCantUsuarios() ]= new Usuarios(InfoJuego.getCantUsuarios(), areaDeTexto.getText());
+             InfoJuego.getUsuarios()[ InfoJuego.getCantUsuarios() ]= new Usuarios(InfoJuego.getCantUsuarios(), areaDeTexto.getText().trim());
             InfoJuego.setCantUsuarios(InfoJuego.getCantUsuarios()+1 );
             System.out.println("nombre ingresado: " + areaDeTexto.getText());
             

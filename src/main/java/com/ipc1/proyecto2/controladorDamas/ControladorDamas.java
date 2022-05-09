@@ -31,6 +31,8 @@ public class ControladorDamas extends Thread implements ActionListener {
 
     private int NumFichasClico = -1;
     private int NumCuadroClico = -1;
+    
+    private int sumaMovimietos=0;
 
     private boolean turno1 = true;
 
@@ -45,6 +47,7 @@ public class ControladorDamas extends Thread implements ActionListener {
         this.tablero = tablero;
 
         if (usuario.getGuardoDamas()) {
+            this.sumaMovimietos = usuario.getSumaMovsDamas();
             this.turno1 = usuario.getTurno1();
             asignarFichas();
             colocarTablero();
@@ -54,6 +57,17 @@ public class ControladorDamas extends Thread implements ActionListener {
         }
 
     }
+
+    public int getSumaMovimietos() {
+        return sumaMovimietos;
+    }
+
+    public void setSumaMovimietos(int sumaMovimietos) {
+        this.sumaMovimietos = sumaMovimietos;
+    }
+    
+    
+    
 
     public void asignarFichas() {
         this.fichas1 = usuario.getFichas1();
@@ -383,6 +397,7 @@ public class ControladorDamas extends Thread implements ActionListener {
         int tipoOcupa12 = 2;
         if (turno1) {
             tipoOcupa12 = 1;
+            ++sumaMovimietos;
         }
 
         /**
@@ -464,7 +479,8 @@ public class ControladorDamas extends Thread implements ActionListener {
     }
 
     public void ventanaTermino(String nomJugadorGano) {
-
+        usuario.setTotalMovsDamas( sumaMovimietos);
+        usuario.setPartidasJugoDamas();
         JOptionPane.showMessageDialog(null, "Gano: " + nomJugadorGano + "\n Tiempo:" + crnmt.tiempo(), "FIN JUEGO", 1);
         tablero.dispose();
         menuJuegos.setVisible(true);
@@ -479,7 +495,7 @@ public class ControladorDamas extends Thread implements ActionListener {
 
             cuadros2[i].getCuadro().removeActionListener(this);
         }
-
+        usuario.setSumaMovsDamas(sumaMovimietos);
         usuario.setFichas1(fichas1);
         usuario.setFichas2(fichas2);
         usuario.setComio1(tablero.getComioRojo());

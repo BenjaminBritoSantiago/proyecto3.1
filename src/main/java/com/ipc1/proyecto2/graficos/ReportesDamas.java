@@ -4,6 +4,10 @@
  */
 package com.ipc1.proyecto2.graficos;
 
+import com.ipc1.proyecto2.InfoJuego;
+import java.awt.Color;
+import javax.swing.JLabel;
+
 /**
  *
  * @author minch
@@ -13,8 +17,40 @@ public class ReportesDamas extends javax.swing.JFrame {
     /**
      * Creates new form ReportesDamas
      */
-    public ReportesDamas() {
+    private JLabel[][] users = new JLabel[6][InfoJuego.getUsuarios().length];
+    private MenuUsuario menuUsuario;
+
+    public ReportesDamas(MenuUsuario menuUsuario ) {
+        this.menuUsuario = menuUsuario;
         initComponents();
+        mostrarUsuarios();
+        this.setLocationRelativeTo(null);
+    }
+
+    public void mostrarUsuarios() {
+        for (int i = 0; i < InfoJuego.getCantUsuarios(); i++) {
+            if (InfoJuego.getUsuarios()[i] != null) {
+
+                users[0][i] = new JLabel(InfoJuego.getUsuarios()[i].getNombre());
+                users[1][i] = new JLabel("" + InfoJuego.getUsuarios()[i].getPartidasJugoDamas());
+                users[2][i] = new JLabel("" + InfoJuego.getUsuarios()[i].getPartidasGanoDamas());
+                users[3][i] = new JLabel("" + InfoJuego.getUsuarios()[i].getPartidasPerdioDamas());
+                users[4][i] = new JLabel("" + InfoJuego.getUsuarios()[i].getTotalMovsDamas());
+
+                if (InfoJuego.getUsuarios()[i].getPartidasJugoDamas() > 0) {
+                    users[5][i] = new JLabel("" + (double)InfoJuego.getUsuarios()[i].getTotalMovsDamas()/(double)InfoJuego.getUsuarios()[i].getPartidasJugoDamas());
+                }else{
+                    users[5][i] = new JLabel("0");
+                }
+
+                for (int j = 0; j < 6; j++) {
+
+                    this.add(users[j][i]);
+                    users[j][i].setBounds(45 + (135 * j), 150+(i*32), 50, 30);
+
+                }
+            }
+        }
     }
 
     /**
@@ -27,69 +63,77 @@ public class ReportesDamas extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(700, 500));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(900, 600));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                VolverMenu(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("REPORTES DAMAS");
+
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton2.setText("Regresar Al Menu");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("Jugador                     Jugadas                     Ganadas                 Perdidas               Total Movimietos         Promedio Movimientos ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(226, 226, 226)
-                .addComponent(jLabel1)
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(97, 97, 97)
+                        .addComponent(jLabel1)))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1)
-                .addContainerGap(439, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton2))
+                .addGap(64, 64, 64)
+                .addComponent(jLabel3)
+                .addContainerGap(460, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ReportesDamas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ReportesDamas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ReportesDamas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ReportesDamas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        dispose();
+        menuUsuario.setVisible(true);
+        
+    }//GEN-LAST:event_jButton2MouseClicked
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ReportesDamas().setVisible(true);
-            }
-        });
-    }
+    private void VolverMenu(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_VolverMenu
+        // TODO add your handling code here:
+         dispose();
+        menuUsuario.setVisible(true);
+    }//GEN-LAST:event_VolverMenu
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

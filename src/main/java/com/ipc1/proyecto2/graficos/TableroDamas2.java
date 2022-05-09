@@ -232,6 +232,7 @@ public class TableroDamas2 extends javax.swing.JFrame {
                 null, options, options[0]);
 
         if ((int) c == 0) {
+            usuario.setTotalMovsDamas( controlador.getSumaMovimietos());
             usuario.setGuardoDamas(false);
             usuario.setPartidasJugoDamas();
             usuario.setPartidasPerdioDamas();

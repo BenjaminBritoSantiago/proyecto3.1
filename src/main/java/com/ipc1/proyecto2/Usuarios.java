@@ -45,6 +45,7 @@ public class Usuarios {
     private Ficha [] Fichas2;
     private int Comio1;
     private int Comio2;
+    private int sumaMovsDamas;
     private boolean turno1;
     private boolean guardoDamas=false;
     
@@ -111,7 +112,7 @@ public class Usuarios {
     }
 
     public void setTotalMovsDamas(int totalMovsDamas) {
-        this.totalMovsDamas = totalMovsDamas;
+        this.totalMovsDamas =this.totalMovsDamas + totalMovsDamas;
     }
 
     
@@ -133,6 +134,15 @@ public class Usuarios {
     }
     
     ////////////////////////////////////////////
+
+    
+    public int getSumaMovsDamas() {
+        return sumaMovsDamas;
+    }
+
+    public void setSumaMovsDamas(int sumaMovsDamas) {
+        this.sumaMovsDamas = sumaMovsDamas;
+    }
     
     
     
