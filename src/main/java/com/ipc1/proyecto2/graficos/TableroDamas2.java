@@ -6,8 +6,8 @@ package com.ipc1.proyecto2.graficos;
 
 import com.ipc1.proyecto2.InfoJuego;
 import com.ipc1.proyecto2.Usuarios;
-import com.ipc1.proyecto2.controladorDamas.CuadrosFichas;
-import com.ipc1.proyecto2.controladorHanoi.BotonesTorres;
+import com.ipc1.proyecto2.controladorDamas.ControladorDamas;
+import com.ipc1.proyecto2.controladorHanoi.ControladorHanoi;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -25,7 +25,7 @@ public class TableroDamas2 extends javax.swing.JFrame {
     private MenuJuegos menuJuegos;
     private int comioBlanco = 0;
     private int comioRojo = 0;
-    private CuadrosFichas controlador;
+    private ControladorDamas controlador;
     private CronometroDamas crnmt;
 
     public TableroDamas2(MenuJuegos menuJuegos) {
@@ -44,7 +44,7 @@ public class TableroDamas2 extends javax.swing.JFrame {
         contadorBlanco.setText(""+comioBlanco);
         contadorRojo.setText(""+comioRojo);
         this.setLocationRelativeTo(null);
-        controlador = new CuadrosFichas(this, crnmt, menuJuegos, usuario);
+        controlador = new ControladorDamas(this, crnmt, menuJuegos, usuario);
 
         Thread t = new Thread(crnmt);
         t.start();
@@ -233,6 +233,8 @@ public class TableroDamas2 extends javax.swing.JFrame {
 
         if ((int) c == 0) {
             usuario.setGuardoDamas(false);
+            usuario.setPartidasJugoDamas();
+            usuario.setPartidasPerdioDamas();
             terminar = true;
             dispose();
             menuJuegos.setVisible(true);

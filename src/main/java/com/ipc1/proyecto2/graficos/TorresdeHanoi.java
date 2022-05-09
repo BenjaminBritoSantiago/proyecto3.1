@@ -7,7 +7,7 @@ package com.ipc1.proyecto2.graficos;
 import com.ipc1.proyecto2.InfoJuego;
 import com.ipc1.proyecto2.Usuarios;
 import com.ipc1.proyecto2.controladorHanoi.Barra;
-import com.ipc1.proyecto2.controladorHanoi.BotonesTorres;
+import com.ipc1.proyecto2.controladorHanoi.ControladorHanoi;
 import com.ipc1.proyecto2.controladorHanoi.Torre;
 import static java.lang.Math.round;
 import javax.swing.JLabel;
@@ -29,7 +29,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
 
     private MenuJuegos menuJuegos;
     private CronometroTorres crnmt;
-    private BotonesTorres graficos;
+    private ControladorHanoi graficos;
 
     /**
      * Creates new form TorresdeHanoi
@@ -40,7 +40,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
         this.cantidaBarras = cantidaBarras;
         
         crnmt = new CronometroTorres(this);
-        this.graficos = new BotonesTorres(this, cantidaBarras, menuJuegos, crnmt, usuario);
+        this.graficos = new ControladorHanoi(this, cantidaBarras, menuJuegos, crnmt, usuario);
 
         this.setBounds(0, 0, 1000, 700);
         this.setLocationRelativeTo(null);
@@ -58,7 +58,7 @@ public class TorresdeHanoi extends javax.swing.JFrame {
 
         crnmt = new CronometroTorres(this, usuario.getTiempoHanoi()[0], usuario.getTiempoHanoi()[1], usuario.getTiempoHanoi()[2]);
         
-        this.graficos = new BotonesTorres(this, cantidaBarras, menuJuegos, crnmt, usuario);
+        this.graficos = new ControladorHanoi(this, cantidaBarras, menuJuegos, crnmt, usuario);
         
        
         this.setBounds(0, 0, 1000, 700);

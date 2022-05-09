@@ -37,6 +37,8 @@ public class Usuarios {
     private boolean guardoHanoi=false;
     private int perdioHanoi=0;
     
+    
+    
     //varibales damas
     private Cuadricula [] tablero;
     private Ficha [] Fichas1;
@@ -44,8 +46,14 @@ public class Usuarios {
     private int Comio1;
     private int Comio2;
     private boolean turno1;
-    
     private boolean guardoDamas=false;
+    
+    private int partidasJugoDamas=0;
+    private int partidasGanoDamas=0;
+    private int partidasPerdioDamas=0;
+    private int totalMovsDamas=0;
+    private int[] tiempoVictoriaCorta = new int [3];
+    private int movsVictoriaCorta=0;
     
     
     
@@ -68,6 +76,66 @@ public class Usuarios {
         this.totalMovRealizo = totalMovRealizo;
         this.promMovRealizo = promMovRealizo;
     }
+    
+    //REPORTES;
+
+    public int getPartidasJugoDamas() {
+        return partidasJugoDamas;
+    }
+
+    public void setPartidasJugoDamas() {
+        ++this.partidasJugoDamas;
+    }
+
+    
+    public int getPartidasGanoDamas() {
+        return partidasGanoDamas;
+    }
+
+    public void setPartidasGanoDamas() {
+        ++this.partidasGanoDamas;
+    }
+
+    
+    public int getPartidasPerdioDamas() {
+        return partidasPerdioDamas;
+    }
+
+    public void setPartidasPerdioDamas() {
+        ++this.partidasPerdioDamas;
+    }
+
+    
+    public int getTotalMovsDamas() {
+        return totalMovsDamas;
+    }
+
+    public void setTotalMovsDamas(int totalMovsDamas) {
+        this.totalMovsDamas = totalMovsDamas;
+    }
+
+    
+    public int[] getTiempoVictoriaCorta() {
+        return tiempoVictoriaCorta;
+    }
+
+    public void setTiempoVictoriaCorta(int[] tiempoVictoriaCorta) {
+        this.tiempoVictoriaCorta = tiempoVictoriaCorta;
+    }
+
+    
+    public int getMovsVictoriaCorta() {
+        return movsVictoriaCorta;
+    }
+
+    public void setMovsVictoriaCorta(int movsVictoriaCorta) {
+        this.movsVictoriaCorta = movsVictoriaCorta;
+    }
+    
+    ////////////////////////////////////////////
+    
+    
+    
 
     public boolean getTurno1() {
         return turno1;
@@ -78,7 +146,6 @@ public class Usuarios {
     }
     
     
-
     public int getComio1() {
         return Comio1;
     }

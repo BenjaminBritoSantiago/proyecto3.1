@@ -20,7 +20,7 @@ import javax.swing.SwingConstants;
  *
  * @author minch
  */
-public class BotonesTorres extends Thread implements ActionListener {
+public class ControladorHanoi extends Thread implements ActionListener {
 
     private Usuarios usuario;
     private Barra[] barras = new Barra[8];
@@ -30,7 +30,7 @@ public class BotonesTorres extends Thread implements ActionListener {
     private CronometroTorres crnmt;
     private TorresdeHanoi ventana;
 
-    public BotonesTorres(TorresdeHanoi ventana, int cantidaBarras, MenuJuegos menuJuegos, CronometroTorres crnmt, Usuarios usuario) {
+    public ControladorHanoi(TorresdeHanoi ventana, int cantidaBarras, MenuJuegos menuJuegos, CronometroTorres crnmt, Usuarios usuario) {
         this.usuario = usuario;
         this.crnmt = crnmt;
         this.menuJuegos = menuJuegos;

@@ -7,7 +7,6 @@ package com.ipc1.proyecto2.controladorDamas;
 import com.ipc1.proyecto2.Usuarios;
 import com.ipc1.proyecto2.graficos.CronometroDamas;
 import com.ipc1.proyecto2.graficos.MenuJuegos;
-import com.ipc1.proyecto2.graficos.TableroDamas;
 import com.ipc1.proyecto2.graficos.TableroDamas2;
 
 import java.awt.Color;
@@ -21,7 +20,7 @@ import javax.swing.JOptionPane;
  *
  * @author minch
  */
-public class CuadrosFichas extends Thread implements ActionListener {
+public class ControladorDamas extends Thread implements ActionListener {
 
     private Usuarios usuario;
     private Cuadricula[] cuadros2 = new Cuadricula[32];
@@ -39,14 +38,14 @@ public class CuadrosFichas extends Thread implements ActionListener {
     private CronometroDamas crnmt;
     private MenuJuegos menuJuegos;
 
-    public CuadrosFichas(TableroDamas2 tablero, CronometroDamas crnmt, MenuJuegos menuJuegos, Usuarios usuario) {
+    public ControladorDamas(TableroDamas2 tablero, CronometroDamas crnmt, MenuJuegos menuJuegos, Usuarios usuario) {
         this.usuario = usuario;
-        this.turno1 = usuario.getTurno1();
         this.crnmt = crnmt;
         this.menuJuegos = menuJuegos;
         this.tablero = tablero;
 
         if (usuario.getGuardoDamas()) {
+            this.turno1 = usuario.getTurno1();
             asignarFichas();
             colocarTablero();
             fondo();
@@ -126,9 +125,12 @@ public class CuadrosFichas extends Thread implements ActionListener {
             if (hayDamas(fichas1)) {
                 desHabilitarFichas(fichas1);
                 ventanaTermino("ROJO");
+                usuario.setPartidasGanoDamas();
+                
             } else {
                 desHabilitarFichas(fichas2);
                 ventanaTermino("BLANCO");
+                usuario.setPartidasPerdioDamas();
             }
         }
 
