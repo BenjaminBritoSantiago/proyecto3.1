@@ -8,6 +8,7 @@ import com.ipc1.proyecto2.InfoJuego;
 import com.ipc1.proyecto2.Usuarios;
 import com.ipc1.proyecto2.graficos.CronometroTorres;
 import com.ipc1.proyecto2.graficos.MenuJuegos;
+import com.ipc1.proyecto2.graficos.MenuUsuario;
 import com.ipc1.proyecto2.graficos.TorresdeHanoi;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -113,7 +114,7 @@ public class ControladorHanoi extends Thread implements ActionListener {
         //ImageIcon[] imgs = null;
 
         for (int i = 7; i > 7 - cantidaBarras; i--) {
-            ImageIcon imgs = new ImageIcon("C:\\Users\\minch\\Documents\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\barra" + i + ".png");
+            ImageIcon imgs = new ImageIcon(MenuUsuario.ruta+"\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\barra" + i + ".png");
             // Barra( int idBarra, int peso, int idTorreActual, int posicionYActual, int pesoAnterior)
             barras[i] = new Barra(i, i, 0, i - 7, i + 1 , 280, 40, String.valueOf(i + 1));
             barras[i].getBoton().setLocation(30, (i * 40) + 140);

@@ -5,6 +5,7 @@
 package com.ipc1.proyecto2.controladorHanoi;
 
 
+import com.ipc1.proyecto2.graficos.MenuUsuario;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -31,7 +32,7 @@ public class Torre extends JPanel {
         torreG.setBounds(0, 0, 40, 350);
         torreG.setOpaque(true); 
         torreG.setContentAreaFilled(false);
-        ImageIcon imgs =  new ImageIcon("C:\\Users\\minch\\Documents\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\amarillo.jpg");
+        ImageIcon imgs =  new ImageIcon( MenuUsuario.ruta+"\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\amarillo.jpg");
         torreG.setIcon(imgs);
     }
 

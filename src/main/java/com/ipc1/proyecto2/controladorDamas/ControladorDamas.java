@@ -7,6 +7,7 @@ package com.ipc1.proyecto2.controladorDamas;
 import com.ipc1.proyecto2.Usuarios;
 import com.ipc1.proyecto2.graficos.CronometroDamas;
 import com.ipc1.proyecto2.graficos.MenuJuegos;
+import com.ipc1.proyecto2.graficos.MenuUsuario;
 import com.ipc1.proyecto2.graficos.TableroDamas2;
 
 import java.awt.Color;
@@ -219,7 +220,7 @@ public class ControladorDamas extends Thread implements ActionListener {
 
         // instaciador del tablero
         ImageIcon imgs = new ImageIcon(
-                "C:\\Users\\minch\\Documents\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\fondoNegro.jpg");
+                MenuUsuario.ruta+"\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\fondoNegro.jpg");
         /**
          * for (int y = 0; y < 8; y++) { for (int x = 0; x < 8; x++) {
          * cuadros[x][y] = new Cuadricula();

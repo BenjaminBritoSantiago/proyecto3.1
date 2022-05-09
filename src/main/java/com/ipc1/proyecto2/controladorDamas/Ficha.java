@@ -5,6 +5,7 @@
 package com.ipc1.proyecto2.controladorDamas;
 
 
+import com.ipc1.proyecto2.graficos.MenuUsuario;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,7 +25,7 @@ public class Ficha{
     private int idCuadroActual;
     
     public Ficha(int numFicha, int grupo12 ) {
-         ImageIcon imgs = new ImageIcon("C:\\Users\\minch\\Documents\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\damas"+grupo12+".png");
+         ImageIcon imgs = new ImageIcon(MenuUsuario.ruta+"\\proyecto3.1\\src\\main\\java\\com\\ipc1\\proyecto2\\imagenes\\damas"+grupo12+".png");
         this.numFicha=numFicha;
         ficha.setSize(60, 60); 
         ficha.setOpaque(true);

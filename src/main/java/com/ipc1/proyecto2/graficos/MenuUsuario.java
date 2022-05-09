@@ -13,6 +13,9 @@ public class MenuUsuario extends javax.swing.JFrame {
     /**
      * Creates new form MenuDeJuegos
      */
+    
+    public static String ruta ="C:\\Users\\minch\\Documents" ;
+    
     public MenuUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
