@@ -26,6 +26,7 @@ public class Barra extends JButton{
     
     
     public Barra( int idBarra, int peso, int idTorreActual, int posicionYActual, int pesoAnterior, int anchoBoton, int altoBoton, String numBoton) {
+        idClico=-1;
         this.peso = peso;
         this.idTorreActual = idTorreActual;
         this.posicionYActual = posicionYActual;

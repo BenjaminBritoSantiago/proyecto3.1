@@ -56,14 +56,16 @@ public class ControladorHanoi extends Thread implements ActionListener {
             if (queBoton == barras[i].getBoton()) {
                 System.out.println("boton pulso>:" + barras[i].getIdBarra());
                 Barra.idClico = barras[i].getIdBarra();
+                if (barras[Barra.idClico].getPeso() != torres[barras[Barra.idClico].getIdTorreActual()].getPeso()){
+                    Barra.idClico =-1;
+                 }
+                
                 break;
-
             }
         }
 
         for (int i = 0; i < 3; i++) {
             if (queBoton == torres[i].getTorreG()) {
-
                 if (Barra.idClico != -1) {
                     System.out.println("torre que pulso>:" + torres[i].getIdTorre());
                     Torre.idClico = torres[i].getIdTorre();
@@ -140,12 +142,12 @@ public class ControladorHanoi extends Thread implements ActionListener {
             ventana.add(torres[i].getTorreG());
             torres[i].getTorreG().addActionListener(this);
         }
-        torres[0].setPosOcupadas(cantidaBarras);
+        iniciador();
     }
 
-    public static void iniciador(Barra[] arrayBarras, Torre[] arrayTorres, int cantBarras) {
-        arrayTorres[0].setPeso(8 - cantBarras);
-        arrayTorres[0].setPosOcupadas(cantBarras);
+    public void iniciador() {
+       torres[0].setPeso(8 - cantidaBarras);
+       torres[0].setPosOcupadas(cantidaBarras);
 
     }
 
@@ -208,12 +210,13 @@ public class ControladorHanoi extends Thread implements ActionListener {
     public void verificador() {
 
         if (Barra.idClico != -1 && Torre.idClico != -1) {
-            if (barras[Barra.idClico].getPeso() <= torres[barras[Barra.idClico].getIdTorreActual()].getPeso()) {
+            if (barras[Barra.idClico].getPeso() == torres[barras[Barra.idClico].getIdTorreActual()].getPeso()) {
                 if (barras[Barra.idClico].getIdTorreActual() != Torre.idClico) {
                     if (torres[Torre.idClico].getPeso() >= barras[Barra.idClico].getPeso()) {
-
                         moverBoton(Torre.idClico, Barra.idClico, 30, posY(Torre.idClico, torres), barras);
-
+                        
+                        System.out.println("peso barra:"+barras[Barra.idClico].getPeso() +"-- peso torre actual:"+torres[barras[Barra.idClico].getIdTorreActual()].getPeso());
+                        
                         mover2(Torre.idClico, Barra.idClico, torres, barras);
                         ventana.setMovActuales();
 

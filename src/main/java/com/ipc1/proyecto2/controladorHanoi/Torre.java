@@ -25,6 +25,7 @@ public class Torre extends JPanel {
 
     public Torre(int idTorre, int peso, int posOcupadas) {
         //this.idBarra=idBarra;
+        idClico=-1;
         this.peso = peso;
         this.posOcupadas = posOcupadas;
         this.idTorre = idTorre;
